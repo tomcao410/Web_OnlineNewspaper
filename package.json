@@ -1,0 +1,23 @@
+{
+  "name": "web_onlinenewspaper",
+  "version": "1.0.0",
+  "description": "1612082_1612175_1612213",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomcao410/Web_OnlineNewspaper.git"
+  },
+  "author": "Tom, Dang, Hao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomcao410/Web_OnlineNewspaper/issues"
+  },
+  "homepage": "https://github.com/tomcao410/Web_OnlineNewspaper#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}
