@@ -37,37 +37,16 @@
         <div class="row align-items-center justify-content-between">
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
-                    <li><a href="/archive">TẤT CẢ TIN</a></li>
-                    <li class="menu-has-children"><a href="/news">THỜI SỰ</a>
+                    <li><a href="/all">TẤT CẢ TIN</a></li>
+                    <% dataTopic.chuyenmuc.forEach(function(motchuyenmuc){%>
+                    <li class="menu-has-children"><a href="/<%=motchuyenmuc.name %>"> <%=motchuyenmuc.name %></a>
                         <ul>
-                            <li><a href="/news/national">TRONG NƯỚC</a></li>
-                            <li><a href="/news/international">NGOÀI NƯỚC</a></li>
+                            <% motchuyenmuc.sub_category.forEach(function(chuyenmuccon){%>
+                            <li><a href="/<%=motchuyenmuc.name %>/<%=chuyenmuccon %>"> <%=chuyenmuccon %></a></li>
+                            <% }) %>
                         </ul>
                     </li>
-                    <li class="menu-has-children"><a href="/business">KINH DOANH</a>
-                        <ul>
-                            <li><a href="/business/agricultural">NÔNG SẢN</a></li>
-                            <li><a href="/business/marine">HẢI SẢN</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-has-children"><a href="./entertainment.html">GIẢI TRÍ</a>
-                        <ul>
-                            <li><a href="./entertainment/movie.html">PHIM</a></li>
-                            <li><a href="./entertainment/music.html">NHẠC</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-has-children"><a href="./sports.html">THỂ THAO</a>
-                        <ul>
-                            <li><a href="./sports/soccer.html">BÓNG ĐÁ</a></li>
-                            <li><a href="./sports/tennis.html">TENNIS</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-has-children"><a href="./travel.html">DU LỊCH</a>
-                        <ul>
-                            <li><a href="./travel/vietnam.html">VIỆT NAM</a></li>
-                            <li><a href="./travel/word.html">THẾ GIỚI</a></li>
-                        </ul>
-                    </li>
+                    <% })%>
                 </ul>
             </nav><!-- #nav-menu-container -->
             <div class="navbar-right">
