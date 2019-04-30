@@ -41,11 +41,11 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="hero-nav-area">
-								<h1 class="text-white">BÓNG ĐÁ</h1>
+								<h1 class="text-white">GIẢI TRÍ</h1>
 								<p class="text-white link-nav">
 									<a href="/index">Trang chủ</a>
 									<span class="lnr lnr-arrow-right"></span>
-									<a>Bóng Đá</a>
+									<a>Giải trí</a>
 								</p>
 							</div>
 						</div>
@@ -69,8 +69,7 @@
 							<!-- Start latest-post Area -->
 							<div class="latest-post-wrap">
 								<h4 class="cat-title">Tin mới nhất</h4>
-                                <% datathethao.thethao.forEach(function(motbaiviet){
-                                    if(motbaiviet.category == "soccer"){%>
+								<% datagiaitri.giaitri.forEach(function(motbaiviet){%>
 									<div class="single-latest-post row align-items-center">
 										<div class="col-lg-5 post-left">
 											<div class="feature-img relative">
@@ -79,12 +78,12 @@
 											</div>
 											<ul class="tags">
 												<li>
-													<a href="/sport"><%=motbaiviet.tag %></a>
+													<a href="/entertainment"><%=motbaiviet.tag %></a>
 												</li>
 											</ul>
 										</div>
 										<div class="col-lg-7 post-right">
-											<a href="/sport/<%=motbaiviet.category %>/<%=motbaiviet.title %>">
+											<a href="/entertainment/<%=motbaiviet.category %>/<%=motbaiviet.title %>">
 												<h4><%=motbaiviet.title %></h4>
 											</a>
 											<ul class="meta">
@@ -106,8 +105,7 @@
 											</p>
 										</div>
 									</div>
-                                    <% }%>
-                                <% }) %>
+								<% })%>
 
 									
 										<div class="load-more">

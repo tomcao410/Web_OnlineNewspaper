@@ -1,3 +1,4 @@
+<link rel='stylesheet' href='/stylesheets/main.css'>
 <header>
     <div class="header-top">
         <div class="container">
@@ -50,16 +51,16 @@
                             <li><a href="/business/marine">HẢI SẢN</a></li>
                         </ul>
                     </li>
-                    <li class="menu-has-children"><a href="./entertainment.html">GIẢI TRÍ</a>
+                    <li class="menu-has-children"><a href="/entertainment">GIẢI TRÍ</a>
                         <ul>
-                            <li><a href="./entertainment/movie.html">PHIM</a></li>
-                            <li><a href="./entertainment/music.html">NHẠC</a></li>
+                            <li><a href="/entertainment/movie">PHIM</a></li>
+                            <li><a href="/entertainment/music">NHẠC</a></li>
                         </ul>
                     </li>
-                    <li class="menu-has-children"><a href="./sports.html">THỂ THAO</a>
+                    <li class="menu-has-children"><a href="/sport">THỂ THAO</a>
                         <ul>
-                            <li><a href="./sports/soccer.html">BÓNG ĐÁ</a></li>
-                            <li><a href="./sports/tennis.html">TENNIS</a></li>
+                            <li><a href="/sport/soccer">BÓNG ĐÁ</a></li>
+                            <li><a href="/sport/tennis">TENNIS</a></li>
                         </ul>
                     </li>
                     <li class="menu-has-children"><a href="./travel.html">DU LỊCH</a>
@@ -85,7 +86,39 @@
                      
                     </span>
                 </form>
+                <button onclick="document.getElementById('id01').style.display='block'"; style="width:80px; font-size:20px"; float: left>Login</button>
             </div>
+            
         </div>
     </div>
+    
 </header>
+<div id="id01" class="modal">
+    <span onclick="document.getElementById('id01').style.display='none'" 
+  class="close" title="Close Modal">&times;</span>
+  
+    <!-- Modal Content -->
+    <form class="modal-content animate" action="/action_page.php">
+      <div class="imgcontainer">
+        <img src="images/img_avatar2.png" alt="Avatar" class="avatar">
+      </div>
+  
+      <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+  
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+  
+        <button type="submit">Login</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+      </div>
+  
+      <div class="container" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+      </div>
+    </form>
+  </div>

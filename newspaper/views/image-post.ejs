@@ -92,8 +92,80 @@
 											</li>
 										</ul>
 										<%-motbaiviet.content%>
-										<% }%>
-											<% }) %>
+									</div>
+									<% }%>
+								<% }) %>
+
+								<!--giaitri-->
+								<% datagiaitri.giaitri.forEach(function(motbaiviet){
+									if(motbaiviet.title == title){%>
+								<div class="feature-img-thumb relative">
+									<div class="overlay overlay-bg"></div>
+									<img class="img-fluid" src="<%=motbaiviet.img%>" alt="">
+								</div>
+								<div class="content-wrap">
+									<ul class="tags mt-10">
+										<li>
+											<a href="#"><%=motbaiviet.category%></a>
+										</li>
+									</ul>
+									<a href="#">
+										<h3><%=motbaiviet.title%></h3>
+									</a>
+									<ul class="meta pb-20">
+										<li>
+											<a href="#">
+												<span class="lnr lnr-user"></span><%=motbaiviet.author%></a>
+										</li>
+										<li>
+											<a href="#">
+												<span class="lnr lnr-calendar-full"></span><%=motbaiviet.date%></a>
+										</li>
+										<li>
+											<a href="#">
+												<span class="lnr lnr-bubble"></span><%=motbaiviet.views%> </a>
+										</li>
+									</ul>
+									<%-motbaiviet.content%>
+								</div>
+								<% }%>
+							<% }) %>
+								<!--/giaitri-->
+								<!--thethao-->
+								<% datathethao.thethao.forEach(function(motbaiviet){
+									if(motbaiviet.title == title){%>
+								<div class="feature-img-thumb relative">
+									<div class="overlay overlay-bg"></div>
+									<img class="img-fluid" src="<%=motbaiviet.img%>" alt="">
+								</div>
+								<div class="content-wrap">
+									<ul class="tags mt-10">
+										<li>
+											<a href="#"><%=motbaiviet.category%></a>
+										</li>
+									</ul>
+									<a href="#">
+										<h3><%=motbaiviet.title%></h3>
+									</a>
+									<ul class="meta pb-20">
+										<li>
+											<a href="#">
+												<span class="lnr lnr-user"></span><%=motbaiviet.author%></a>
+										</li>
+										<li>
+											<a href="#">
+												<span class="lnr lnr-calendar-full"></span><%=motbaiviet.date%></a>
+										</li>
+										<li>
+											<a href="#">
+												<span class="lnr lnr-bubble"></span><%=motbaiviet.views%> </a>
+										</li>
+									</ul>
+									<%-motbaiviet.content%>
+								</div>
+								<% }%>
+							<% }) %>
+								<!--/thethao-->
 												<!-- <blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</blockquote> -->
 
 												<div class="navigation-wrap justify-content-between d-flex">
