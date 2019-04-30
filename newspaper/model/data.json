@@ -4,7 +4,8 @@
         {
            "id": 1,
            "title": "Sài Gòn sắp vào mùa mưa",
-           "category":"In",
+           "category":"Thời sự",
+           "sub_category":"Trong nước",
            "author": "Cao Phu Cuong",
            "date":"29 - 04 - 2019",
            "views": "50",
@@ -16,7 +17,8 @@
         {
             "id": 2,
             "title": "Biển Cửa Lò ken đặc người trong dịp nghỉ lễ",
-            "category": "In",
+            "category":"Thời sự",
+            "sub_category":"Trong nước",
             "author": "Cao Phu Cuong",
             "date":"29 - 04 - 2019",
             "views": "50",
@@ -25,7 +27,5 @@
              "img": "https://i-dulich.vnecdn.net/2019/04/28/cua-lo-2-1556467395_680x0.jpg"
          }
     ]
-
-
-
+    
 }

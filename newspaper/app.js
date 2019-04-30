@@ -40,4 +40,5 @@ app.use(function(err, req, res, next) {
 });
 
 app.locals.datathoisu = require('./model/data.json');
+app.locals.dataTopic = require('./model/topic.json');
 module.exports = app;
