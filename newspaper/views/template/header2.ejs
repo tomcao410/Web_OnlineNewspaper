@@ -30,6 +30,9 @@
                 <div class="col-lg-8 col-md-8 col-sm-12 logo-right no-padding ads-banner">
                     <img class="img-fluid" src="images/banner-ad.jpg" alt="">
                 </div>
+                <div>
+                    <button onclick="document.getElementById('id01').style.display='block'"; style="width:auto; font-size:18px"; float: left><i class="fa fa-user-o"></i> Login</button>
+                </div>
             </div>
         </div>
     </div>
@@ -54,17 +57,45 @@
                     <input type="text" class="form-control Search-box" name="Search-box" id="Search-box" placeholder="Search">
                     <!-- <i for="Search-box" class="Search-box-label fa fa-search text-light d-flex align-items-center">
                         <span class="lnr lnr-magnifier"></span>
-
                     </i> -->
-                    <label for="Search-box" class="Search-box-label">
-                        <span class="lnr lnr-magnifier fa fa-search "></span>
+                    <label for="Search-box" class="Search-box-label fa fa-search text-light d-flex align-items-center">
+                        <!-- <span class="lnr lnr-magnifier fa fa-search "></span> -->
                     </label>
-                    <span class="Search-close">
+                    <!-- <span class="Search-close">
                         <span class="lnr lnr-cross fa fa-times"></span>
                      
-                    </span>
+                    </span> -->
                 </form>
             </div>
         </div>
     </div>
 </header>
+<div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" 
+      class="close" title="Close Modal">&times;</span>
+      
+        <!-- Modal Content -->
+        <form class="modal-content animate" action="/action_page.php">
+          <div class="imgcontainer">
+            <img src="images/img_avatar2.png" alt="Avatar" class="avatar">
+          </div>
+      
+          <div class="container">
+            <label for="uname"><b>Tên đăng nhập</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+      
+            <label for="psw"><b>Mật khẩu</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+      
+            <button type="submit">Đăng nhập</button>
+            <label>
+              <input type="checkbox" checked="checked" name="remember"> Nhớ tài khoản
+            </label>
+          </div>
+      
+          <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Hủy bỏ</button>
+            <span class="psw"> <a href="#">Quên mật khẩu</a></span>
+          </div>
+        </form>
+      </div>

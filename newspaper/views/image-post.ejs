@@ -24,11 +24,11 @@
 </head>
 
 <body>
-	<%include template/header.ejs %>
+	<%include template/header2.ejs %>
 
 		<div class="site-main-container">
 			<!-- Start top-post Area -->
-			<section class="top-post-area pt-10">
+			<!-- <section class="top-post-area pt-10">
 				<div class="container no-padding">
 					<div class="row">
 						<div class="col-lg-12">
@@ -53,7 +53,7 @@
 						</div>
 					</div>
 				</div>
-			</section>
+			</section> -->
 			<!-- End top-post Area -->
 			<!-- Start latest-post Area -->
 			<section class="latest-post-area pb-120">
@@ -62,7 +62,7 @@
 						<div class="col-lg-8 post-list">
 							<!-- Start single-post Area -->
 							<div class="single-post-wrap">
-								<% datathoisu.thoisutrongnuoc.forEach(function(motbaiviet){
+								<% datathoisu.tintuc.forEach(function(motbaiviet){
 										if(motbaiviet.title == title){%>
 									<div class="feature-img-thumb relative">
 										<div class="overlay overlay-bg"></div>
@@ -71,7 +71,7 @@
 									<div class="content-wrap">
 										<ul class="tags mt-10">
 											<li>
-												<a href="#"><%=motbaiviet.category%></a>
+												<a href="/<%=motbaiviet.category%>"><%=motbaiviet.category%></a>
 											</li>
 										</ul>
 										<a href="#">
@@ -80,29 +80,30 @@
 										<ul class="meta pb-20">
 											<li>
 												<a href="#">
-													<span class="lnr lnr-user"></span><%=motbaiviet.author%></a>
+													<i class="fa fa-pencil"></i> <%=motbaiviet.author%></a>
 											</li>
 											<li>
 												<a href="#">
-													<span class="lnr lnr-calendar-full"></span><%=motbaiviet.date%></a>
+													<i class="fa fa-calendar"></i> <%=motbaiviet.date%></a>
 											</li>
 											<li>
 												<a href="#">
-													<span class="lnr lnr-bubble"></span><%=motbaiviet.views%> </a>
+													<i class="fa fa-eye"></i> <%=motbaiviet.views%> </a>
 											</li>
 										</ul>
 										<%-motbaiviet.content%>
+										
 										<% }%>
 											<% }) %>
 												<!-- <blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</blockquote> -->
 
-												<div class="navigation-wrap justify-content-between d-flex">
+												<!-- <div class="navigation-wrap justify-content-between d-flex">
 													<a class="prev" href="#">
 														<span class="lnr lnr-arrow-left"></span>Prev Post</a>
 													<a class="next" href="#">Next Post
 														<span class="lnr lnr-arrow-right"></span>
 													</a>
-												</div>
+												</div> -->
 
 												<div class="comment-sec-area">
 													<div class="container">
@@ -226,11 +227,11 @@
 												</li>
 												<li>
 													<a href="#">
-														<span class="lnr lnr-calendar-full"></span>03 April, 2018</a>
+														<i class="fa fa-calendar"></i>03 April, 2018</a>
 												</li>
 												<li>
 													<a href="#">
-														<span class="lnr lnr-bubble"></span>06 </a>
+														<i class="fa fa-eye"></i> 06 </a>
 												</li>
 											</ul>
 											<p class="excert">
@@ -249,11 +250,11 @@
 													<ul class="meta">
 														<li>
 															<a href="#">
-																<span class="lnr lnr-calendar-full"></span>03 April, 2018</a>
+																<i class="fa fa-calendar"></i>03 April, 2018</a>
 														</li>
 														<li>
 															<a href="#">
-																<span class="lnr lnr-bubble"></span>06</a>
+																<i class="fa fa-eye"></i> 06</a>
 														</li>
 													</ul>
 												</div>
@@ -269,11 +270,11 @@
 													<ul class="meta">
 														<li>
 															<a href="#">
-																<span class="lnr lnr-calendar-full"></span>03 April, 2018</a>
+																<i class="fa fa-calendar"></i>03 April, 2018</a>
 														</li>
 														<li>
 															<a href="#">
-																<span class="lnr lnr-bubble"></span>06</a>
+																<i class="fa fa-eye"></i> 06</a>
 														</li>
 													</ul>
 												</div>
@@ -289,11 +290,11 @@
 													<ul class="meta">
 														<li>
 															<a href="#">
-																<span class="lnr lnr-calendar-full"></span>03 April, 2018</a>
+																<i class="fa fa-calendar"></i>03 April, 2018</a>
 														</li>
 														<li>
 															<a href="#">
-																<span class="lnr lnr-bubble"></span>06</a>
+																<i class="fa fa-eye"></i> 06</a>
 														</li>
 													</ul>
 												</div>
@@ -335,11 +336,11 @@
 											<ul class="meta">
 												<li>
 													<a href="#">
-														<span class="lnr lnr-calendar-full"></span>03 April, 2018</a>
+														<i class="fa fa-calendar"></i>03 April, 2018</a>
 												</li>
 												<li>
 													<a href="#">
-														<span class="lnr lnr-bubble"></span>06</a>
+														<i class="fa fa-eye"></i> 06</a>
 												</li>
 											</ul>
 										</div>
@@ -355,11 +356,11 @@
 											<ul class="meta">
 												<li>
 													<a href="#">
-														<span class="lnr lnr-calendar-full"></span>03 April, 2018</a>
+														<i class="fa fa-calendar"></i>03 April, 2018</a>
 												</li>
 												<li>
 													<a href="#">
-														<span class="lnr lnr-bubble"></span>06</a>
+														<i class="fa fa-eye"></i> 06</a>
 												</li>
 											</ul>
 										</div>
@@ -375,11 +376,11 @@
 											<ul class="meta">
 												<li>
 													<a href="#">
-														<span class="lnr lnr-calendar-full"></span>03 April, 2018</a>
+														<i class="fa fa-calendar"></i>03 April, 2018</a>
 												</li>
 												<li>
 													<a href="#">
-														<span class="lnr lnr-bubble"></span>06</a>
+														<i class="fa fa-eye"></i> 06</a>
 												</li>
 											</ul>
 										</div>
@@ -395,11 +396,11 @@
 											<ul class="meta">
 												<li>
 													<a href="#">
-														<span class="lnr lnr-calendar-full"></span>03 April, 2018</a>
+														<i class="fa fa-calendar"></i>03 April, 2018</a>
 												</li>
 												<li>
 													<a href="#">
-														<span class="lnr lnr-bubble"></span>06</a>
+														<i class="fa fa-eye"></i> 06</a>
 												</li>
 											</ul>
 										</div>
