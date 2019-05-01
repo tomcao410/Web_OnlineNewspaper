@@ -17,7 +17,7 @@ router.get('/:category', function(req, res, next) {
 router.get('/:category/:subCategory', function(req, res, next) {
   res.render('subCategory',{title:req.params.subCategory});
 });
-<<<<<<< HEAD
+
 router.get('/entertainment', function(req, res, next) {
   res.render('entertainment', { title: 'Express' });
 });
@@ -42,8 +42,6 @@ router.get('/sport/soccer', function(req, res, next) {
 router.get('/sport/tennis', function(req, res, next) {
   res.render('tennis', { title: 'Express' });
 });
-=======
 
->>>>>>> 1612175
 module.exports = router;
 
