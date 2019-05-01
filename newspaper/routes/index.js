@@ -5,31 +5,19 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-router.get('/news', function(req, res, next) {
-  res.render('news', { title: 'Express' });
+router.get('/all', function(req, res, next) {
+  res.render('all', { title: 'Express' });
 });
-router.get('/news/national', function(req, res, next) {
-  res.render('national', { title: 'Express' });
-});
-
-router.get('/news/international', function(req, res, next) {
-  res.render('international', { title: 'Express' });
-});
-router.get('/business', function(req, res, next) {
-  res.render('business', { title: 'Express' });
-});
-router.get('/business/agricultural', function(req, res, next) {
-  res.render('agricultural', { title: 'Express' });
-});
-router.get('/business/marine', function(req, res, next) {
-  res.render('marine', { title: 'Express' });
-});
-router.get('/news/In', function(req, res, next) {
-  res.render('image-post', { title: 'Express' });
-});
-router.get('/news/:category/:title', function(req, res, next) {
+router.get('/:category/:subCategory/:title', function(req, res, next) {
   res.render('image-post',{title:req.params.title});
 });
+router.get('/:category', function(req, res, next) {
+  res.render('category',{title:req.params.category});
+});
+router.get('/:category/:subCategory', function(req, res, next) {
+  res.render('subCategory',{title:req.params.subCategory});
+});
+<<<<<<< HEAD
 router.get('/entertainment', function(req, res, next) {
   res.render('entertainment', { title: 'Express' });
 });
@@ -54,5 +42,8 @@ router.get('/sport/soccer', function(req, res, next) {
 router.get('/sport/tennis', function(req, res, next) {
   res.render('tennis', { title: 'Express' });
 });
+=======
+
+>>>>>>> 1612175
 module.exports = router;
 

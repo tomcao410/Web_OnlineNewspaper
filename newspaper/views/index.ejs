@@ -33,7 +33,8 @@
 		
 	</head>
 	<body>
-		<%include template/header.ejs %>
+		<%include template/header2.ejs %>
+		
 		<div class="site-main-container">
 			<!-- Start top-post Area -->
 			<section class="top-post-area pt-10">
@@ -50,11 +51,11 @@
 								</ul>
 								<a href="image-post.html">
 									<h3>A Discount Toner Cartridge Is Better Than Ever.</h3>
-								</a>	
+								</a>
 								<ul class="meta">
-									<li><a href="#"><span class="lnr lnr-user"></span>Mark wiens</a></li>
-									<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-									<li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
+									<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
+									<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+									<li><a href="#"><i class="fa fa-eye"></i> 06 Comments</a></li>
 								</ul>
 							</div>
 						</div>
@@ -72,9 +73,9 @@
 										<h4>Post #2.</h4>
 									</a>
 									<ul class="meta">
-										<li><a href="#"><span class="lnr lnr-user"></span>Mark wiens</a></li>
-										<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-										<li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
+										<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
+										<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+										<li><a href="#"><i class="fa fa-eye"></i> 06 Comments</a></li>
 									</ul>
 								</div>
 							</div>
@@ -91,18 +92,18 @@
 										<h4>Post #3</h4>
 									</a>
 									<ul class="meta">
-										<li><a href="#"><span class="lnr lnr-user"></span>Mark wiens</a></li>
-										<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-										<li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
+										<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
+										<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+										<li><a href="#"><i class="fa fa-eye"></i> 06 Comments</a></li>
 									</ul>
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-12">
+						<!-- <div class="col-lg-12">
 							<div class="news-tracker-wrap">
 								<h6><span>Breaking News:</span>   <a href="#">Astronomy Binoculars A Great Alternative</a></h6>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</section>
@@ -115,177 +116,35 @@
 							<!-- Start latest-post Area -->
 							<div class="latest-post-wrap">
 								<h4 class="cat-title">Tin mới nhất</h4>
+								<% datathoisu.tintuc.forEach(function(post){%>
 								<div class="single-latest-post row align-items-center">
 									<div class="col-lg-5 post-left">
 										<div class="feature-img relative">
 											<div class="overlay overlay-bg"></div>
-											<img class="img-fluid" src="./news/content_img/national1_1.jpg" alt="">
+											<img class="img-fluid" src="<%=post.img %>" alt="">
 										</div>
 										<ul class="tags">
-											<li><a href="./news/national.html">Thời sự - Trong nước</a></li>
+											<li><a href="/<%=post.category %>/<%=post.sub_category %>"><%=post.category %> - <%=post.sub_category %></a></li>
 										</ul>
 									</div>
 									<div class="col-lg-7 post-right">
-										<a href="./news/national/post1.html">
-											<h4>Viện kiểm sát đã phê chuẩn quyết định khởi tố Nguyễn Hữu Linh.</h4>
+										<a href="/<%=post.category %>/<%=post.sub_category %>/<%=post.title %>">
+											<h4><%=post.title %></h4>
 										</a>
 										<ul class="meta">
-											<li><a href="#"><span class="lnr lnr-user"></span>N Đức - P Loan</a></li>
-											<li><a href="#"><span class="lnr lnr-calendar-full"></span>22 April, 2019</a></li>
-											<li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
-										</ul>
-										<p class="excert">
-											Chiều ngày 22-4, một lãnh đạo VKSND TP.HCM cho biết VKSND quận 4 đã phê chuẩn quyết định khởi tố vụ án, khởi tố bị can , lệnh cấm đi khỏi nơi cư trú đối với ông Nguyễn Hữu Linh (cựu viện phó VKSND TP Đà Nẵng).
-										</p>
-									</div>
-								</div>
-								<div class="single-latest-post row align-items-center">
-									<div class="col-lg-5 post-left">
-										<div class="feature-img relative">
-											<div class="overlay overlay-bg"></div>
-											<img class="img-fluid" src="./news/content_img/national2_1.jpg" alt="">
-										</div>
-										<ul class="tags">
-											<li><a href="./news/national.html">Thời sự - Trong nước</a></li>
-										</ul>
-									</div>
-									<div class="col-lg-7 post-right">
-										<a href="./news/national/post2.html">
-											<h4>Vụ cán bộ QLTT bị tố làm luật: Cựu đội phó tử vong sau nhiều ngày tạm giam</h4>
-										</a>
-										<ul class="meta">
-											<li><a href="#"><span class="lnr lnr-user"></span>Đ Ngọc - T Nguyễn</a></li>
-											<li><a href="#"><span class="lnr lnr-calendar-full"></span>22 April, 2019</a></li>
-											<li><a href="#"><span class="lnr lnr-bubble"></span>05 Comments</a></li>
+											<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
+											<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+											<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
 										</ul>
 										<p>
-											Sau hơn 2 tháng bị tạm giam để điều tra về tội Lạm dụng chức vụ, quyền hạn chiếm đoạt tài sản, ông Nguyễn Văn Quang, cựu đội phó Đội QLTT số 8 (ở Nghệ An), đã bất ngờ tử vong trong sáng nay, 22-4
+											<%=post.description %>
 										</p>
 									</div>
 								</div>
-								<div class="single-latest-post row align-items-center">
-									<div class="col-lg-5 post-left">
-										<div class="feature-img relative">
-											<div class="overlay overlay-bg"></div>
-											<img class="img-fluid" src="./news/content_img/international1_1.jpg" alt="">
-										</div>
-										<ul class="tags">
-											<li><a href="./news/international.html">Thời sự - Ngoài nước</a></li>
-										</ul>
-									</div>
-									<div class="col-lg-7 post-right">
-										<a href="./newsinternational/post1.html">
-											<h4>Cựu Tổng thống Peru nói gì trước khi tự bắn vào đầu?</h4>
-										</a>
-										<ul class="meta">
-											<li><a href="#"><span class="lnr lnr-user"></span>Xuân Mai</a></li>
-											<li><a href="#"><span class="lnr lnr-calendar-full"></span>18 April, 2019</a></li>
-											<li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
-										</ul>
-										<p class="excert">
-											(NLĐO) – Cựu Tổng thống Peru Alan Garcia qua đời tại bệnh viện hôm 17-4 sau khi tự sát để tránh bị bắt giữ vì cáo buộc hối lộ.
-										</p>
-									</div>
-								</div>
-								<div class="single-latest-post row align-items-center">
-									<div class="col-lg-5 post-left">
-										<div class="feature-img relative">
-											<div class="overlay overlay-bg"></div>
-											<img class="img-fluid" src="./news/content_img/international2_1.jpg" alt="">
-										</div>
-										<ul class="tags">
-											<li><a href="./news/international.html">Thời sự - Ngoài nước</a></li>
-										</ul>
-									</div>
-									<div class="col-lg-7 post-right">
-										<a href="./news/international/post2.html">
-											<h4>Mỹ: Bắt người đàn ông mang xăng và hộp quẹt vào nhà thờ</h4>
-										</a>
-										<ul class="meta">
-											<li><a href="#"><span class="lnr lnr-user"></span>Phạm Nghĩa</a></li>
-											<li><a href="#"><span class="lnr lnr-calendar-full"></span>18 April, 2019</a></li>
-											<li><a href="#"><span class="lnr lnr-bubble"></span>05 Comments</a></li>
-										</ul>
-										<p>
-											(NLĐO) – Một người đàn ông đã bị cảnh sát TP New York – Mỹ (NYPD) bắt giữ sau khi mang xăng và hộp quẹt vào nhà thờ St Patrick ở thành phố này.
-										</p>
-									</div>
-									<div class="single-latest-post row align-items-center">
-											<div class="col-lg-5 post-left">
-												<div class="feature-img relative">
-													<div class="overlay overlay-bg"></div>
-													<img class="img-fluid" src="./business/content_img/marine1_1.jpg" alt="">
-												</div>
-												<ul class="tags">
-													<li><a href="./business/marine.html">Kinh doanh - hải sản</a></li>
-												</ul>
-											</div>
-											<div class="col-lg-7 post-right">
-												<a href="./business/marine/post1.html">
-													<h4>Bão số 9 khiến tôm hùm, cá lồng bè ở Ninh Thuận chết hàng loạt</h4>
-												</a>
-												<ul class="meta">
-													<li><a href="#"><span class="lnr lnr-user"></span>Nguyễn Thành</a></li>
-													<li><a href="#"><span class="lnr lnr-calendar-full"></span>26 November, 2018</a></li>
-													<li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
-												</ul>
-												<p class="excert">
-														Do ảnh hưởng cơn bão số 9, hàng chục hộ nuôi tôm hùm, nuôi cá ở vịnh Vĩnh Hy, xã Vĩnh Hải (huyện Ninh Hải, tỉnh Ninh Thuận) đang điêu đứng vì thiệt hại quá nặng, có người trắng tay.
-												</p>
-											</div>
-										</div>
-									<div class="single-latest-post row align-items-center">
-											<div class="col-lg-5 post-left">
-												<div class="feature-img relative">
-													<div class="overlay overlay-bg"></div>
-													<img class="img-fluid" src="./business/content_img/agri1_1.jpg" alt="">
-												</div>
-												<ul class="tags">
-													<li><a href="./business/agricultural.html">Kinh doanh - nông sản</a></li>
-												</ul>
-											</div>
-											<div class="col-lg-7 post-right">
-												<a href="./business/agricultural/post1.html">
-													<h4>Vụ phế phẩm cà phê trộn pin ở Đắk Nông: Truy tố 5 bị can</h4>
-												</a>
-												<ul class="meta">
-													<li><a href="#"><span class="lnr lnr-user"></span>VOV</a></li>
-													<li><a href="#"><span class="lnr lnr-calendar-full"></span>10 October, 2018</a></li>
-													<li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
-												</ul>
-												<p class="excert">
-													VKSND tỉnh Đắk Nông vừa ban hành cáo trạng truy tố 5 bị can trong vụ trộn hỗn hợp bột pin với tạp chất cà phê vào sản phẩm hồ tiêu.
-												</p>
-											</div>
-										</div>
-										<div class="single-latest-post row align-items-center">
-											<div class="col-lg-5 post-left">
-												<div class="feature-img relative">
-													<div class="overlay overlay-bg"></div>
-													<img class="img-fluid" src="./business/content_img/agri2_1.jpg" alt="">
-												</div>
-												<ul class="tags">
-													<li><a href="./business/agricultural.html">Kinh doanh - nông sản</a></li>
-												</ul>
-											</div>
-											<div class="col-lg-7 post-right">
-												<a href="./business/agricultural/post2.html">
-													<h4>Hàng nghìn thương nhân đổ về Bắc Giang thu mua vải thiều</h4>
-												</a>
-												<ul class="meta">
-													<li><a href="#"><span class="lnr lnr-user"></span>Ngọc Anh</a></li>
-													<li><a href="#"><span class="lnr lnr-calendar-full"></span>12 June, 2018</a></li>
-													<li><a href="#"><span class="lnr lnr-bubble"></span>05 Comments</a></li>
-												</ul>
-												<p>
-													Tính đến hết ngày 10/6/2018, tổng sản lượng vải thiều của tỉnh đã tiêu thụ đạt trên 43.700 tấn.
-												</p>
-											</div>
-										</div>
+								<% }) 	%>
 									<div class="load-more">
 										<a href="#" class="primary-btn">Load More Posts</a>
 									</div>
-								</div>
 							</div>
 							<!-- End latest-post Area -->
 							
@@ -311,9 +170,9 @@
 											<h3>A Discount Toner Cartridge Is Better Than Ever.</h3>
 										</a>
 										<ul class="meta">
-											<li><a href="#"><span class="lnr lnr-user"></span>Mark wiens</a></li>
-											<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-											<li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
+											<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
+											<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+											<li><a href="#"><i class="fa fa-eye"></i> 06 Comments</a></li>
 										</ul>
 									</div>
 								</div>
@@ -335,9 +194,9 @@
 												Better Than Ever.</h4>
 											</a>
 											<ul class="meta">
-												<li><a href="#"><span class="lnr lnr-user"></span>Mark wiens</a></li>
-												<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-												<li><a href="#"><span class="lnr lnr-bubble"></span>06 </a></li>
+												<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+												<li><a href="#"><i class="fa fa-eye"></i> 06 </a></li>
 											</ul>
 											<p class="excert">
 												Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
@@ -361,9 +220,9 @@
 												Better Than Ever.</h4>
 											</a>
 											<ul class="meta">
-												<li><a href="#"><span class="lnr lnr-user"></span>Mark wiens</a></li>
-												<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-												<li><a href="#"><span class="lnr lnr-bubble"></span>06 </a></li>
+												<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+												<li><a href="#"><i class="fa fa-eye"></i> 06 </a></li>
 											</ul>
 											<p class="excert">
 												Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
@@ -386,9 +245,9 @@
 												Better Than Ever.</h4>
 											</a>
 											<ul class="meta">
-												<li><a href="#"><span class="lnr lnr-user"></span>Mark wiens</a></li>
-												<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-												<li><a href="#"><span class="lnr lnr-bubble"></span>06 </a></li>
+												<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+												<li><a href="#"><i class="fa fa-eye"></i> 06 </a></li>
 											</ul>
 											<p class="excert">
 												Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
@@ -411,9 +270,9 @@
 												Better Than Ever.</h4>
 											</a>
 											<ul class="meta">
-												<li><a href="#"><span class="lnr lnr-user"></span>Mark wiens</a></li>
-												<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-												<li><a href="#"><span class="lnr lnr-bubble"></span>06 </a></li>
+												<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+												<li><a href="#"><i class="fa fa-eye"></i> 06 </a></li>
 											</ul>
 											<p class="excert">
 												Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
@@ -447,9 +306,9 @@
 												Better Than Ever.</h4>
 											</a>
 											<ul class="meta">
-												<li><a href="#"><span class="lnr lnr-user"></span>Mark wiens</a></li>
-												<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-												<li><a href="#"><span class="lnr lnr-bubble"></span>06 </a></li>
+												<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+												<li><a href="#"><i class="fa fa-eye"></i> 06 </a></li>
 											</ul>
 											<p class="excert">
 												Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
@@ -464,8 +323,8 @@
 													<a href="image-post.html"><h6>Help Finding Information
 													Online is so easy</h6></a>
 													<ul class="meta">
-														<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-														<li><a href="#"><span class="lnr lnr-bubble"></span>06</a></li>
+														<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+														<li><a href="#"><i class="fa fa-eye"></i> 06</a></li>
 													</ul>
 												</div>
 											</div>
@@ -477,8 +336,8 @@
 													<a href="image-post.html"><h6>Compatible Inkjet Cartr
 													world famous</h6></a>
 													<ul class="meta">
-														<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-														<li><a href="#"><span class="lnr lnr-bubble"></span>06</a></li>
+														<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+														<li><a href="#"><i class="fa fa-eye"></i> 06</a></li>
 													</ul>
 												</div>
 											</div>
@@ -490,8 +349,8 @@
 													<a href="image-post.html"><h6>5 Tips For Offshore Soft
 													Development </h6></a>
 													<ul class="meta">
-														<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-														<li><a href="#"><span class="lnr lnr-bubble"></span>06</a></li>
+														<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+														<li><a href="#"><i class="fa fa-eye"></i> 06</a></li>
 													</ul>
 												</div>
 											</div>
@@ -532,8 +391,8 @@
 												Online is so easy</h6>
 											</a>
 											<ul class="meta">
-												<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-												<li><a href="#"><span class="lnr lnr-bubble"></span>06</a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+												<li><a href="#"><i class="fa fa-eye"></i> 06</a></li>
 											</ul>
 										</div>
 									</div>
@@ -547,8 +406,8 @@
 												world famous</h6>
 											</a>
 											<ul class="meta">
-												<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-												<li><a href="#"><span class="lnr lnr-bubble"></span>06</a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+												<li><a href="#"><i class="fa fa-eye"></i> 06</a></li>
 											</ul>
 										</div>
 									</div>
@@ -562,8 +421,8 @@
 												Development </h6>
 											</a>
 											<ul class="meta">
-												<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-												<li><a href="#"><span class="lnr lnr-bubble"></span>06</a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+												<li><a href="#"><i class="fa fa-eye"></i> 06</a></li>
 											</ul>
 										</div>
 									</div>
@@ -577,8 +436,8 @@
 												Development </h6>
 											</a>
 											<ul class="meta">
-												<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-												<li><a href="#"><span class="lnr lnr-bubble"></span>06</a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
+												<li><a href="#"><i class="fa fa-eye"></i> 06</a></li>
 											</ul>
 										</div>
 									</div>
@@ -692,17 +551,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</div>
 		</footer>
 		<!-- End footer Area -->
-		<script>
-			// Get the modal
-			var modal = document.getElementById('id01');
-			
-			// When the user clicks anywhere outside of the modal, close it
-			window.onclick = function(event) {
-			  if (event.target == modal) {
-				modal.style.display = "none";
-			  }
-			}
-		</script>
 		<script src="javascripts/vendor/jquery-2.2.4.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="javascripts/vendor/bootstrap.min.js"></script>
