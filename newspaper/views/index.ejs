@@ -154,132 +154,66 @@
 							</div>
 							<!-- End banner-ads Area -->
 							<!-- Start popular-post Area -->
-							<div class="popular-post-wrap">
+							<div class="popular-post-wrap" >
 								<h4 class="title">Bài viết mới nhất từ chuyên mục top 10</h4>
 								<!--Top 10 mục - đứng đầu-->
-								<div class="feature-post relative">
+								<% dataTopten.topten.forEach(function(post){
+									if(post.id == 1){%>
+
+								<div class="feature-post relative">									
 									<div class="feature-img relative">
 										<div class="overlay overlay-bg"></div>
-										<img class="img-fluid" src="images/f1.jpg" alt="">
+										<img class="img-fluid" src="<%=post.img %>" alt="">
 									</div>
 									<div class="details">
 										<ul class="tags">
-											<li><a href="#">Food Habit</a></li>
+											<li><a href="#"><%=post.tag %></a></li>
 										</ul>
 										<a href="image-post.html">
-											<h3>A Discount Toner Cartridge Is Better Than Ever.</h3>
+											<h3><%=post.title %></h3>
 										</a>
 										<ul class="meta">
-											<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
-											<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-											<li><a href="#"><i class="fa fa-eye"></i> 06 Comments</a></li>
+												<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+												<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
+											
 										</ul>
 									</div>
 								</div>
+								<% }%>
+								<% }) %>
 								<!--Top 10 mục (1 dòng 2 cột)-->
-								<div class="row mt-20 medium-gutters">
-									<div class="col-lg-6 single-popular-post">
-										<div class="feature-img-wrap relative">
-											<div class="feature-img relative">
-												<div class="overlay overlay-bg"></div>
-												<img class="img-fluid" src="images/f2.jpg" alt="">
-											</div>
-											<ul class="tags">
-												<li><a href="#">Travel</a></li>
-											</ul>
-										</div>
-										<div class="details">
-											<a href="image-post.html">
-												<h4>A Discount Toner Cartridge Is
-												Better Than Ever.</h4>
-											</a>
-											<ul class="meta">
-												<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
-												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-												<li><a href="#"><i class="fa fa-eye"></i> 06 </a></li>
-											</ul>
-											<p class="excert">
-												Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
-											</p>
-										</div>
-									</div>
+								
+								<div class="row mt-20 medium-gutters" style="overflow-y: scroll; height: 500px;">
+									<% dataTopten.topten.forEach(function(post){%>								
 									<!--Top 10 mục (1 dòng 2 cột)-->
 									<div class="col-lg-6 single-popular-post">
 										<div class="feature-img-wrap relative">
 											<div class="feature-img relative">
 												<div class="overlay overlay-bg"></div>
-												<img class="img-fluid" src="images/f3.jpg" alt="">
+												<img class="img-fluid" src="<%=post.img %>" alt="">
 											</div>
 											<ul class="tags">
-												<li><a href="#">Travel</a></li>
+												<li><a href="#"><%=post.tag %></a></li>
 											</ul>
 										</div>
 										<div class="details">
 											<a href="image-post.html">
-												<h4>A Discount Toner Cartridge Is
-												Better Than Ever.</h4>
+												<h4><%=post.title %></h4>
 											</a>
 											<ul class="meta">
-												<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
-												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-												<li><a href="#"><i class="fa fa-eye"></i> 06 </a></li>
+												<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+												<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
 											</ul>
 											<p class="excert">
-												Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
+													<%=post.description %>											
 											</p>
 										</div>
 									</div>
-									<div class="col-lg-6 single-popular-post">
-										<div class="feature-img-wrap relative">
-											<div class="feature-img relative">
-												<div class="overlay overlay-bg"></div>
-												<img class="img-fluid" src="images/f3.jpg" alt="">
-											</div>
-											<ul class="tags">
-												<li><a href="#">Travel</a></li>
-											</ul>
-										</div>
-										<div class="details">
-											<a href="image-post.html">
-												<h4>A Discount Toner Cartridge Is
-												Better Than Ever.</h4>
-											</a>
-											<ul class="meta">
-												<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
-												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-												<li><a href="#"><i class="fa fa-eye"></i> 06 </a></li>
-											</ul>
-											<p class="excert">
-												Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
-											</p>
-										</div>
-									</div>
-									<div class="col-lg-6 single-popular-post">
-										<div class="feature-img-wrap relative">
-											<div class="feature-img relative">
-												<div class="overlay overlay-bg"></div>
-												<img class="img-fluid" src="images/f3.jpg" alt="">
-											</div>
-											<ul class="tags">
-												<li><a href="#">Travel</a></li>
-											</ul>
-										</div>
-										<div class="details">
-											<a href="image-post.html">
-												<h4>A Discount Toner Cartridge Is
-												Better Than Ever.</h4>
-											</a>
-											<ul class="meta">
-												<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
-												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-												<li><a href="#"><i class="fa fa-eye"></i> 06 </a></li>
-											</ul>
-											<p class="excert">
-												Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
-											</p>
-										</div>
-									</div>
+									<% }) 	%>
 								</div>
+								
 							</div>
 							<!-- End popular-post Area -->
 							<!-- Start relavent-story-post Area -->

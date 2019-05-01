@@ -40,6 +40,6 @@ app.use(function(err, req, res, next) {
 });
 
 app.locals.datathoisu = require('./model/data.json');
-app.locals.datagiaitri = require('./model/entertainment.json');
-app.locals.datathethao = require('./model/sport.json');
+app.locals.dataTopic = require('./model/topic.json');
+app.locals.dataTopten = require('./model/topten.json');
 module.exports = app;
