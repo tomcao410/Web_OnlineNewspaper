@@ -11,21 +11,11 @@
            "views": "50",
            "description": "Những ngày tới TP HCM có mưa dông buổi chiều, gia tăng trên diện rộng báo hiệu bước vào mùa mưa.",
             "content": "<p>Dịp lễ 30/4 và 1/5, nắng nóng tại TP HCM và khu vực Nam bộ chỉ xảy ra cục bộ, nền nhiệt phổ biến 33-35 độ C.</p><p>Đài khí tượng thuỷ văn khu vực cho biết, mưa dông đang có xu hướng gia tăng vào chiều tối kèm nguy cơ xảy ra lốc, sét, mưa đá và gió giật mạnh. Riêng TP HCM ban ngày có mưa rào và dông. Đây cũng là kiểu thời tiết đặc trưng trong những ngày đầu tháng 5 đánh dấu Nam bộ vào giai đoạn chuyển mùa mưa.</p><p>Thời gian qua, TP HCM trải qua đợt nắng nóng kéo dài. Nền nhiệt cao nhất duy trì ở mức 37-39 độ C. Do bức xạ, đô thị hoá, nhiệt độ ngoài trời cao hơn lều khí tượng 3-4 độ C khiến người dân luôn mệt mỏi vì oi bức.</p><p>Đến ngày 27 và 28/4, Sài Gòn và Nam bộ đón liên tiếp mưa 'giải nhiệt'. Lưu lượng mưa ghi nhận đến 89 mm ở Bình Phước, 86 mm ở Bình Dương còn Cà Mau là 36 mm. Tại TP HCM lưu lượng cao nhất đo được ở huyện Hóc Môn là 44,6 mm.</p><p>Nguyên nhân xuất hiện mưa do rãnh thấp xích đạo hoạt động khá mạnh. Ngoài ra, trên cao có áp cao cận nhiệt đới gây nên những nhiễu động, hình thành mây dông gây mưa.</p><p>Dự báo sau đợt nghỉ lễ dài ngày, mưa dông gia tăng, thường kèm lốc, gió giật mạnh và sét nên người dân cần đề phòng khi ra đường.</p><p><strong>Duy Trần</strong></p>",
-            "img": "https://i-vnexpress.vnecdn.net/2019/04/29/muangap11536404098680x0-155652-1334-3060-1556520742_500x300.jpg"
+            "img": "https://i-vnexpress.vnecdn.net/2019/04/29/muangap11536404098680x0-155652-1334-3060-1556520742_500x300.jpg",
+            "tag":"Sài Gòn"
         },
        
-        {
-            "id": 2,
-            "title": "Biển Cửa Lò ken đặc người trong dịp nghỉ lễ",
-            "category":"Thời sự",
-            "sub_category":"Trong nước",
-            "author": "Cao Phu Cuong",
-            "date":"29 - 04 - 2019",
-            "views": "50",
-            "description": "Trong ba ngày, hơn 200.000 người đã đến bãi biển Cửa Lò (Nghệ An), khách sạn đều kín phòng.",
-             "content": "<p>Dịp lễ 30/4 và 1/5, nắng nóng tại TP HCM và khu vực Nam bộ chỉ xảy ra cục bộ, nền nhiệt phổ biến 33-35 độ C.</p><p>Đài khí tượng thuỷ văn khu vực cho biết, mưa dông đang có xu hướng gia tăng vào chiều tối kèm nguy cơ xảy ra lốc, sét, mưa đá và gió giật mạnh. Riêng TP HCM ban ngày có mưa rào và dông. Đây cũng là kiểu thời tiết đặc trưng trong những ngày đầu tháng 5 đánh dấu Nam bộ vào giai đoạn chuyển mùa mưa.</p><p>Thời gian qua, TP HCM trải qua đợt nắng nóng kéo dài. Nền nhiệt cao nhất duy trì ở mức 37-39 độ C. Do bức xạ, đô thị hoá, nhiệt độ ngoài trời cao hơn lều khí tượng 3-4 độ C khiến người dân luôn mệt mỏi vì oi bức.</p><p>Đến ngày 27 và 28/4, Sài Gòn và Nam bộ đón liên tiếp mưa 'giải nhiệt'. Lưu lượng mưa ghi nhận đến 89 mm ở Bình Phước, 86 mm ở Bình Dương còn Cà Mau là 36 mm. Tại TP HCM lưu lượng cao nhất đo được ở huyện Hóc Môn là 44,6 mm.</p><p>Nguyên nhân xuất hiện mưa do rãnh thấp xích đạo hoạt động khá mạnh. Ngoài ra, trên cao có áp cao cận nhiệt đới gây nên những nhiễu động, hình thành mây dông gây mưa.</p><p>Dự báo sau đợt nghỉ lễ dài ngày, mưa dông gia tăng, thường kèm lốc, gió giật mạnh và sét nên người dân cần đề phòng khi ra đường.</p><p><strong>Duy Trần</strong></p>",
-             "img": "https://i-dulich.vnecdn.net/2019/04/28/cua-lo-2-1556467395_680x0.jpg"
-         },
+        
          {
             "id": "gt1",
             "title": "Scarlett Johansson khổ luyện để diện đồ bó của Black Widow",
@@ -39,48 +29,20 @@
              "img": "https://i-giaitri.vnecdn.net/2019/04/29/Scarlett-Johansson-trong-The-A-3864-7366-1556547901.jpg",
              "tag": "Avengers: Endgame"
          },
-        
          {
-             "id": "gt2",
-             "title": "Đạo diễn '2 Fast 2 Furious' hôn mê sau cơn đột quỵ",
-             "category": "Giải trí",
-             "sub_category":"Phim truyện",
-             "author": "Đạt Phan",
-             "date":"26 - 04 - 2019",
-             "views": "50",
-             "description": "Gia đình John Singleton thông báo đạo diễn từng hai lần được đề cử giải Oscar đang nằm viện.",
-              "content": "<p>Theo Hollywood Reporter, đạo diễn 51 tuổi đang được điều trị tại khoa cấp cứu của một bệnh viện bang California, Mỹ. Gia đình John chia sẻ ông hôn mê sâu sau cơn đột quỵ cuối tuần trước. Các bác sĩ chưa đưa ra kết luận về tình trạng sức khỏe của đạo diễn.</p><p>Ngày 17/4, John Singleton tới bệnh viện khám chân. Tại đây, ông bị đột quỵ và lập tức được đưa vào phòng cấp cứu. Nguyên nhân dẫn đến vụ việc được gia đình John chia sẻ là 'một sự cố y tế'.</p><p >Mẹ John - Sheila Ward - chăm sóc ông trong thời gian hôn mê. Gia đình đạo diễn đã đệ đơn xin tòa trao quyền quyết định về tài sản và sức khỏe ông cho Sheila và mới được thông qua. Bà sẽ giúp triển khai các hợp đồng dang dở của đạo diễn để tránh tổn thất về kinh tế.</p><p >Khi biết tin, hãng phim FX - nơi đạo diễn làm việc - chia sẻ: 'John là một chiến binh và chúng tôi biết anh ấy sẽ vượt qua tai nạn này'. Nhiều ngôi sao như rapper Snoop Dogg, đạo diễn Guillermo del Toro, nhà sản xuất Brian Koppelman gửi lời động viên gia đình John. </p><p>John Singleton sinh năm 1968, là một đạo diễn, nhà sản xuất phim nổi tiếng người Mỹ với những bộ phim như 2 Fast 2 Furious, Boyz n the Hood, Baby Boy... Ông có hai đề cử Oscar cho 'Đạo diễn xuất sắc' và 'Kịch bản xuất sắc'. John đang đồng sản xuất series truyền hình tội phạm Snowfall của kênh FX.</p><p><strong>Đạt Phan</strong></p>",
-              "img": "https://i-giaitri.vnecdn.net/2019/04/26/john-singleton-getty-h-2019-5563-1556254165.jpg",
-              "tag": "Fast and Furious"
-          },
-
-          {
-             "id": "gt3",
-             "title": "Taylor Swift phát hành MV mới 'Me!'",
-             "category": "Giải trí",
-             "sub_category":"Âm nhạc",
-             "author": "Đạt Phan",
-             "date":"26 - 04 - 2019",
-             "views": "50",
-             "description": "Ca sĩ Mỹ chia sẻ bài hát mới khuyến khích mọi người tôn vinh và tự hào về tính cách của bản thân.",
-              "content": "<p>Nữ ca sĩ hợp tác cùng rocker Brendon Urie của ban nhạc Panic! at the Disco trong dự án mới. MV được phát hành trên kênh Youtube của ca sĩ vào 11h ngày 26/4, theo giờ Việt Nam. Hệ thống truyền tải nhạc trực tuyến Spotify dựng một tấm biển quảng cáo ngoài trời để quảng bá Me!. Trước đó nhiều tuần cô đã úp mở về việc ra single mới.</p><p>Trên sóng ABC, Taylor giới thiệu nội dung ca khúc: 'Me! khuyến khích mọi người tôn vinh và tự hào về tính cách của mình. Tôi muốn viết một ca khúc để người nghe cảm thấy yêu bản thân hơn. Giai điệu dễ nghe của nó sẽ khiến mọi người không thể quên'. Cô cũng nói tình yêu và sự ủng hộ của người hâm mộ là niềm cảm hứng lớn để cô tiếp tục sáng tác. </p><p>MV do Taylor và Dave Meyers đồng đạo diễn, mở đầu bằng hình ảnh con rắn tan biến thành đàn bướm đầy màu sắc. Từ năm 2016, Taylor Swift chọn hình ảnh loài bò sát để khẳng định rũ bỏ hình tượng 'công chúa đồng quê', mở đầu kỷ nguyên Reputation đầy u ám và táo bạo. Không khí MV mới vui vẻ, khác những sản phẩm trước đây như Look What You Made Me Do. Người hâm mộ vui mừng vì Taylor trở lại với hình ảnh tươi vui, trong trẻo từng làm nên tên tuổi cô.</p><p>Người hâm mộ đã chờ đón tác phẩm mới này từ lâu. Tuần trước, Taylor đăng một bức ảnh đồng hồ đếm ngược trên Instagram khiến nhiều fan thích thú. Sau đó, nữ ca sĩ tiếp tục đăng tấm hình một viên kim cương hình trái tim màu hồng cùng dòng chữ 'Ngày 26/4'.</p><p>Reputation - album gần nhất của cô được phát hành vào tháng 11/2017, đứng đầu về doanh số tại thị trường Mỹ trong năm đó với hơn 1,2 triệu bản được bán ra. Tour diễn quảng bá album đem về cho nữ ca sĩ hơn 345 triệu USD. Đây cũng là tour lưu diễn thành công nhất mọi thời đại tại Mỹ. Mới đây, Taylor Swift được tạp chí Time bình chọn vào top 100 người ảnh hưởng nhất thế giới của năm 2019.</p><p><strong>Đạt Phan</strong></p>",
-              "img": "https://i-giaitri.vnecdn.net/2019/04/26/D4XD6M5WwAESOKS-1556248554-9910-1556248761_180x108.jpg",
-              "tag": "Taylor Swift"
-          },
-
-          {
-             "id": "gt4",
-             "title": "Ariana Grande bênh vực Justin Bieber sau sự cố hát nhép",
-             "category": "Giải trí",
-             "sub_category":"Âm nhạc",
-             "author": "Đạt Phan",
-             "date":"25 - 04 - 2019",
-             "views": "50",
-             "description": "Nữ ca sĩ nói việc khách mời hát lip-sync tại các chương trình là bình thường trong làng giải trí.",
-              "content": "<p>Ngày 24/4, Justin Bieber lên Twitter thừa nhận hát nhép. Anh xuất hiện với tư cách khách mời trong phần diễn của Ariana tại lễ hội âm nhạc Coachella hồi cuối tuần. Đây là lần đầu Justin trở lại sân khấu sau gần hai năm nghỉ ngơi. Anh biểu diễn ca khúc Sorry và bị khán giả phát hiện hát nhép.</p><p>Ariana Grande bênh vực đồng nghiệp: 'Chúng tôi quyết định màn diễn đó chỉ 10 phút trước khi lên sân khấu và không có sự chuẩn bị nào. Justin hát lip-sync như mọi nghệ sĩ khách mời khác'. Nữ ca sĩ cho rằng khán giả quá săm soi Justin và phóng đại sự việc. 'Điều quan trọng là người hâm mộ, bạn bè và thế giới đều vui mừng vì anh ấy đã trở lại', cô nói.</p><p>Lời bênh vực của Ariana đến sau khi Justin bị chương trình Nighly Pop bêu riếu  trên sóng truyền hình. Người dẫn chương trình Morgan Stewart cùng các khách mời liên tiếp có những bình luận mỉa mai nam ca sĩ. 'Ít nhất là cậu ta đã cắt tóc và vẫn mặc áo trên sân khấu', Morgan nói.</p><p>Justin Bieber đáp trả Morgan trên Twitter: 'Điều tôi thấy khó chịu là cô có một chương trình truyền hình chỉ để cười cợt người khác. Hãy thử học cách giúp đỡ và khuyến khích, cô sẽ thấy mình có thể làm được điều gì đó tích cực cho xã hội. Việc hát nhép của tôi hoàn toàn bình thường'.</p><p>Trong phần biểu diễn của Ariana Grande, một nghệ sĩ khách mời khác, rapper Nicki Minaj, cũng bị nghi hát nhép.</p></p><p><strong>Đạt Phan</strong></p>",
-              "img": "https://i-giaitri.vnecdn.net/2019/04/25/arianaa1-1556161536-4662-1556161888_180x108.jpg",
-              "tag": "Ariana Grande"
-          },
+            "id": "gt3",
+            "title": "Taylor Swift phát hành MV mới 'Me!'",
+            "category": "Giải trí",
+            "sub_category":"Âm nhạc",
+            "author": "Đạt Phan",
+            "date":"26 - 04 - 2019",
+            "views": "50",
+            "description": "Ca sĩ Mỹ chia sẻ bài hát mới khuyến khích mọi người tôn vinh và tự hào về tính cách của bản thân.",
+             "content": "<p>Nữ ca sĩ hợp tác cùng rocker Brendon Urie của ban nhạc Panic! at the Disco trong dự án mới. MV được phát hành trên kênh Youtube của ca sĩ vào 11h ngày 26/4, theo giờ Việt Nam. Hệ thống truyền tải nhạc trực tuyến Spotify dựng một tấm biển quảng cáo ngoài trời để quảng bá Me!. Trước đó nhiều tuần cô đã úp mở về việc ra single mới.</p><p>Trên sóng ABC, Taylor giới thiệu nội dung ca khúc: 'Me! khuyến khích mọi người tôn vinh và tự hào về tính cách của mình. Tôi muốn viết một ca khúc để người nghe cảm thấy yêu bản thân hơn. Giai điệu dễ nghe của nó sẽ khiến mọi người không thể quên'. Cô cũng nói tình yêu và sự ủng hộ của người hâm mộ là niềm cảm hứng lớn để cô tiếp tục sáng tác. </p><p>MV do Taylor và Dave Meyers đồng đạo diễn, mở đầu bằng hình ảnh con rắn tan biến thành đàn bướm đầy màu sắc. Từ năm 2016, Taylor Swift chọn hình ảnh loài bò sát để khẳng định rũ bỏ hình tượng 'công chúa đồng quê', mở đầu kỷ nguyên Reputation đầy u ám và táo bạo. Không khí MV mới vui vẻ, khác những sản phẩm trước đây như Look What You Made Me Do. Người hâm mộ vui mừng vì Taylor trở lại với hình ảnh tươi vui, trong trẻo từng làm nên tên tuổi cô.</p><p>Người hâm mộ đã chờ đón tác phẩm mới này từ lâu. Tuần trước, Taylor đăng một bức ảnh đồng hồ đếm ngược trên Instagram khiến nhiều fan thích thú. Sau đó, nữ ca sĩ tiếp tục đăng tấm hình một viên kim cương hình trái tim màu hồng cùng dòng chữ 'Ngày 26/4'.</p><p>Reputation - album gần nhất của cô được phát hành vào tháng 11/2017, đứng đầu về doanh số tại thị trường Mỹ trong năm đó với hơn 1,2 triệu bản được bán ra. Tour diễn quảng bá album đem về cho nữ ca sĩ hơn 345 triệu USD. Đây cũng là tour lưu diễn thành công nhất mọi thời đại tại Mỹ. Mới đây, Taylor Swift được tạp chí Time bình chọn vào top 100 người ảnh hưởng nhất thế giới của năm 2019.</p><p><strong>Đạt Phan</strong></p>",
+             "img": "https://i-giaitri.vnecdn.net/2019/04/26/D4XD6M5WwAESOKS-1556248554-9910-1556248761_180x108.jpg",
+             "tag": "Taylor Swift"
+         },
+        
 
           {
             "id": "tt1",
@@ -95,21 +57,6 @@
              "img": "https://i-thethao.vnecdn.net/2019/04/30/DeJong-1556624098-2075-1556624216_500x300.jpg",
              "tag": "Champion League"
          },
-
-         {
-            "id": "tt2",
-            "title": "Pogba: 'Tôi được trả tiền không phải để khua môi múa mép'",
-            "category": "Thể thao",
-            "sub_category": "Bóng đá",
-            "author": "Bảo Lam",
-            "date":"30 - 04 - 2019",
-            "views": "50",
-            "description": "Tiền vệ Man Utd tỏ ra bất cần trước những chỉ trích vì phong độ đi xuống gần đây.",
-             "content": "<p>'Điều đó không thành vấn đề', Pogba nói trên kênh phát thanh RMC về những chỉ trích gần đây. 'Họ được trả tiền để nói trước camera. Tôi chỉ tập trung vào màn trình diễn trên sân cỏ. Họ có thể nói bất cứ điều gì họ muốn, còn tôi được trả tiền không phải cho việc khua môi múa mép. Tôi nhận lương để có mặt trên sân và chiến đấu cho CLB. Đó là những gì tôi quan tâm'.</p><p>Trong số những người chỉ trích Pogba có cựu đội trưởng Man Utd Roy Keane. Đây không phải điều mới lạ, bởi tiền vệ người Pháp từng chịu nhiều chỉ trích tương tự kể từ sau khi trở lại sân Old Trafford với giá 136 triệu đôla.</p><p>Ở trận gần nhất hòa 1-1 với Chelsea, Pogba gây ấn tượng trong hiệp một với những pha phát động tấn công chính xác. Tuy nhiên, nhà vô địch World Cup 2018 không thể giúp đội bóng có được ba điểm để nuôi hy vọng cho cuộc đua top 4. Man Utd đang kém vị trí thứ tư của Chelsea tới ba điểm khi chỉ còn hai vòng đấu.</p><p>Trước đó, thất bại nặng nề bốn bàn trắng trên sân Everton khiến làn sóng chỉ trích Man Utd lên cao. Pogba thừa nhận anh và đồng đội đã không tôn trọng các CĐV Man Utd. Nhưng trên chương trình bình luận của Sky Sports, Roy Keane cho biết những lời của Pogba là 'không đáng để tin' và tiền vệ này chính là 'vấn đề lớn' tại Man Utd.</p><p><strong>Bảo Lam</strong></p>",
-             "img": "https://i-thethao.vnecdn.net/2019/04/30/paul-pogba-manchester-united-2-6048-2353-1556592963_180x108.png",
-             "tag": "Man Utd"
-         },
-
          {
             "id": "tt3",
             "title": "Nadal và dấu hỏi về triều đại sân đất nện",
@@ -125,17 +72,70 @@
          },
 
          {
-            "id": "tt4",
-            "title": "ATP Finals chia tay London vào 2021",
-            "category": "Thể thao",
-            "sub_category": "Tennis",
-            "author": "Bảo Lam",
-            "date":"25 - 04 - 2019",
-            "views": "50",
-            "description": "Giải đấu tám tay vợt nam xếp hạng cao nhất ATP sẽ chuyển khẩu sang thành phố Turin, Italy giai đoạn 2021-2025.",
-            "content": "<p>Turin đã giành chiến thắng trong cuộc đua cuối cùng với các đối thủ London, Machester, Singapore và Tokyo. Kể từ năm 2009, ATP Finals được tổ chức tại nhà thi đấu O2 ở London, nhưng sẽ chuyển sang sân Pala Alpitour sau hai năm nữa.</p><p>ATP Finals quy tụ tám tay vợt nam và tám cặp đánh đôi xếp hạng cao nhất vào cuối năm. Tới 2021, giải sẽ có phần thưởng kỷ lục trong làng banh nỉ lên tới 14,5 triệu đôla.</p><p>Khởi đầu vào năm 1970, ATP Finals đã di chuyển qua 15 thành phố khác nhau. Turin sẽ là thành phố đầu tiên ở Italy đăng cai giải đấu hấp dẫn này. Sân Pala Alpitour được khánh thành năm 2005 với sức chứa 15.000 khán giả, lớn nhất trong số các sân trong nhà ở đất nước hình chiếc ủng.</p><p>'ATP Finals là giải đấu lớn và danh giá nhất trong hệ thống ATP', tay vợt số một thế giới Novak Djokovic nói. 'Đây là giải đấu có lịch sử dịch chuyển vòng quanh thế giới và tôi háo hức được chứng kiến Turin tổ chức vào năm 2021'.</p><p>Ở giải năm 2018, Djokovic đã để thua tay vợt trẻ người Đức Alexander Zverev trong trận đấu cuối cùng.</p><p><strong>Bảo Lam</strong></p>",
-            "img": "https://i-thethao.vnecdn.net/2019/04/24/skysports-alexander-zverev-449-6015-8020-1556114726_180x108.png",
-            "tag": "ATP Finals"
-         }
+            "id": "dl1",
+            "title": "Quảng bá áo dài Việt Nam tại Tuần lễ thời trang toàn cầu ở Ấn Độ",
+            "category": "Du lịch",
+            "sub_category": "Việt Nam",
+            "author": "ĐCSVN",
+            "date":"22 - 04 - 2019",
+            "views": "136",
+            "description": "Tiếp tục các nỗ lực quảng bá văn hóa và áo dài truyền thống Việt Nam đến với bạn bè quốc tế, Đại sứ quán Việt Nam tại Ấn Độ đã phối hợp với Câu lạc bộ Điện ảnh và truyền hình quốc tế tại phim trường Marwah Studios, thành phố Noida (Noi-đa) tổ chức tiết mục trình diễn áo dài nam, nữ truyền thống của Việt Nam.",
+            "content": "<p>Tiết mục biểu diễn nét đẹp áo dài của Việt Nam nằm trong khuôn khổ Tuần lễ thời trang và thiết kế toàn cầu diễn ra từ ngày 17-19/4 tại Thành phố Điện ảnh (Film City) ở Noida, bang Uttar Pradesh (U-ta Pra-đét) của Ấn Độ. Tiết mục được chuẩn bị công phu và do chính các cán bộ nhân viên và phu quân, phu nhân của Đại sứ quán, các cơ quan bên cạnh Đại sứ quán thể hiện.</p><p>Những mẫu nam, mẫu nữ trưởng thành từ nhiều chương trình quảng bá áo dài Việt Nam trước đó đã có màn trình diễn tự tin và chuyên nghiệp trên sàn catwalk, thu hút sự hò reo cổ vũ cuồng nhiệt của người xem.</p><p>Tham dự Tuần lễ thời trang và thiết kế toàn cầu lần thứ 3 này còn có khoảng 200 nhà thiết kế với 700 mẫu trang phục đại diện cho nhiều quốc gia khác nhau trên thế giới. Bên lề các sự kiện thời trang còn diễn ra 6 hội thảo chuyên đề về báo chí, điện ảnh và thời trang, 8 hoạt động trưng bày các sản phẩm trong lĩnh vực hội họa, trang sức, đồ nội thất.</p>",
+            "img": "http://vietnamtourism.gov.vn/images/2019/vnp2004aodai2-092510569.jpg",
+            "tag": "Ấn Độ"
+          },
+          {
+            "id": "dl9",
+            "title": "Khách nước ngoài bị ngồi tù vì nhặt điện thoại ở Thái Lan",
+            "category": "Du lịch",
+            "sub_category": "Thế giới",
+            "author": "Anh Minh (Theo Sun)",
+            "date":"22 - 04 - 2019",
+            "views": "230",
+            "description": "Khi nhặt được chiếc điện thoại ở gần sân bay Chiang Mai, du khách Anh không nghĩ rằng nó là nguyên nhân khiến anh phải ngồi tù.",
+            "content": "<p>Chris Dodd, 29 tuổi, bay tới Thái Lan du lịch vào đầu tháng 4. Phượt thủ Anh nhặt được một chiếc điện thoại trong máng nước ngoài sân bay Chiang Mai. Sau đó, anh cầm điện thoại trên tới nhà nghỉ cách sân bay khoảng 10 phút lái xe. </p><p>Nam du khách không ngờ hành động vô tình này khiến anh rơi vào vòng lao lý. Camera ở sân bay chỉ ra anh tới một địa điểm mới cùng chiếc điện thoại di động. Theo luật Thái Lan, việc cầm một vật nào đó không phải của mình đi từ nơi này tới nơi khác bị coi là hành vi trộm cắp. Những người phạm tội phải đối mặt với bản án 3-5 năm tù, nộp phạt từ 6.000 tới 10.000 baht (4,4 triệu đến 7,3 triệu đồng).</p><p>Chris bị cảnh sát bắt ngay sau đó và giam 12 ngày, đối mặt với án tù 5 năm. Bạn bè, người thân của nam du khách đã gây quỹ được gần 830.000 baht (hơn 600 triệu đồng) để anh có tiền nộp phạt và thuê người bào chữa tại Thái Lan. Dưới sự giúp đỡ của luật sư, tòa án đã hủy cáo buộc đối với Chris. Ngay sau khi được thả, nam du khách bay về Anh đoàn tụ cùng gia đình ngày 19/4. </p><p>Chủ sở hữu chiếc điện thoại mà anh nhặt được đã lên tiếng xác nhận Chris không phải kẻ trộm. </p><p>Mike, bố của Chris, cho biết rất nhẹ nhõm khi con trai thoát khỏi tù tội. Gia đình anh gửi lời cám ơn tới những người đã quyên góp tiền để giúp Chris.</p>",
+            "img": "https://i-dulich.vnecdn.net/2019/04/22/top-6509-1555910904.jpg",
+            "tag": "Thái Lan"
+          },
+          {
+            "id": "ts3",
+            "title": "Cuộc đảo chính 'chết yểu' của phe đối lập Venezuela",
+            "category": "Thời sự",
+            "sub_category": "Thế giới",
+            "author": "Phương Vũ (Theo NYTimes)",
+            "date":"02 - 05 - 2019",
+            "views": "100",
+            "description": "Điểm mấu chốt khiến cuộc đảo chính của Juan Guaido thất bại là ông đã không thể thuyết phục được các chỉ huy quân đội đổi phe.",
+            "content": "<p>Rạng sáng 30/4, thủ lĩnh đối lập Venezuela Juan Guaido thực hiện nước cờ táo bạo: ông xuất hiện trong một video, đứng cạnh các binh sĩ ủng hộ mình trước căn cứ không quân La Carlota ở thủ đô Caracas, tuyên bố cuộc nổi dậy mang tên 'Chiến dịch Tự do' bắt đầu.</p><p>Đứng cạnh ông là Leopoldo Lopez, nhà hoạt động đã bị chính quyền Maduro quản thúc tại gia vì dẫn đầu lực lượng chống chính phủ năm 2014, hiện là cố vấn chính trị của Guaido. Guaido tuyên bố rằng thời cơ đã đến và kêu gọi quân đội quay lưng với Tổng thống Nicolas Maduro.</p><p>Ngay sau đó, đụng độ nổ ra giữa các binh sĩ bên trong căn cứ La Carlota và lực lượng ủng hộ Guaido, gồm phần lớn là dân thường và vài chục binh sĩ đào ngũ được trang bị vũ khí.</p><p>Với việc tấn công vào căn cứ quân sự La Carlota ở thủ đô, phe đối lập hy vọng tạo tiếng vang bằng một hành động mang tính biểu tượng, kích động cả những người lính lẫn dân thường chấm dứt sự cầm quyền của Maduro.</p><p>Trên đường phố, lực lượng an ninh Venezuela sử dụng xe bọc thép, hơi cay và đạn cao su để chống lại đám đông bạo lực, khiến hơn 100 người bị thương. Người biểu tình cáo buộc quân đội đã sử dụng đạn thật nhưng không đưa ra được bằng chứng.</p><p>Sau buổi trưa, Guaido dẫn đầu nhóm biểu tình về phía tây Caracas nhưng cuộc tuần hành cuối cùng phải giải tán khi đụng độ tiếp tục xảy ra và quân đội phát thông điệp cứng rắn rằng họ sẽ sử dụng biện pháp bạo lực nếu người biểu tình kéo tới Dinh Tổng thống Miraflores.</p><p>Cuối cùng, kế hoạch lật đổ Tổng thống Maduro bằng một cuộc binh biến kết hợp biểu tình quy mô lớn của Guaido đã phá sản hoàn toàn. Vào cuối ngày, Maduro phát biểu trên sóng truyền hình trực tiếp, tuyên bố đã đánh bại cuộc đảo chính, đồng thời cảm ơn các lực lượng vũ trang vì đã 'trung thành tuyệt đối' với ông.</p><p>Tuy nhiên, sự kiện này cũng hé lộ sự chia rẽ trong lực lượng vũ trang Venezuela. Trong khi các lãnh đạo cao nhất của quân đội duy trì ủng hộ với Maduro, nhiều sĩ quan cấp trung và cấp thấp sẵn sàng thách thức các chỉ huy của họ và đứng về phe đối lập.</p><p><strong>Phương Vũ (Theo NYTimes)</strong></p>",
+            "img": "https://i-dulich.vnecdn.net/2019/04/16/kuman-thong-bua-phep-155541113-9051-9176-1555412204.png",
+            "tag": "đảo chính Venezuela"
+          },
+          {
+            "id": "kd1",
+            "title": "Sinh viên tạo dung dịch từ vỏ tôm giữ nông sản tươi hơn 10 ngày",
+            "category": "Kinh doanh",
+            "sub_category": "Nông sản",
+            "author": "Phan Minh",
+            "date":"22 - 04 - 2019",
+            "views": "100",
+            "description": "Khi phun dung dịch sẽ tạo lớp màng mỏng bám trên bề mặt vỏ nông sản tránh sâu bọ, vi sinh, nấm mốc và giảm được quá trình oxy hóa.",
+            "content": "<p>Tại cuộc thi Công nghệ chế biến sau thu hoạch năm 2019 vừa tổ chức tháng 4/2019, cô sinh viên Bùi Thị Khánh Linh, Đại học Khoa học Tự nhiên (Đại học Quốc gia TP HCM) để lại nhiều ấn tượng khi giành giải nhất với nghiên cứu và chiết xuất dung dịch biến tính chitosan từ vỏ tôm, cua với dịch chiết polyphenols trong trà xanh thay thế hóa chất để bảo quản nông sản tươi lâu.</p><p>Nghiên cứu được đánh giá cao trong bối cảnh nông sản Việt bị thất thoát nhiều sau thu hoạch và các chất bảo quản hóa học có nguy cơ ảnh hưởng sức khỏe người tiêu dùng.</p><p>Tác giả đã tạo dung dịch bằng cách sử dụng chất khử nhóm hydroxyl, amino và α – methylene để tạo gốc tự do trên mạch cấu tạo của chitosan, rồi gắn các polyphenols lên mạch chitosan. Thay vì nhúng nông sản vào dung dịch bảo quản, tác giả đã dùng phương pháp phun áp suất kết hợp thổi gió (phun sương). Cách này tránh được úng thối khi dung dịch bảo quản dư thừa bám lại trên nông sản.</p><p>Khi phun, dung dịch tạo lớp màng mỏng bám trên bề mặt vỏ nông sản ngăn sâu bọ, vi sinh, nấm mốc phát triển và giảm được quá trình oxy hóa (già hóa) do màng có khả năng thoát khí để nông sản có thể hô hấp.</p><p>So sánh trên các mẫu chuối cho thấy, ở điều kiện thường (nhiệt độ phòng), mẫu chuối không sử dụng chất bảo quản đã chín sau 3 ngày, 5 ngày bắt đầu có đốm đen (bị oxy hóa) và đến ngày thứ 7 bị thối.</p><p>Mẫu chuối bảo quản bằng polyphenols chín ngay sau 2 ngày, 4 ngày xuất hiện đốm đen và 8 ngày sau có nấm mốc trên vỏ. Mẫu được phun dung dịch chitosan chín sau 10 ngày, lớp vỏ chuối chỉ chuyển vàng và thối ở nửa thân dưới quả chuối.</p><p>Với mẫu phun sương biến tính chitosan với dịch chiết polyphenols có thời gian chín lâu nhất (khoảng 10 ngày), vỏ vẫn còn duy trì được màu xanh, chỉ xuất hiện thối ở đầu cuống nhưng không bị nấm mốc trên thân, khối lượng giảm ít.</p><p>Theo đánh giá của giới chuyên môn, kết quả nghiên cứu này tạo tiền đề phát triển chuỗi công nghệ lưu giữ và gia tăng chất lượng nông sản Việt Nam cung cấp cho thị trường nội địa và xuất khấu.</p><p>Linh cho biết, trong tương lai sẽ so sánh hiệu quả của việc sử dụng biến tính chitosan với dịch chiết polyphenols từ trà xanh với các loại thực vật khác để tìm ra nguồn nguyên liệu polyphenols tốt nhất cho bảo quản nông sản.</p><p><strong>Phan Minh</strong></p>",
+            "img": "https://i-vnexpress.vnecdn.net/2019/04/22/tac-gia-dung-dich-sinh-hoc-6456-1555903197.jpg",
+            "tag": "dung dịch từ vỏ tôm trà xanh"
+          },
+          {
+            "id": "kd4",
+            "title": "Hải sản ngoại tiền triệu được săn mua ngày Tết",
+            "category": "Kinh doanh",
+            "sub_category": "Hải sản",
+            "author": "Hồng Châu",
+            "date":"07 - 02 - 2019",
+            "views": "100",
+            "description": "Cua, tu hài có trọng lượng vài kg được nhiều khách săn mua để làm mâm cỗ Tết.",
+            "content": "<p>Dọn mâm cỗ toàn hải sản ngày mùng 2 Tết, anh Thành, ở đường 44, quận Tân Bình (TP HCM) cho biết, bữa tiệc này có giá trị hơn chục triệu đồng, đó là chưa kể các loại thức uống nổi tiếng.</p><p>'Tôi đặt hải sản từ ngày 20/12 dương lịch nhưng phải đến ngày 29/12 (âm lịch) cửa hàng hải sản mới giao để giữ được độ tươi ngon mà không lo hết hàng. Ngoài cua hoàng đế Alaska, năm nay gia đình tôi còn mua thêm tu hài loại 1 kg một con', anh Thành chia sẻ.</p><p>Là cửa hàng chuyên bán hải sản lạ, anh Hoàng, ở quận Bình Thạnh cho biết, năm nay nhập 200 con cua hoàng đế Alaska loại 3-5kg nhưng đều hết hàng từ 22 âm lịch nên anh phải nhập thêm 100 con nữa mới đủ hàng cung ứng. 'Ban đầu giá loại này chỉ 1,2 triệu đồng một kg nhưng do cận Tết 'cháy' hàng nên giá tăng lên 1,5 triệu đồng. Với những con 5kg, loại này khá hiếm nên giá lên tới gần 8 triệu đồng một con', anh Hoàng nói và cho hay, ngoài cua trên thì tu hài, cua Cà Mau, mực lá cũng là những sản phẩm được nhiều khách đặt mua nhất, giá các loại này dao động 500.000 đến 2 triệu đồng một kg.</p><p>'Những con tu hài loại từ 1 kg trở lên đa phần được những khách quen đặt mua khi hàng vừa mới nhập về. Có nhiều khách mua vài con nặng 1,5 kg về để làm tiệc. Họ sẵn sàng chi vài chục triệu đồng để có được bữa tiệc hải sản lạ miệng, ưng ý', chủ cửa hàng hải sản ở quận 7 nói và cho hay, ông nhập về 100 kg tu hài loại lớn nhưng được khách đặt mua hết. Nhiều mối muốn lấy sỉ thì tùy theo số lượng đặt hàng mà cửa hàng đặt riêng theo yêu cầu.</p><p>Tu hài Canada đang là một trong những món hải sản nhập ngoại có giá đắt đỏ tại thị trường Việt, với mức giá từ 1,7 đến 2,5 triệu đồng một kg.</p><p>Cùng với tu hài, tôm hùm Canada hay còn gọi là tôm hùm Alaska đã trở thành mặt hàng được giới nhà giàu Việt ưa chuộng hai năm gần đây. Tôm này cũng là loại được nhiều khách đặt mua dịp Tết. Tôm có trọng lượng khá lớn, trung bình 1-3 kg một con, có con nặng tới 5 kg nhưng loại này không nhiều.</p><p><strong>Hồng Châu</strong></p>",
+            "img": "https://i-kinhdoanh.vnecdn.net/2019/02/07/cua1-1549503573-9175-1549504287.png",
+            "tag": "Cua hoàng đế Alska"
+          }
+
     ]
 }
