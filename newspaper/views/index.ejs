@@ -42,8 +42,8 @@
 								<ul class="tags">
 									<li><a href="#"><%=post.tag %></a></li>
 								</ul>
-								<a href="image-post.html">
-									<h3><%=post.description %></h3>
+								<a href="/<%=post.category %>/<%=post.sub_category %>/<%=post.title %>">
+									<h3><%=post.title %></h3>
 								</a>
 								<ul class="meta">
 										<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
@@ -67,8 +67,8 @@
 									<ul class="tags">
 										<li><a href="#"><%=post.tag %></a></li>
 									</ul>
-									<a href="image-post.html">
-										<h4><%=post.description %></h4>
+									<a href="/<%=post.category %>/<%=post.sub_category %>/<%=post.title %>">
+										<h4><%=post.title %></h4>
 									</a>
 									<ul class="meta">
 											<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
@@ -127,9 +127,25 @@
 									</div>
 								</div>
 								<% }) 	%>
-									<div class="load-more">
-										<a href="#" class="primary-btn">Load More Posts</a>
-									</div>
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center">
+									  <li class="page-item">
+										<a class="page-link" href="#" aria-label="Previous">
+										  <span aria-hidden="true">&laquo;</span>
+										  <span class="sr-only">Previous</span>
+										</a>
+									  </li>
+									  <li class="page-item"><a class="page-link" href="#">1</a></li>
+									  <li class="page-item"><a class="page-link" href="#">2</a></li>
+									  <li class="page-item"><a class="page-link" href="#">3</a></li>
+									  <li class="page-item">
+										<a class="page-link" href="#" aria-label="Next">
+										  <span aria-hidden="true">&raquo;</span>
+										  <span class="sr-only">Next</span>
+										</a>
+									  </li>
+									</ul>
+								  </nav>
 							</div>
 							<!-- End latest-post Area -->
 							
