@@ -4,7 +4,7 @@
 <head>
 
   <% include template/header-admin.ejs %>
-
+  <% include template/css.ejs %>
 </head>
 
 <body id="page-top">
@@ -13,85 +13,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/dashboard">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">S-Team
-          <sup>2</sup>
-        </div>
-      </a>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0">
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="/admin/dashboard">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-
-      <!-- Divider -->
-
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Personal </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-
-
-
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/profile">
-          <i class="fa fa-user"></i>
-          <span>Profile</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/write-post">
-          <i class="fa fa-paper-plane"></i>
-          <span>Write new post</span>
-        </a>
-      </li>
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Data
-      </div>
-      <hr class="sidebar-divider">
-      <!-- Nav Item - Pages Collapse Menu -->
-
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/users-table">
-          <i class="fa fa-users"></i>
-          <span>Users Table</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/posts-table">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Posts Table</span>
-        </a>
-      </li>
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
-
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
-
-    </ul>
+    <%include template/sidebarAdmin.ejs%>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -168,7 +90,7 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-              <i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+              <i class="fas fa-download fa-sm text-white-50"></i> Xuất báo cáo thống kê</a>
           </div>
 
           <!-- Content Row -->
@@ -180,7 +102,7 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings (Monthly)</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Theo tháng</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
                     </div>
                     <div class="col-auto">
@@ -197,7 +119,7 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Theo năm</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
                     </div>
                     <div class="col-auto">
@@ -214,7 +136,7 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Công việc cần làm</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
                           <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
@@ -240,7 +162,7 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Các bài đăng chờ duyệt</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                     </div>
                     <div class="col-auto">
@@ -323,6 +245,7 @@
 
   <!-- Bootstrap core JavaScript-->
   <% include template/footer-admin.ejs %>
+  <% include template/js.ejs %>
 </body>
 
 </html>

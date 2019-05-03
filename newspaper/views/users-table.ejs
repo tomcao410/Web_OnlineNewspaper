@@ -4,7 +4,7 @@
 <head>
 
   <% include template/header-admin.ejs%>
-
+  <% include template/css.ejs %>
 
 </head>
 
@@ -14,85 +14,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/dashboard">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">S-Team
-          <sup>2</sup>
-        </div>
-      </a>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0">
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item ">
-        <a class="nav-link" href="/admin/dashboard">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-
-      <!-- Divider -->
-
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Personal </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-
-
-
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-      <li class="nav-item ">
-        <a class="nav-link" href="/admin/profile">
-          <i class="fa fa-user"></i>
-          <span>Profile</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/write-post">
-          <i class="fa fa-paper-plane"></i>
-          <span>Write new post</span>
-        </a>
-      </li>
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Data
-      </div>
-      <hr class="sidebar-divider">
-      <!-- Nav Item - Pages Collapse Menu -->
-
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item active">
-        <a class="nav-link" href="/admin/users-table">
-          <i class="fa fa-users"></i>
-          <span>Users Table</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/posts-table">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Posts Table</span>
-        </a>
-      </li>
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
-
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
-
-    </ul>
+    <%include template/sidebarAdmin.ejs%>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -162,27 +84,27 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Manage Users</h1>
-          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables,
+          <h1 class="h3 mb-2 text-gray-800">Qủan lý người dùng</h1>
+          <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables,
             please visit the
-            <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+            <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
           <a href="#" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-primary btn-icon-split mr-4">
             <span class="icon text-white  ">
               <i class="fa fa-user-plus"></i>
             </span>
-            <span class="text">Add Users</span>
+            <span class="text">Thêm người dùng</span>
           </a>
           <a href="#" class="btn btn-danger btn-icon-split">
             <span class="icon text-white  ">
               <i class="fa fa-trash"></i>
             </span>
-            <span class="text">Delete Many Users</span>
+            <span class="text">Xóa người dùng</span>
           </a>
 
           <!-- DataTales Users -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Data Users</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Danh sách người dùng hiện tại</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -190,17 +112,17 @@
                   <thead>
                     <tr>
                       <th></th>
-                      <th>Name</th>
-                      <th>Roles</th>
-                      <th>Authorization date</th>
-                      <th>Create date</th>
-                      <th>Age</th>
-                      <th>Number of Posts </th>
-                      <th>Option </th>
+                      <th>Tên</th>
+                      <th>Phân hệ</th>
+                      <th>Bài viết đã đăng</th>
+                      <th>Ngày đăng ký</th>
+                      <th> thông tin x </th>
+                      <th> thông tin y </th>
+                      <th>Thao tác </th>
 
                     </tr>
                   </thead>
-                  <tfoot>
+                  <!-- <tfoot>
                     <tr>
                       <th></th>
 
@@ -213,7 +135,7 @@
                       <th>Option </th>
 
                     </tr>
-                  </tfoot>
+                  </tfoot> -->
                   <tbody>
                     <tr>
                       <td>
@@ -226,8 +148,8 @@
                       <td>2011/04/25</td>
                       <td>$320,800</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -241,8 +163,8 @@
                       <td>2011/07/25</td>
                       <td>$170,750</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -256,8 +178,8 @@
                       <td>2009/01/12</td>
                       <td>$86,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -271,8 +193,8 @@
                       <td>2012/03/29</td>
                       <td>$433,060</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -286,8 +208,8 @@
                       <td>2008/11/28</td>
                       <td>$162,700</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -301,8 +223,8 @@
                       <td>2012/12/02</td>
                       <td>$372,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -316,8 +238,8 @@
                       <td>2012/08/06</td>
                       <td>$137,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -331,8 +253,8 @@
                       <td>2010/10/14</td>
                       <td>$327,900</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -346,8 +268,8 @@
                       <td>2009/09/15</td>
                       <td>$205,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -361,8 +283,8 @@
                       <td>2008/12/13</td>
                       <td>$103,600</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -376,8 +298,8 @@
                       <td>2008/12/19</td>
                       <td>$90,560</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -391,8 +313,8 @@
                       <td>2013/03/03</td>
                       <td>$342,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -406,8 +328,8 @@
                       <td>2008/10/16</td>
                       <td>$470,600</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -421,8 +343,8 @@
                       <td>2012/12/18</td>
                       <td>$313,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -436,8 +358,8 @@
                       <td>2010/03/17</td>
                       <td>$385,750</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -451,8 +373,8 @@
                       <td>2012/11/27</td>
                       <td>$198,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -466,8 +388,8 @@
                       <td>2010/06/09</td>
                       <td>$725,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -481,8 +403,8 @@
                       <td>2009/04/10</td>
                       <td>$237,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -496,8 +418,8 @@
                       <td>2012/10/13</td>
                       <td>$132,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -511,8 +433,8 @@
                       <td>2012/09/26</td>
                       <td>$217,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -526,8 +448,8 @@
                       <td>2011/09/03</td>
                       <td>$345,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -541,8 +463,8 @@
                       <td>2009/06/25</td>
                       <td>$675,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -556,8 +478,8 @@
                       <td>2011/12/12</td>
                       <td>$106,450</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -571,8 +493,8 @@
                       <td>2010/09/20</td>
                       <td>$85,600</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -586,8 +508,8 @@
                       <td>2009/10/09</td>
                       <td>$1,200,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -601,8 +523,8 @@
                       <td>2010/12/22</td>
                       <td>$92,575</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -616,8 +538,8 @@
                       <td>2010/11/14</td>
                       <td>$357,650</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -631,8 +553,8 @@
                       <td>2011/06/07</td>
                       <td>$206,850</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -646,8 +568,8 @@
                       <td>2010/03/11</td>
                       <td>$850,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -661,8 +583,8 @@
                       <td>2011/08/14</td>
                       <td>$163,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -676,8 +598,8 @@
                       <td>2011/06/02</td>
                       <td>$95,400</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -691,8 +613,8 @@
                       <td>2009/10/22</td>
                       <td>$114,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -706,8 +628,8 @@
                       <td>2011/05/07</td>
                       <td>$145,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -721,8 +643,8 @@
                       <td>2008/10/26</td>
                       <td>$235,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -736,8 +658,8 @@
                       <td>2011/03/09</td>
                       <td>$324,050</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -751,8 +673,8 @@
                       <td>2009/12/09</td>
                       <td>$85,675</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -766,8 +688,8 @@
                       <td>2008/12/16</td>
                       <td>$164,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -781,8 +703,8 @@
                       <td>2010/02/12</td>
                       <td>$109,850</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -796,8 +718,8 @@
                       <td>2009/02/14</td>
                       <td>$452,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -811,8 +733,8 @@
                       <td>2008/12/11</td>
                       <td>$136,200</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -826,8 +748,8 @@
                       <td>2008/09/26</td>
                       <td>$645,750</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -841,8 +763,8 @@
                       <td>2011/02/03</td>
                       <td>$234,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -856,8 +778,8 @@
                       <td>2011/05/03</td>
                       <td>$163,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -871,8 +793,8 @@
                       <td>2009/08/19</td>
                       <td>$139,575</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -886,8 +808,8 @@
                       <td>2013/08/11</td>
                       <td>$98,540</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -901,8 +823,8 @@
                       <td>2009/07/07</td>
                       <td>$87,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -916,8 +838,8 @@
                       <td>2012/04/09</td>
                       <td>$138,575</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -931,8 +853,8 @@
                       <td>2010/01/04</td>
                       <td>$125,250</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -946,8 +868,8 @@
                       <td>2012/06/01</td>
                       <td>$115,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -961,8 +883,8 @@
                       <td>2013/02/01</td>
                       <td>$75,650</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -976,8 +898,8 @@
                       <td>2011/12/06</td>
                       <td>$145,600</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -991,8 +913,8 @@
                       <td>2011/03/21</td>
                       <td>$356,250</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -1006,8 +928,8 @@
                       <td>2009/02/27</td>
                       <td>$103,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -1021,8 +943,8 @@
                       <td>2010/07/14</td>
                       <td>$86,500</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -1036,8 +958,8 @@
                       <td>2008/11/13</td>
                       <td>$183,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -1051,8 +973,8 @@
                       <td>2011/06/27</td>
                       <td>$183,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                     <tr>
@@ -1066,8 +988,8 @@
                       <td>2011/01/25</td>
                       <td>$112,000</td>
                       <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button class="btn btn-danger">Xóa</button>
                       </td>
                     </tr>
                   </tbody>
@@ -1164,11 +1086,11 @@
       </div>
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
+        <!-- <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>Copyright &copy; Your Website 2019</span>
           </div>
-        </div>
+        </div> -->
       </footer>
       <!-- End of Footer -->
 
@@ -1187,6 +1109,7 @@
   <% include template/logout-modal.ejs %>
 
     <% include template/footer-admin.ejs%>
+    <% include template/js.ejs %>
 
 </body>
 

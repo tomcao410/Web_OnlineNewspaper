@@ -16,85 +16,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/dashboard">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">S-Team
-                    <sup>2</sup>
-                </div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item ">
-                <a class="nav-link" href="/admin/dashboard">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Personal </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-
-
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <li class="nav-item ">
-                <a class="nav-link" href="/admin/profile">
-                    <i class="fa fa-user"></i>
-                    <span>Profile</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/admin/write-post">
-                    <i class="fa fa-paper-plane"></i>
-                    <span>Write new post</span>
-                </a>
-            </li>
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Data
-            </div>
-            <hr class="sidebar-divider">
-            <!-- Nav Item - Pages Collapse Menu -->
-
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/users-table">
-                    <i class="fa fa-users"></i>
-                    <span>Users Table</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/posts-table">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Posts Table</span>
-                </a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
+        <%include template/sidebarAdmin.ejs%>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -161,44 +83,52 @@
                 <!-- Begin Page Content -->
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800 ml-5">Write new post</h1>
+                <h1 class="h3 mb-4 text-gray-800 ml-5">Đăng bài</h1>
 
                 <div class="input-group mb-3 ml-5 w-25">
-                    <select class="custom-select" id="inputGroupSelect02">
+                    <select class="custom-select" id="inputGroupSelect02" onchange="categorySelect()">
                         <option selected>Chọn chuyên mục</option>
-                        <option value="Classic">Classic</option>
-                        <option value="Supercars">Supercars</option>
-                        <option value="Humor">Humor</option>
+                        <% dataTopic.chuyenmuc.forEach(function(motChuyenMuc){
+                            motChuyenMuc.sub_category.forEach(function(chuyenMucCon){ %>
+                        <option value="<%=motChuyenMuc.name %> - <%=chuyenMucCon %>"><%=motChuyenMuc.name%> - <%=chuyenMucCon %> %></option>
+                        <%})%>
+                        <%})%>
+                        <!-- <option value="Supercars">Supercars</option>
+                        <option value="Humor">Humor</option> -->
                     </select>
+                    
                     <div class="input-group-append">
-                        <label class="input-group-text bg-gradient-primary text-light" for="inputGroupSelect02">Category</label>
+                        <label class="input-group-text bg-gradient-primary text-light" for="inputGroupSelect02" style="background: rgba(0, 0, 0, 0.4)">Chuyên mục</label>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between container-fluid">
                     <div class="ml-4">
                         <label for="" class="">Tags: </label>
-                        <input type="text" value="Classic,Sales" data-role="tagsinput">
-                        <a href="#" id="btn-submit" class=" btn btn-warning  btn-icon-split">
-                            <span class="icon text-white  ">
-                                <i class="fa fa-rocket"></i>
-                            </span>
-                            <span class="text">Submit your post</span>
-                        </a>
+                        <input type="text" value="" data-role="tagsinput">
+                        
                     </div>
 
 
+                </div>
+                <div class="d-flex justify-content-between container-fluid">
+                <a href="#" id="btn-submit" class=" btn btn-warning  btn-icon-split" style="background: rgba(0, 0, 0, 0.4);">
+                        <span class="icon text-white  ">
+                            <i class="fa fa-upload"></i>
+                        </span>
+                        <span class="text text-white">Đăng bài</span>
+                    </a>
                 </div>
                 <div class=" form-group ml-5 w-50 mt-3">
 
                     <label for="inputTitle">Title: </label>
 
 
-                    <input type="text" class="form-control font-weight-bold" id="inputAddress" placeholder="Best Car Evers - One Direction">
+                    <input type="text" class="form-control font-weight-bold" id="inputAddress" placeholder="*tên bài đăng">
 
                 </div>
                 <!-- /.container-fluid -->
                 <div class="row d-flex justify-content-center">
-                    <textarea name="editor1" id="editor1">&lt;p&gt;Blow your mind&lt;/p&gt;</textarea>
+                    <textarea name="editor1" id="editor1">&lt;p&gt;*văn bản&lt;/p&gt;</textarea>
                     <script>
                         CKEDITOR.replace('editor1');
                         CKEDITOR.config.width = "93%";
@@ -211,13 +141,13 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            <!-- <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; S-TEAM 2019</span>
+                        
                     </div>
                 </div>
-            </footer>
+            </footer> -->
             <!-- End of Footer -->
 
         </div>
@@ -236,7 +166,9 @@
         <!-- Bootstrap core JavaScript-->
         <% include template/footer-admin.ejs%>
             <script src="../../javascripts/write-post.js"></script>
-
+            <!-- <script src="../../javascripts/selecSubCategory.js"></script> -->
+            <script type="text/javascript" src="../model/topic.json"></script>
+            <% include template/js.ejs %>
 </body>
 
 </html>

@@ -17,85 +17,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/dashboard">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">S-Team
-                    <sup>2</sup>
-                </div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item ">
-                <a class="nav-link" href="/admin/dashboard">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Personal </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-
-
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <li class="nav-item active">
-                <a class="nav-link" href="/admin/profile">
-                    <i class="fa fa-user"></i>
-                    <span>Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                    <a class="nav-link" href="/admin/write-post">
-                      <i class="fa fa-paper-plane"></i>
-                      <span>Write new post</span>
-                    </a>
-                  </li>
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Data
-            </div>
-            <hr class="sidebar-divider">
-            <!-- Nav Item - Pages Collapse Menu -->
-
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/users-table">
-                    <i class="fa fa-users"></i>
-                    <span>Users Table</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/posts-table">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Posts Table</span>
-                </a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
+        <%include template/sidebarAdmin.ejs%>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -169,57 +91,57 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Personal Infomation</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Thông tin cá nhân</h1>
 
                 </div>
                 <!-- /.container-fluid -->
                 <div class="row">
                     <div class="p-5 col-lg-5 d-flex align-items-center justify-content-center">
 
-                        <img src="../../images/author-1.jpg" class="img-fluid" width="380px" height="380px" alt="">
+                        <img src="../../images/img_avatar2.png" class="img-fluid" width="380px" height="380px" alt="">
                     </div>
                     <div class="p-5 col-lg-6">
 
                         <form class="user">
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="">First Name</label>
-                                    <input type="text" class="form-control form-control-user" id="exampleFirstName" value="Quốc Bảo" placeholder="First Name">
+                                    <label for="">Tên</label>
+                                    <input type="text" class="form-control form-control-user" id="exampleFirstName" value="Tên của bạn" placeholder="First Name">
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="">Last Name</label>
+                                    <label for="">Họ</label>
 
-                                    <input type="text" class="form-control form-control-user" id="exampleLastName" value="Phạm Phú" placeholder="Last Name">
+                                    <input type="text" class="form-control form-control-user" id="exampleLastName" value="" placeholder="Họ của bạn">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="">Email Address</label>
+                                <label for="">Email</label>
 
-                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" value="baoit128@gmail.com" placeholder="Email Address">
+                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" value="" placeholder="abcxyz@domain">
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="">Role</label>
+                                    <label for="">Phân hệ</label>
 
-                                    <input type="text" class="form-control form-control-user" disabled id="exampleInputEmail" value="Admin" placeholder="Email Address">
+                                    <input type="text" class="form-control form-control-user" disabled id="exampleInputEmail" value="Admin">
 
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label for="">Writing Posts</label>
+                                        <label for="">Bài đã đăng</label>
     
                                         <input type="text" class="form-control form-control-user" disabled id="exampleInputEmail" value="15" placeholder="Email Address">
     
                                     </div>
                             </div>
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label for="">Password</label>
 
-                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" value="2655165" placeholder="Password">
+                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" value="8534118" placeholder="Password">
                                 </div>
 
-                            </div>
-                            <a href="login.html" class="btn btn-primary btn-user btn-block">
+                            </div> -->
+                            <a href="/admin/profile" class="btn btn-primary btn-user btn-block">
                                 UPDATE
                             </a>
 
@@ -236,11 +158,11 @@
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
+                <!-- <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Your Website 2019</span>
                     </div>
-                </div>
+                </div> -->
             </footer>
             <!-- End of Footer -->
 
