@@ -3507,3 +3507,20 @@ span.psw {
 .block_relative {
   position: relative;
 }
+.ic-tag {
+  background-position: -227px -48px;
+  width: 13px;
+  height: 13px;
+}
+.block_tag {
+  margin-bottom: 20px;
+}
+.block_tag .txt_tag, .block_tag .tag_item {
+  background: #f1f1f1;
+  padding: 0 10px;
+  height: 20px;
+  color: #939393;
+  float: left;
+  margin: 0 5px 5px 0;
+  font: 400 11px/20px arial;
+}
