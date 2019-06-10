@@ -101,12 +101,12 @@
 							
 							<div class="latest-post-wrap" style="overflow-y: scroll; height: 1000px;">
 								
-								<% datathoisu.tintuc.forEach(function(post){%>
+								<% postall.forEach(function(post){%>
 								<div class="single-latest-post row align-items-center">
 									<div class="col-lg-5 post-left">
 										<div class="feature-img relative">
 											<div class="overlay overlay-bg"></div>
-											<img class="img-fluid" src="<%=post.img %>" alt="">
+											<img class="img-fluid" src="<%=post.imgLink %>"" alt="">
 										</div>
 										<ul class="tags">
 											<li><a href="/<%=post.category %>/<%=post.sub_category %>"><%=post.category %> - <%=post.sub_category %></a></li>

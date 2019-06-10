@@ -1,9 +1,17 @@
 var express = require('express');
 var router = express.Router();
-
+var posts = require('../model/posts');
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', (req, res) => {
+  var p= posts.all();
+  p.then( rows => {
+      
+      res.render('index', { postall: rows, title: 'Express' });
+      console.log(rows);
+    }
+  ).catch( err =>{
+      console.log(err);
+    });
 });
 router.get('/all', function(req, res, next) {
   res.render('all', { title: 'Express' });
