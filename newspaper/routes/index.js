@@ -80,7 +80,6 @@ router.get('/:category', function(req, res, next) {
   });   
 });
 
-
 router.get('/:category/:subCategory/:title', function(req, res, next) {
   res.render('image-post',{title:req.params.title});
 });
