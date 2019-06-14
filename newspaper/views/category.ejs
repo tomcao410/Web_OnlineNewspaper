@@ -33,13 +33,14 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="hero-nav-area">
-                                <% dataTopic.chuyenmuc.forEach(function(motchuyenmuc){ 
-                                    if (motchuyenmuc.name == title){%>
-								<h1 class="text-white"><%=motchuyenmuc.name %></h1>
+                                <% topics.forEach(function(topic){ 
+									console.log(title);
+                                    if (topic.categoryName == title){%>
+								<h1 class="text-white"><%=topic.categoryName %></h1>
 								<p class="text-white link-nav">
 									<a href="/">Trang chủ</a>
 									<i class="fa fa-long-arrow-right"></i></span>
-									<a><%=motchuyenmuc.name %></a>
+									<a><%=topic.categoryName %></a>
                                 </p>
                                 <% } %>
                                 <% }) %>

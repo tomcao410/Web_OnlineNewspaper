@@ -37,11 +37,11 @@
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
                     <li><a href="/all">TẤT CẢ TIN</a></li>
-                    <% dataTopic.chuyenmuc.forEach(function(motchuyenmuc){%>
-                    <li class="menu-has-children"><a href="/<%=motchuyenmuc.name %>"> <%=motchuyenmuc.name %></a>
+                    <% topics.forEach(function(topic){%>
+                    <li class="menu-has-children"><a href="/<%=topic.categoryName %>"> <%=topic.categoryName %></a>
                         <ul>
-                            <% motchuyenmuc.sub_category.forEach(function(chuyenmuccon){%>
-                            <li><a href="/<%=motchuyenmuc.name %>/<%=chuyenmuccon %>"> <%=chuyenmuccon %></a></li>
+                            <% topic.subCategories.forEach(function(subTopic){%>
+                            <li><a href="/<%=topic.categoryName %>/<%=subTopic.subcategoryName %>"> <%=subTopic.subcategoryName %></a></li>
                             <% }) %>
                         </ul>
                     </li>
