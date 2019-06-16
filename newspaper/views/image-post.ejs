@@ -25,9 +25,9 @@
 
 <body>
 	<%include template/header2.ejs %>
-	<%var abc%>
-	<% var tag%>
-
+	<% var curSubTopic; %>
+	<% var curTopic; %>
+	<% var count = 0; %>
 		<div class="site-main-container">
 			<!-- Start top-post Area -->
 			<!-- <section class="top-post-area pt-10">
@@ -64,38 +64,38 @@
 						<div class="col-lg-8 post-list">
 							<!-- Start single-post Area -->
 							<div class="single-post-wrap">
-								<% datathoisu.tintuc.forEach(function(motbaiviet){
-										if(motbaiviet.title == title){%>
-											<%abc = motbaiviet.category%>
-											<%tag = motbaiviet.tag%>
+								<% allPosts.forEach(function(posts){
+										if(posts.title == title){
+											curSubTopic = posts.subCategoryName;
+											curTopic = posts.categoryName; %>
 									<div class="feature-img-thumb relative">
 										<div class="overlay overlay-bg"></div>
-										<img class="img-fluid" src="<%=motbaiviet.img%>" alt="">
+										<img class="img-fluid" src="<%=posts.imgLink%>" alt="">
 									</div>
 									<div class="content-wrap">
 										<ul class="tags mt-10">
 											<li>
-												<a href="/<%=motbaiviet.category%>"><%=motbaiviet.category%></a>
+												<a href="/<%=posts.categoryName%>"><%=posts.categoryName%></a>
 											</li>
 										</ul>
 										<a href="#">
-											<h3><%=motbaiviet.title%></h3>
+											<h3><%=posts.title%></h3>
 										</a>
 										<ul class="meta pb-20">
 											<li>
 												<a href="#">
-													<i class="fa fa-pencil"></i> <%=motbaiviet.author%></a>
+													<i class="fa fa-pencil"></i> <%=posts.fullname%></a>
 											</li>
 											<li>
 												<a href="#">
-													<i class="fa fa-calendar"></i> <%=motbaiviet.date%></a>
+													<i class="fa fa-calendar"></i> <%=posts.publishDate%></a>
 											</li>
 											<li>
 												<a href="#">
-													<i class="fa fa-eye"></i> <%=motbaiviet.views%> </a>
+													<i class="fa fa-eye"></i> <%=posts.views%> </a>
 											</li>
 										</ul>
-										<%-motbaiviet.content%>
+										<%-posts.content%>
 										
 										<% }%>
 											<% }) %>
@@ -184,7 +184,7 @@
 														<div class="txt_tag">Tags:</div>
 														<div>
 																<h3>
-																		<a href="/<%=abc%>" class="tag_item" > <%=tag%> </a>														
+																		<a href="#" class="tag_item" > </a>														
 																</h3>
 														</div>
 														
@@ -222,16 +222,18 @@
 									<h6 class="title">Bài viết cùng chuyên mục</h6>
 									<div class="single-sidebar-widget editors-pick-widget" style="overflow-y: scroll; height: 800px;">
 									
-											<% datathoisu.tintuc.forEach(function(post){
-												if(post.category == abc){%>
+											<% allPosts.forEach(function(post){
+												if (count == 10) return true;
+												if(post.categoryName == curTopic){
+													count += 1; %>
 											<div class="editors-pick-post">
 												<div class="feature-img-wrap relative">
 													<div class="feature-img relative">
 														<div class="overlay overlay-bg"></div>
-														<img class="img-fluid" src="<%=post.img%>" alt="">
+														<img class="img-fluid" src="<%=post.imgLink%>" alt="">
 													</div>
 													<ul class="tags">
-														<li><a href="#"><%=post.category%></a></li>
+														<li><a href="#"><%=post.categoryName%></a></li>
 													</ul>
 												</div>
 												<div class="details">
@@ -239,15 +241,14 @@
 														<h4 class="mt-20"><%=post.title%></h4>
 													</a>
 													<ul class="meta">
-														<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
-														<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+														<li><a href="#"><i class="fa fa-pencil"></i> <%=post.fullname %></a></li>
+														<li><a href="#"><i class="fa fa-calendar"></i> <%=post.publishDate %></a></li>
 														<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
 													</ul>
 													<p class="excert">
-														<%=post.description %>
+														<%=post.postExcerpt %>
 													</p>
 												</div>
-												
 											</div>
 											<% }%>
 										<% }) %>

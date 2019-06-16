@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var topics = require('../model/topics');
-var posts = require('../model/posts');
+var ftPosts = require('../model/ftPosts');
+var allPost = require('../model/allPosts');
 var _ = require('lodash');
 /* GET home page. */
 
@@ -30,11 +31,22 @@ function transformTopics(rows) {
     return rows;
 }
 
+function jsonParse(rows){
+  rows = JSON.parse(JSON.stringify(rows));
+  return rows;
+}
+
 router.get('/', function(req, res, next) {
   var getTopics = topics.all();
-  Promise.all([getTopics]).then(result => {
+  var getAllPosts = allPost.all();
+  var getFtPosts = ftPosts.all();
+  var getTopMost = ftPosts.topMost();
+  Promise.all([getTopics, getAllPosts, getFtPosts, getTopMost]).then(result => {
     var topics = transformTopics(result[0]);
-    res.render('index', { topics: topics, title: 'Express' });  
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    var ftPosts = JSON.parse(JSON.stringify(result[2]));
+    var ftTopMost = JSON.parse(JSON.stringify(result[3]));
+    res.render('index', { topics: topics, allPosts: allPosts, ftPosts: ftPosts, ftTopMost: ftTopMost, title: 'Express' });  
   }
   ).catch(err => {
     console.log(err);
@@ -42,11 +54,29 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/page/:pagenum', function(req, res, next) {
-  res.render('panination',{title:req.params.pagenum});
+  var getTopics = topics.all();
+  Promise.all([getTopics]).then(result => {
+    var topics = transformTopics(result[0]);
+    res.render('panination',{ topics: topics , title:req.params.pagenum});  
+  }
+  ).catch(err => {
+    console.log(err);
+  });
 });
+
 router.get('/all', function(req, res, next) {
-  res.render('all', { title: 'Express' });
+  var getAllPosts = allPost.all();
+  var getTopics = topics.all();
+  Promise.all([getTopics, getAllPosts]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    res.render('all', {topics: topics, allPosts: allPosts, title: 'Express' });  
+  }
+  ).catch(err => {
+    console.log(err);
+  });
 });
+
 router.get('/admin/dashboard', function(req, res, next) {
   res.render('dashboard', { title: 'Express' });
 
@@ -66,11 +96,14 @@ router.get('/admin/posts-table', function(req, res, next) {
 router.get('/admin/write-post', function(req, res, next) {
   res.render('write-post', { title: 'Express' });
 });
+
 router.get('/:category', function(req, res, next) {
   var getTopics = topics.all();
-  Promise.all([getTopics]).then(result => {
+  var getAllPosts = allPost.all();
+  Promise.all([getTopics, getAllPosts]).then(result => {
     var topics = transformTopics(result[0]);
-    res.render('category', { topics: topics, title:req.params.category });  
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    res.render('category', { topics: topics, allPosts: allPosts, title:req.params.category });  
   }
   ).catch(err => {
     console.log(err);
@@ -79,10 +112,28 @@ router.get('/:category', function(req, res, next) {
 
 
 router.get('/:category/:subCategory/:title', function(req, res, next) {
-  res.render('image-post',{title:req.params.title});
+  var getTopics = topics.all();
+  var getAllPosts = allPost.all();
+  Promise.all([getTopics, getAllPosts]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    res.render('image-post',{ topics: topics, allPosts: allPosts,title:req.params.title}); 
+  }
+  ).catch(err => {
+    console.log(err);
+  });   
 });
 router.get('/:category/:subCategory', function(req, res, next) {
-  res.render('subCategory',{title:req.params.subCategory});
+  var getTopics = topics.all();
+  var getAllPosts = allPost.all();
+  Promise.all([getTopics, getAllPosts]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    res.render('subCategory',{topics: topics, allPosts: allPosts, title:req.params.subCategory});
+  }
+  ).catch(err => {
+    console.log(err);
+  });  
 });
 
 

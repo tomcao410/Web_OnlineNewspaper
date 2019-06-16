@@ -27,53 +27,49 @@
 			<section class="top-post-area pt-10">
 				<div class="container no-padding">
 					<div class="row small-gutters">
-						<% datathreepost.threepost.forEach(function(post){
-							if(post.id == 1){%>
-						<div class="col-lg-8 top-post-left">
+						<% ftTopMost.forEach(function(post){%>
+						<div class="col-lg-8 top-post-left" style="height: 100%">
 							<div class="feature-image-thumb relative">
 								<div class="overlay overlay-bg"></div>
-								<img class="img-fluid" src="<%=post.img %>" alt="">
+								<img class="img-fluid" src="<%=post.imgLink %>" alt="">
 							</div>
 							<div class="top-post-details">
 								<ul class="tags">
-									<li><a href="#"><%=post.tag %></a></li>
+									<li><a href="#"><%=post.categoryName %></a></li>
 								</ul>
-								<a href="/<%=post.category %>/<%=post.sub_category %>/<%=post.title %>">
+								<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
 									<h3><%=post.title %></h3>
 								</a>
 								<ul class="meta">
-										<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
-										<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+										<li><a href="#"><i class="fa fa-pencil"></i> <%=post.fullname %></a></li>
+										<li><a href="#"><i class="fa fa-calendar"></i> <%=post.publishDate %></a></li>
 										<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
 								</ul>
 							</div>
 						</div>
-						<% }%>
 						<% }) %>
 						<div class="col-lg-4 top-post-right">
-							<% datathreepost.threepost.forEach(function(post){
-								if(post.id != 1){%>
+							<% ftPosts.forEach(function(post){%>
 							
 							<div class="single-top-post mt-10">
 								<div class="feature-image-thumb relative">
 									<div class="overlay overlay-bg"></div>
-									<img class="img-fluid" src="<%=post.img %>" alt="">
+									<img class="img-fluid" src="<%=post.imgLink %>" alt="">
 								</div>
 								<div class="top-post-details">
 									<ul class="tags">
-										<li><a href="#"><%=post.tag %></a></li>
+										<li><a href="#"><%=post.categoryName %></a></li>
 									</ul>
-									<a href="/<%=post.category %>/<%=post.sub_category %>/<%=post.title %>">
+									<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
 										<h4><%=post.title %></h4>
 									</a>
 									<ul class="meta">
-											<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
-											<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+											<li><a href="#"><i class="fa fa-pencil"></i> <%=post.fullname %></a></li>
+											<li><a href="#"><i class="fa fa-calendar"></i> <%=post.publishDate %></a></li>
 											<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
 									</ul>
 								</div>
 							</div>
-							<% }%>
 							<% }) %>
 						</div>
 						<!-- <div class="col-lg-12">
@@ -96,33 +92,32 @@
 							<!-- Start latest-post Area -->
 							<div class="latest-post-wrap">
 								<h4 class="cat-title">Tin mới nhất</h4>
-								<% datathoisu.tintuc.forEach(function(post){
-									if(post.page==1){%>
+								<% allPosts.forEach(function(post){%>
+									<!-- if(post.page==1){%> -->
 								<div class="single-latest-post row align-items-center">
 									<div class="col-lg-5 post-left">
 										<div class="feature-img relative">
 											<div class="overlay overlay-bg"></div>
-											<img class="img-fluid" src="<%=post.img %>" alt="">
+											<img class="img-fluid" src="<%=post.imgLink %>" alt="">
 										</div>
 										<ul class="tags">
-											<li><a href="/<%=post.category %>/<%=post.sub_category %>"><%=post.category %> - <%=post.sub_category %></a></li>
+											<li><a href="/<%=post.categoryName %>/<%=post.subCategoryName %>"><%=post.categoryName %> - <%=post.subCategoryName %></a></li>
 										</ul>
 									</div>
 									<div class="col-lg-7 post-right">
-										<a href="/<%=post.category %>/<%=post.sub_category %>/<%=post.title %>">
+										<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
 											<h4><%=post.title %></h4>
 										</a>
 										<ul class="meta">
-											<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
-											<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+											<li><a href="#"><i class="fa fa-pencil"></i> <%=post.fullname %></a></li>
+											<li><a href="#"><i class="fa fa-calendar"></i> <%=post.publishDate %></a></li>
 											<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
 										</ul>
 										<p>
-											<%=post.description %>
+											<%=post.postExcerpt %>
 										</p>
 									</div>
 								</div>
-								<% }%>
 								<% }) %>
 								<nav aria-label="Page navigation example">
 									<ul class="pagination justify-content-center">
@@ -161,8 +156,8 @@
 											<h3><%=post.title %></h3>
 										</a>
 										<ul class="meta">
-												<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
-												<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+												<li><a href="#"><i class="fa fa-pencil"></i> <%=post.fullname %></a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> <%=post.publishDate %></a></li>
 												<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
 											
 										</ul>
@@ -190,8 +185,8 @@
 												<h4><%=post.title %></h4>
 											</a>
 											<ul class="meta">
-												<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
-												<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+												<li><a href="#"><i class="fa fa-pencil"></i> <%=post.fullname %></a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> <%=post.publishDate %></a></li>
 												<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
 											</ul>
 											<p class="excert">
@@ -232,8 +227,8 @@
 											<h4 class="mt-20"><%=post.title%></h4>
 										</a>
 										<ul class="meta">
-											<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
-											<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+											<li><a href="#"><i class="fa fa-pencil"></i> <%=post.fullname %></a></li>
+											<li><a href="#"><i class="fa fa-calendar"></i> <%=post.publishDate %></a></li>
 											<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
 										</ul>
 										<p class="excert">
@@ -321,35 +316,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</div>
 		</footer>
 		<!-- End footer Area -->
-<<<<<<< HEAD
-		<script>
-			// Get the modal
-			var modal = document.getElementById('id01');
-			
-			// When the user clicks anywhere outside of the modal, close it
-			window.onclick = function(event) {
-			  if (event.target == modal) {
-				modal.style.display = "none";
-			  }
-			}
-		</script>
-		<script src="javascripts/vendor/jquery-2.2.4.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="javascripts/vendor/bootstrap.min.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-		<script src="javascripts/easing.min.js"></script>
-		<script src="javascripts/hoverIntent.js"></script>
-		<script src="javascripts/superfish.min.js"></script>
-		<script src="javascripts/jquery.ajaxchimp.min.js"></script>
-		<script src="javascripts/jquery.magnific-popup.min.js"></script>
-		<script src="javascripts/mn-accordion.js"></script>
-		<script src="javascripts/jquery-ui.js"></script>
-		<script src="javascripts/jquery.nice-select.min.js"></script>
-		<script src="javascripts/owl.carousel.min.js"></script>
-		<script src="javascripts/mail-script.js"></script>
-		<script src="javascripts/main.js"></script>
-=======
 		<%include template/js.ejs %>
->>>>>>> c2159354d7e81ee6719b73450b9a12d7e1f92de2
 	</body>
 </html>
