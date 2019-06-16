@@ -30,11 +30,17 @@ function transformTopics(rows) {
     return rows;
 }
 
+function jsonParse(rows)
+{
+  rows = JSON.parse(JSON.stringify(rows));
+  return rows;
+}
+
 router.get('/', function(req, res, next) {
   var getTopics = topics.all();
   Promise.all([getTopics]).then(result => {
     var topics = transformTopics(result[0]);
-    res.render('index', { topics: topics, title: 'Express' });  
+    res.render('index', { topics: topics, allPosts: allPosts, title: 'Express' });  
   }
   ).catch(err => {
     console.log(err);

@@ -3,10 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var bodyParser = require('body-parser');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+var bodyParser = require('body-parser');
+var fs = require('fs')
+var session = require('express-session');
+var LocalStrategy = require('passport-local').Strategy
+var passport = require('passport');
 
 var app = express();
 
@@ -14,6 +18,46 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
+// passportjs
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(session({
+  secret: "websecret",
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+app.get('/', (req, res) => res.render('index'));
+app.route('login')
+.get((req, res) => res.render('login'))
+.post(passport.authenticate('local', {failureRedirect: 'login',
+                                      successRedirect: '/loginOK'}));
+
+app.get('/loginOK', (req, res) => res.send('alo alo'));
+passport.use(new LocalStrategy(
+  (uname, psw, done) => {
+    fs.readFile('./user.json', (error, data) => {
+      const db = JSON.parse(data)
+      const userRecord = db.find(user => user.usr == uname)
+      if (userRecord && userRecord.pass == psw)
+      {
+        return done(null, userRecord)
+      }
+      else{
+        return done(null, false)
+      }
+    })
+  }
+))
+
+passport.serializeUser((user, done) => {
+  done(null, user.usr)
+})
+
+//
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -38,6 +82,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 
 

@@ -78,12 +78,13 @@
       
           <div class="container">
             <label for="uname"><b>Tên đăng nhập</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" >
+            <input type="text" placeholder="Enter Username" name="uname" autocomplete="off">
       
             <label for="psw"><b>Mật khẩu</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" >
+            <input type="password" placeholder="Enter Password" name="psw" autocomplete="off">
             
-            <a href="/admin/dashboard" class="btn btn-success" style="width: 100%; display: block;">Đăng nhập</a>
+            <input type="submit" value="Login" class="btn btn-success" style="width: 100%; display: block;">
+            
             <label></label>
               <input type="checkbox" checked="checked" name="remember"> Nhớ tài khoản
             </label>
@@ -94,4 +95,4 @@
             <span class="psw"> <a href="#">Quên mật khẩu</a></span>
           </div>
         </form>
-      </div>
+</div>
