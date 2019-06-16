@@ -39,6 +39,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+
+app.locals.dataTopic = [];
 app.locals.datathoisu = require('./model/data.json');
-app.locals.dataTopic = require('./model/topic.json');
+app.locals.dataTopten = require('./model/topten.json');
+app.locals.datathreepost = require('./model/threepost.json');
 module.exports = app;

@@ -17,93 +17,73 @@
 		<title>Magazine</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-		<!--
-		CSS
-		============================================= -->
-		<link rel='stylesheet' href='/stylesheets/style.css' />
-		<link rel='stylesheet' href='/stylesheets/linearicons.css'>
-		<link rel='stylesheet' href='/stylesheets/font-awesome.min.css'>
-		<link rel='stylesheet' href='/stylesheets/bootstrap.css'>
-		<link rel='stylesheet' href='/stylesheets/magnific-popup.css'>
-		<link rel='stylesheet' href='/stylesheets/nice-select.css'>
-		<link rel='stylesheet' href='/stylesheets/animate.min.css'>
-		<link rel='stylesheet' href='/stylesheets/owl.carousel.css'>
-		<link rel='stylesheet' href='/stylesheets/jquery-ui.css'>
-		<link rel='stylesheet' href='/stylesheets/main.css'>
-		
+		<!--CSS============================================= -->
+		<%include template/css.ejs %>
 	</head>
 	<body>
 		<%include template/header2.ejs %>
-		
 		<div class="site-main-container">
 			<!-- Start top-post Area -->
 			<section class="top-post-area pt-10">
 				<div class="container no-padding">
 					<div class="row small-gutters">
+						<% datathreepost.threepost.forEach(function(post){
+							if(post.id == 1){%>
 						<div class="col-lg-8 top-post-left">
 							<div class="feature-image-thumb relative">
 								<div class="overlay overlay-bg"></div>
-								<img class="img-fluid" src="images/top-post1.jpg" alt="">
+								<img class="img-fluid" src="<%=post.img %>" alt="">
 							</div>
 							<div class="top-post-details">
 								<ul class="tags">
-									<li><a href="#">Food Habit</a></li>
+									<li><a href="#"><%=post.tag %></a></li>
 								</ul>
-								<a href="image-post.html">
-									<h3>A Discount Toner Cartridge Is Better Than Ever.</h3>
+								<a href="/<%=post.category %>/<%=post.sub_category %>/<%=post.title %>">
+									<h3><%=post.title %></h3>
 								</a>
 								<ul class="meta">
-									<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
-									<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-									<li><a href="#"><i class="fa fa-eye"></i> 06 Comments</a></li>
+										<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
+										<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+										<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
 								</ul>
 							</div>
 						</div>
+						<% }%>
+						<% }) %>
 						<div class="col-lg-4 top-post-right">
-							<div class="single-top-post">
-								<div class="feature-image-thumb relative">
-									<div class="overlay overlay-bg"></div>
-									<img class="img-fluid" src="images/top-post2.jpg" alt="">
-								</div>
-								<div class="top-post-details">
-									<ul class="tags">
-										<li><a href="#">Food Habit</a></li>
-									</ul>
-									<a href="image-post.html">
-										<h4>Post #2.</h4>
-									</a>
-									<ul class="meta">
-										<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
-										<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-										<li><a href="#"><i class="fa fa-eye"></i> 06 Comments</a></li>
-									</ul>
-								</div>
-							</div>
+							<% datathreepost.threepost.forEach(function(post){
+								if(post.id != 1){%>
+							
 							<div class="single-top-post mt-10">
 								<div class="feature-image-thumb relative">
 									<div class="overlay overlay-bg"></div>
-									<img class="img-fluid" src="images/top-post3.jpg" alt="">
+									<img class="img-fluid" src="<%=post.img %>" alt="">
 								</div>
 								<div class="top-post-details">
 									<ul class="tags">
-										<li><a href="#">Food Habit</a></li>
+										<li><a href="#"><%=post.tag %></a></li>
 									</ul>
-									<a href="image-post.html">
-										<h4>Post #3</h4>
+									<a href="/<%=post.category %>/<%=post.sub_category %>/<%=post.title %>">
+										<h4><%=post.title %></h4>
 									</a>
 									<ul class="meta">
-										<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
-										<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-										<li><a href="#"><i class="fa fa-eye"></i> 06 Comments</a></li>
+											<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
+											<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+											<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
 									</ul>
 								</div>
 							</div>
+							<% }%>
+							<% }) %>
 						</div>
 						<!-- <div class="col-lg-12">
 							<div class="news-tracker-wrap">
 								<h6><span>Breaking News:</span>   <a href="#">Astronomy Binoculars A Great Alternative</a></h6>
 							</div>
 						</div> -->
+						
+							
+						
 					</div>
 				</div>
 			</section>
@@ -116,7 +96,8 @@
 							<!-- Start latest-post Area -->
 							<div class="latest-post-wrap">
 								<h4 class="cat-title">Tin mới nhất</h4>
-								<% datathoisu.tintuc.forEach(function(post){%>
+								<% datathoisu.tintuc.forEach(function(post){
+									if(post.page==1){%>
 								<div class="single-latest-post row align-items-center">
 									<div class="col-lg-5 post-left">
 										<div class="feature-img relative">
@@ -141,10 +122,17 @@
 										</p>
 									</div>
 								</div>
-								<% }) 	%>
-									<div class="load-more">
-										<a href="#" class="primary-btn">Load More Posts</a>
-									</div>
+								<% }%>
+								<% }) %>
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center">
+									  
+									  <li class="page-item"><a class="page-link" href="/page/1">1</a></li>
+									  <li class="page-item"><a class="page-link" href="/page/2">2</a></li>
+									  <li class="page-item"><a class="page-link" href="/page/3">3</a></li>
+									  
+									</ul>
+								  </nav>
 							</div>
 							<!-- End latest-post Area -->
 							
@@ -157,128 +145,61 @@
 							<div class="popular-post-wrap">
 								<h4 class="title">Bài viết mới nhất từ chuyên mục top 10</h4>
 								<!--Top 10 mục - đứng đầu-->
-								<div class="feature-post relative">
+								<% dataTopten.topten.forEach(function(post){
+									if(post.id == 1){%>
+
+								<div class="feature-post relative">									
 									<div class="feature-img relative">
 										<div class="overlay overlay-bg"></div>
-										<img class="img-fluid" src="images/f1.jpg" alt="">
+										<img class="img-fluid" src="<%=post.img %>" alt="">
 									</div>
 									<div class="details">
 										<ul class="tags">
-											<li><a href="#">Food Habit</a></li>
+											<li><a href="#"><%=post.tag %></a></li>
 										</ul>
-										<a href="image-post.html">
-											<h3>A Discount Toner Cartridge Is Better Than Ever.</h3>
+										<a href="/<%=post.category %>/<%=post.sub_category %>/<%=post.title %>">
+											<h3><%=post.title %></h3>
 										</a>
 										<ul class="meta">
-											<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
-											<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-											<li><a href="#"><i class="fa fa-eye"></i> 06 Comments</a></li>
+												<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+												<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
+											
 										</ul>
 									</div>
 								</div>
+								<% }%>
+								<% }) %>
 								<!--Top 10 mục (1 dòng 2 cột)-->
-								<div class="row mt-20 medium-gutters">
-									<div class="col-lg-6 single-popular-post">
-										<div class="feature-img-wrap relative">
-											<div class="feature-img relative">
-												<div class="overlay overlay-bg"></div>
-												<img class="img-fluid" src="images/f2.jpg" alt="">
-											</div>
-											<ul class="tags">
-												<li><a href="#">Travel</a></li>
-											</ul>
-										</div>
-										<div class="details">
-											<a href="image-post.html">
-												<h4>A Discount Toner Cartridge Is
-												Better Than Ever.</h4>
-											</a>
-											<ul class="meta">
-												<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
-												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-												<li><a href="#"><i class="fa fa-eye"></i> 06 </a></li>
-											</ul>
-											<p class="excert">
-												Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
-											</p>
-										</div>
-									</div>
+								
+								<div class="row mt-20 medium-gutters" style="overflow-y: scroll; height: 500px;">
+									<% dataTopten.topten.forEach(function(post){%>								
 									<!--Top 10 mục (1 dòng 2 cột)-->
 									<div class="col-lg-6 single-popular-post">
 										<div class="feature-img-wrap relative">
 											<div class="feature-img relative">
 												<div class="overlay overlay-bg"></div>
-												<img class="img-fluid" src="images/f3.jpg" alt="">
+												<img class="img-fluid" src="<%=post.img %>" alt="">
 											</div>
 											<ul class="tags">
-												<li><a href="#">Travel</a></li>
+												<li><a href="#"><%=post.tag %></a></li>
 											</ul>
 										</div>
 										<div class="details">
-											<a href="image-post.html">
-												<h4>A Discount Toner Cartridge Is
-												Better Than Ever.</h4>
+											<a href="/<%=post.category %>/<%=post.sub_category %>/<%=post.title %>">
+												<h4><%=post.title %></h4>
 											</a>
 											<ul class="meta">
-												<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
-												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-												<li><a href="#"><i class="fa fa-eye"></i> 06 </a></li>
+												<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
+												<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+												<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
 											</ul>
 											<p class="excert">
-												Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
+													<%=post.description %>											
 											</p>
 										</div>
 									</div>
-									<div class="col-lg-6 single-popular-post">
-										<div class="feature-img-wrap relative">
-											<div class="feature-img relative">
-												<div class="overlay overlay-bg"></div>
-												<img class="img-fluid" src="images/f3.jpg" alt="">
-											</div>
-											<ul class="tags">
-												<li><a href="#">Travel</a></li>
-											</ul>
-										</div>
-										<div class="details">
-											<a href="image-post.html">
-												<h4>A Discount Toner Cartridge Is
-												Better Than Ever.</h4>
-											</a>
-											<ul class="meta">
-												<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
-												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-												<li><a href="#"><i class="fa fa-eye"></i> 06 </a></li>
-											</ul>
-											<p class="excert">
-												Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
-											</p>
-										</div>
-									</div>
-									<div class="col-lg-6 single-popular-post">
-										<div class="feature-img-wrap relative">
-											<div class="feature-img relative">
-												<div class="overlay overlay-bg"></div>
-												<img class="img-fluid" src="images/f3.jpg" alt="">
-											</div>
-											<ul class="tags">
-												<li><a href="#">Travel</a></li>
-											</ul>
-										</div>
-										<div class="details">
-											<a href="image-post.html">
-												<h4>A Discount Toner Cartridge Is
-												Better Than Ever.</h4>
-											</a>
-											<ul class="meta">
-												<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
-												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-												<li><a href="#"><i class="fa fa-eye"></i> 06 </a></li>
-											</ul>
-											<p class="excert">
-												Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
-											</p>
-										</div>
-									</div>
+									<% }) 	%>
 								</div>
 							</div>
 							<!-- End popular-post Area -->
@@ -290,191 +211,40 @@
 							<div class="sidebars-area">
 								<div class="single-sidebar-widget editors-pick-widget">
 									<h6 class="title">Xem nhiều nhất</h6>
-									<div class="editors-pick-post">
-										<div class="feature-img-wrap relative">
-											<div class="feature-img relative">
-												<div class="overlay overlay-bg"></div>
-												<img class="img-fluid" src="images/e1.jpg" alt="">
-											</div>
-											<ul class="tags">
-												<li><a href="#">Travel</a></li>
-											</ul>
+							</div>
+							
+							<div class="single-sidebar-widget editors-pick-widget" style="overflow-y: scroll; height: 800px;">
+								
+								<% datathoisu.tintuc.forEach(function(post){
+									if(post.views > 100){%>
+								<div class="editors-pick-post">
+									<div class="feature-img-wrap relative">
+										<div class="feature-img relative">
+											<div class="overlay overlay-bg"></div>
+											<img class="img-fluid" src="<%=post.img%>" alt="">
 										</div>
-										<div class="details">
-											<a href="image-post.html">
-												<h4 class="mt-20">A Discount Toner Cartridge Is
-												Better Than Ever.</h4>
-											</a>
-											<ul class="meta">
-												<li><a href="#"><i class="fa fa-pencil"></i> Mark wiens</a></li>
-												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-												<li><a href="#"><i class="fa fa-eye"></i> 06 </a></li>
-											</ul>
-											<p class="excert">
-												Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
-											</p>
-										</div>
-										<div class="post-lists">
-											<div class="single-post d-flex flex-row">
-												<div class="thumb">
-													<img src="images/e2.jpg" alt="">
-												</div>
-												<div class="detail">
-													<a href="image-post.html"><h6>Help Finding Information
-													Online is so easy</h6></a>
-													<ul class="meta">
-														<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-														<li><a href="#"><i class="fa fa-eye"></i> 06</a></li>
-													</ul>
-												</div>
-											</div>
-											<div class="single-post d-flex flex-row">
-												<div class="thumb">
-													<img src="images/e3.jpg" alt="">
-												</div>
-												<div class="detail">
-													<a href="image-post.html"><h6>Compatible Inkjet Cartr
-													world famous</h6></a>
-													<ul class="meta">
-														<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-														<li><a href="#"><i class="fa fa-eye"></i> 06</a></li>
-													</ul>
-												</div>
-											</div>
-											<div class="single-post d-flex flex-row">
-												<div class="thumb">
-													<img src="images/e4.jpg" alt="">
-												</div>
-												<div class="detail">
-													<a href="image-post.html"><h6>5 Tips For Offshore Soft
-													Development </h6></a>
-													<ul class="meta">
-														<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-														<li><a href="#"><i class="fa fa-eye"></i> 06</a></li>
-													</ul>
-												</div>
-											</div>
-										</div>
+										<ul class="tags">
+											<li><a href="#"><%=post.sub_category%></a></li>
+										</ul>
 									</div>
+									<div class="details">
+										<a href="/<%=post.category %>/<%=post.sub_category %>/<%=post.title %>">
+											<h4 class="mt-20"><%=post.title%></h4>
+										</a>
+										<ul class="meta">
+											<li><a href="#"><i class="fa fa-pencil"></i> <%=post.author %></a></li>
+											<li><a href="#"><i class="fa fa-calendar"></i> <%=post.date %></a></li>
+											<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
+										</ul>
+										<p class="excert">
+											<%=post.description %>
+										</p>
+									</div>
+									
 								</div>
-								<div class="single-sidebar-widget ads-widget">
-									<img class="img-fluid" src="images/sidebar-ads.jpg" alt="">
-								</div>
-								<div class="single-sidebar-widget newsletter-widget">
-									<h6 class="title">Newsletter</h6>
-									<p>
-										Here, I focus on a range of items
-										andfeatures that we use in life without
-										giving them a second thought.
-									</p>
-									<div class="form-group d-flex flex-row">
-										<div class="col-autos">
-											<div class="input-group">
-												<input class="form-control" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'" type="text">
-											</div>
-										</div>
-										<a href="#" class="bbtns">Subcribe</a>
-									</div>
-									<p>
-										You can unsubscribe us at any time
-									</p>
-								</div>
-								<div class="single-sidebar-widget most-popular-widget">
-									<h6 class="title">Most Popular</h6>
-									<div class="single-list flex-row d-flex">
-										<div class="thumb">
-											<img src="images/m1.jpg" alt="">
-										</div>
-										<div class="details">
-											<a href="image-post.html">
-												<h6>Help Finding Information
-												Online is so easy</h6>
-											</a>
-											<ul class="meta">
-												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-												<li><a href="#"><i class="fa fa-eye"></i> 06</a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="single-list flex-row d-flex">
-										<div class="thumb">
-											<img src="images/m2.jpg" alt="">
-										</div>
-										<div class="details">
-											<a href="image-post.html">
-												<h6>Compatible Inkjet Cartr
-												world famous</h6>
-											</a>
-											<ul class="meta">
-												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-												<li><a href="#"><i class="fa fa-eye"></i> 06</a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="single-list flex-row d-flex">
-										<div class="thumb">
-											<img src="images/m3.jpg" alt="">
-										</div>
-										<div class="details">
-											<a href="image-post.html">
-												<h6>5 Tips For Offshore Soft
-												Development </h6>
-											</a>
-											<ul class="meta">
-												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-												<li><a href="#"><i class="fa fa-eye"></i> 06</a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="single-list flex-row d-flex">
-										<div class="thumb">
-											<img src="images/m4.jpg" alt="">
-										</div>
-										<div class="details">
-											<a href="image-post.html">
-												<h6>5 Tips For Offshore Soft
-												Development </h6>
-											</a>
-											<ul class="meta">
-												<li><a href="#"><i class="fa fa-calendar"></i> 03 April, 2018</a></li>
-												<li><a href="#"><i class="fa fa-eye"></i> 06</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="single-sidebar-widget social-network-widget">
-									<h6 class="title">Social Networks</h6>
-									<ul class="social-list">
-										<li class="d-flex justify-content-between align-items-center fb">
-											<div class="icons d-flex flex-row align-items-center">
-												<i class="fa fa-facebook" aria-hidden="true"></i>
-												<p>983 Likes</p>
-											</div>
-											<a href="#">Like our page</a>
-										</li>
-										<li class="d-flex justify-content-between align-items-center tw">
-											<div class="icons d-flex flex-row align-items-center">
-												<i class="fa fa-twitter" aria-hidden="true"></i>
-												<p>983 Followers</p>
-											</div>
-											<a href="#">Follow Us</a>
-										</li>
-										<li class="d-flex justify-content-between align-items-center yt">
-											<div class="icons d-flex flex-row align-items-center">
-												<i class="fa fa-youtube-play" aria-hidden="true"></i>
-												<p>983 Subscriber</p>
-											</div>
-											<a href="#">Subscribe</a>
-										</li>
-										<li class="d-flex justify-content-between align-items-center rs">
-											<div class="icons d-flex flex-row align-items-center">
-												<i class="fa fa-rss" aria-hidden="true"></i>
-												<p>983 Subscribe</p>
-											</div>
-											<a href="#">Subscribe</a>
-										</li>
-									</ul>
-								</div>
+								<% }%>
+							<% }) %>
+							</div>
 							</div>
 						</div>
 					</div>
@@ -551,6 +321,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</div>
 		</footer>
 		<!-- End footer Area -->
+<<<<<<< HEAD
 		<script>
 			// Get the modal
 			var modal = document.getElementById('id01');
@@ -577,5 +348,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		<script src="javascripts/owl.carousel.min.js"></script>
 		<script src="javascripts/mail-script.js"></script>
 		<script src="javascripts/main.js"></script>
+=======
+		<%include template/js.ejs %>
+>>>>>>> c2159354d7e81ee6719b73450b9a12d7e1f92de2
 	</body>
 </html>
