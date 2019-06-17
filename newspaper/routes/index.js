@@ -145,7 +145,7 @@ router.get('/news/:category', function(req, res, next) {
   });   
 });
 
-router.get('/news/:category/:subCategory', function(req, res, next) {
+router.get('/news/:category/:subCategory/:title', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
   var getComments = users.comments();
@@ -159,25 +159,23 @@ router.get('/news/:category/:subCategory', function(req, res, next) {
   }
   ).catch(err => {
     console.log(err);
-  });  
-router.get('/news/:category/:subCategory/:title', function(req, res, next) {
+  });   
+});
+router.get('/news/:category/:subCategory', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
-  var getComments = users.comments();
-  Promise.all([getTopics, getAllPosts, getComments]).then(result => {
+  var getTopTen = ftPosts.topTenTopics();
+  Promise.all([getTopics, getAllPosts, getTopTen]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
-    var comments = JSON.parse(JSON.stringify(result[2]));
-    res.render('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
+    var ftTopTen = JSON.parse(JSON.stringify(result[2]));
+    res.render('subCategory',{topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
   }
   ).catch(err => {
     console.log(err);
-  });   
+  });  
 });
-router.get('/:category/:subCategory/:title', function(req, res, next) {
-  res.render('image-post',{title:req.params.title});
-});
-});
+
 
 
 module.exports = router;
