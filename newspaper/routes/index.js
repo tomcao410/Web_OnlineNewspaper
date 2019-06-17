@@ -131,7 +131,19 @@ router.get('/news/:category', function(req, res, next) {
   });   
 });
 
-
+router.get('/news/:category/:subCategory', function(req, res, next) {
+  var getTopics = topics.all();
+  var getAllPosts = allPost.all();
+  var getTopTen = ftPosts.topTenTopics();
+  Promise.all([getTopics, getAllPosts, getTopTen]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    var ftTopTen = JSON.parse(JSON.stringify(result[2]));
+    res.render('subCategory',{topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
+  }
+  ).catch(err => {
+    console.log(err);
+  });  
 router.get('/news/:category/:subCategory/:title', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
@@ -146,19 +158,7 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
     console.log(err);
   });   
 });
-router.get('/news/:category/:subCategory', function(req, res, next) {
-  var getTopics = topics.all();
-  var getAllPosts = allPost.all();
-  var getTopTen = ftPosts.topTenTopics();
-  Promise.all([getTopics, getAllPosts, getTopTen]).then(result => {
-    var topics = transformTopics(result[0]);
-    var allPosts = JSON.parse(JSON.stringify(result[1]));
-    var ftTopTen = JSON.parse(JSON.stringify(result[2]));
-    res.render('subCategory',{topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
-  }
-  ).catch(err => {
-    console.log(err);
-  });  
+
 });
 
 
