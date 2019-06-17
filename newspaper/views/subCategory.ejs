@@ -64,11 +64,11 @@
                                                     <img class="img-fluid" src="<%=post.imgLink %>" alt="">
                                                 </div>
                                                 <ul class="tags">
-                                                    <li><a href="/<%=post.categoryName %>/<%=post.subCategoryName %>"><%=post.categoryName %> - <%=post.subCategoryName %></a></li>
+                                                    <li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>"><%=post.categoryName %> - <%=post.subCategoryName %></a></li>
                                                 </ul>
                                             </div>
                                             <div class="col-lg-7 post-right">
-                                                <a href="/news/<%=post.categoryName %>/<%=post.title %>">
+                                                <a href="/news/<%=post.categoryName %>/<%=post.subCategoryName%>/<%=post.title %>">
                                                     <h4><%=post.title %></h4>
                                                 </a>
                                                 <ul class="meta">
@@ -126,11 +126,11 @@
 														<img class="img-fluid" src="<%=post.imgLink%>" alt="">
 													</div>
 													<ul class="tags">
-														<li><a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=curTopic%> - <%=post.subCategoryName%></a></li>
+														<li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=curTopic%> - <%=post.subCategoryName%></a></li>
 													</ul>
 												</div>
 												<div class="details">
-													<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
+													<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
 														<h4 class="mt-20"><%=post.title%></h4>
 													</a>
 													<ul class="meta">
@@ -180,7 +180,7 @@
 											<img src="<%=post.imgLink%>" alt="" style="max-width: 100px; max-height: 70px">
 										</div>
 										<div class="details">
-												<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
+												<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
 													<h6><%=post.title%></h6>
 												</a>
 											<ul class="meta">
