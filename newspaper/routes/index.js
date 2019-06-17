@@ -139,10 +139,14 @@ router.get('/admin/dashboard', function(req, res, next) {
   res.render('dashboard', { title: 'Express' });
 });
 router.get('/TrangCaNhan', function(req, res, next) {
+  var getAllPosts = allPost.all();
   var getTopics = topics.all();
-  Promise.all(getTopics).then(result => {
+  var getTopTen = ftPosts.topTenTopics();
+  Promise.all([getTopics, getAllPosts, getTopTen]).then(result => {
     var topics = transformTopics(result[0]);
-    res.render('info', {topics: topics, title: 'Express' });
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    var ftTopTen = JSON.parse(JSON.stringify(result[2]));
+    res.render('infor', {topics: topics, allPosts: allPosts, ftTopTen: ftTopTen,title: 'Express' });
   }
   ).catch(err => {
     console.log(err);
