@@ -43,8 +43,12 @@ router.post('/news/:category/:subCategory/:title', (req, res) => {
     postId: req.body.postID,
     userId: req.body.userID,
     commentContent: req.body.commentContent
-  }
-  commentModel.addComment(entity).then(id => {}).catch(err => {
+  };
+  var redirectUrl = "/news/" + req.params.category + "/" + req.params.subCategory + "/" + req.params.title;
+  commentModel.addComment(entity).then(id => {
+    console.log(id);
+    res.redirect(redirectUrl);
+  }).catch(err => {
     console.log(err);
   });
 });

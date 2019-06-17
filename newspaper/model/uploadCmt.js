@@ -1,6 +1,6 @@
 var db = require('../utils/db');
 module.exports = {
-    addComment : () => {
+    addComment : entity => {
         return db.add('Comments', entity);
     },
 }
