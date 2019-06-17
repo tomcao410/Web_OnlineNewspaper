@@ -4,25 +4,18 @@ var topics = require('../model/topics');
 var ftPosts = require('../model/ftPosts');
 var allPost = require('../model/allPosts');
 var _ = require('lodash');
-/* GET home page. */
 
-// router.get('*', function(req, res, next) {
-//   var p = topics.all();
-//   p.then(rows => {
-//     rows = JSON.parse(JSON.stringify(rows));
-//     rowsGroupby = _.groupBy(rows, function(row) {
-//       return row.categoryName;
-//     })
-//     rows = _.map(rowsGroupby, function(rowGroupby, key) {
-//       return { categoryName: key, subCategories: rowGroupby };
-//     });
-//     console.log('abc');
-//     res.render('template/header2', { topics: rows, title: 'Express' });  
-//   }
-//   ).catch(err => {
-//     console.log(err);
-//   });
-// });
+
+var userModel = require('../model/user');
+
+var bodyParser = require('body-parser');
+var fs = require('fs')
+var session = require('express-session');
+var LocalStrategy = require('passport-local').Strategy
+var passport = require('passport');
+
+var app = express();
+
 
 function transformTopics(rows) {
   rows = JSON.parse(JSON.stringify(rows));
@@ -53,6 +46,68 @@ router.get('/', function(req, res, next) {
   });   
 });
 
+
+
+// --------------------Login--------------------
+router.post('/users', (req, res) => {
+  var entity = {
+    username: req.body.username,
+    password: req.body.password
+  }
+  console.log(entity.username)
+  var p = userModel.login(entity.username, entity.password);
+  p.then(rows => {
+    if (rows.length > 0)
+    {
+      console.log(rows)
+    }
+    else
+    {
+      console.log('Login fail')
+    }
+  }).catch(err => {
+    console.log(err);
+  });
+})
+
+
+// // passportjs
+// app.use(bodyParser.urlencoded({extended: true}));
+// app.use(session({
+//   secret: "websecret",
+//   resave: true,
+//   saveUninitialized: true
+// }));
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// app.route('/template/header2')
+// .get((req, res) => res.render('/template/header2'))
+// .post(passport.authenticate('/template/header2', {failureRedirect: '/template/header2',
+//                                       successRedirect: '/loginOK'}));
+
+
+// passport.use(new LocalStrategy(
+//   (uname, psw, done) => {
+//     fs.readFile('./user.json', (error, data) => {
+//       const db = JSON.parse(data)
+//       const userRecord = db.find(user => user.usr == uname)
+//       if (userRecord && userRecord.pass == psw)
+//       {
+//         return done(null, userRecord)
+//       }
+//       else{
+//         return done(null, false)
+//       }
+//     })
+//   }
+// ))
+
+// passport.serializeUser((user, done) => {
+//   done(null, user.usr)
+// })
+
+// --------------------------------------------
 router.get('/page/:pagenum', function(req, res, next) {
   var getTopics = topics.all();
   Promise.all([getTopics]).then(result => {
@@ -78,7 +133,6 @@ router.get('/all', function(req, res, next) {
 
 router.get('/admin/dashboard', function(req, res, next) {
   res.render('dashboard', { title: 'Express' });
-
 });
 router.get('/admin/profile', function(req, res, next) {
   res.render('profile', { title: 'Express' });

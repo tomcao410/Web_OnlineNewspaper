@@ -71,18 +71,18 @@
       class="close" title="Close Modal">&times;</span>
       
         <!-- Modal Content -->
-        <form class="modal-content animate">
+        <form class="modal-content animate" method="POST" action="/users">
           <div class="imgcontainer">
             <img src="images/img_avatar2.png" alt="Avatar" class="avatar">
           </div>
       
           <div class="container">
             <label for="uname"><b>Tên đăng nhập</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" autocomplete="off">
+            <input type="text" placeholder="Enter Username" name="username" id="username" autocomplete="off">
       
             <label for="psw"><b>Mật khẩu</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" autocomplete="off">
-            
+            <input type="password" placeholder="Enter Password" name="password" id="password" autocomplete="off">
+
             <input type="submit" value="Login" class="btn btn-success" style="width: 100%; display: block;">
             
             <label></label>
