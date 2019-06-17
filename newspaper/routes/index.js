@@ -4,6 +4,7 @@ var topics = require('../model/topics');
 var ftPosts = require('../model/ftPosts');
 var allPost = require('../model/allPosts');
 var users = require('../model/dataUser');
+var commentModel = require('../model/uploadCmt.js');
 var _ = require('lodash');
 /* GET home page. */
 
@@ -31,11 +32,24 @@ function transformTopics(rows) {
     rows = _.map(rowsGroupby, (rowGroupby, key) => ( { categoryName: key, subCategories: rowGroupby }));
     return rows;
 }
+
+
 router.post('/news/:category/:subCategory/:title', (req, res) => {
   // res.redirect('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
   console.log(req.body);
-  res.end('...');
+  // res.end('...');
+  var entity = {
+    commentId: req.body.commentID,
+    postId: req.body.postID,
+    userId: req.body.userID,
+    commentContent: req.body.commentContent
+  }
+  commentModel.addComment(entity).then(id => {}).catch(err => {
+    console.log(err);
+  });
 });
+
+
 router.get('/', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
