@@ -6,7 +6,9 @@ var createConnection = ()=>{
     host     : 'localhost',
     user     : 'root',
     password : 'root',
-    database : 'Newspaper'
+    database : 'Newspaper',
+    timezone : 'Z',
+    dateString  : true
   });
 }
 
