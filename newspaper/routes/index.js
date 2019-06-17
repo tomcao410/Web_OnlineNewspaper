@@ -5,9 +5,6 @@ var ftPosts = require('../model/ftPosts');
 var allPost = require('../model/allPosts');
 var _ = require('lodash');
 
-
-var userModel = require('../model/user');
-
 var bodyParser = require('body-parser');
 var fs = require('fs')
 var session = require('express-session');
@@ -49,7 +46,8 @@ router.get('/', function(req, res, next) {
 
 
 // --------------------Login--------------------
-router.post('/users', (req, res) => {
+var userModel = require('../model/user');
+router.post('/', (req, res) => {
   var entity = {
     username: req.body.username,
     password: req.body.password
@@ -59,6 +57,7 @@ router.post('/users', (req, res) => {
   p.then(rows => {
     if (rows.length > 0)
     {
+      console.log('Login succeed');
       console.log(rows)
     }
     else
@@ -117,12 +116,13 @@ router.get('/page/:pagenum', function(req, res, next) {
   ).catch(err => {
     console.log(err);
   });
+});
+
 var posts = require('../model/posts');
 /* GET home page. */
 router.get('/', (req, res) => {
   var p= posts.all();
   p.then( rows => {
-      
       res.render('index', { postall: rows, title: 'Express' });
       console.log(rows);
     }
@@ -130,6 +130,7 @@ router.get('/', (req, res) => {
       console.log(err);
     });
 });
+
 router.get('/all', function(req, res, next) {
   var getAllPosts = allPost.all();
   var getTopics = topics.all();

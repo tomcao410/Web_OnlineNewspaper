@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "express-session": "^1.16.2",
+    "jquery-datetimepicker": "^2.5.21",
     "lodash": "^4.17.11",
     "mysql": "^2.17.1",
     "passport": "^0.4.0",
