@@ -136,7 +136,14 @@ router.get('/admin/dashboard', function(req, res, next) {
   res.render('dashboard', { title: 'Express' });
 });
 router.get('/TrangCaNhan', function(req, res, next) {
-  res.render('infor', { title: 'Express' });
+  var getTopics = topics.all();
+  Promise.all(getTopics).then(result => {
+    var topics = transformTopics(result[0]);
+    res.render('info', {topics: topics, title: 'Express' });
+  }
+  ).catch(err => {
+    console.log(err);
+  });
 });
 router.get('/:category/:subCategory/:title', function(req, res, next) {
   res.render('image-post',{title:req.params.title});
