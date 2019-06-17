@@ -31,8 +31,10 @@ function transformTopics(rows) {
     rows = _.map(rowsGroupby, (rowGroupby, key) => ( { categoryName: key, subCategories: rowGroupby }));
     return rows;
 }
-router.post('/news/:category/:subCategory/add/add-comment', (req, res) => {
-    console.log(req.body);
+router.post('/news/:category/:subCategory/:title', (req, res) => {
+  // res.redirect('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
+  console.log(req.body);
+  res.end('...');
 });
 router.get('/', function(req, res, next) {
   var getTopics = topics.all();

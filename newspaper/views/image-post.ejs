@@ -64,10 +64,12 @@
 						<div class="col-lg-8 post-list">
 							<!-- Start single-post Area -->
 							<div class="single-post-wrap">
+								<%var curPostId = 0;%>
 								<% allPosts.forEach(function(posts){
 										if(posts.title == title){
 											curSubTopic = posts.subCategoryName;
-											curTopic = posts.categoryName; %>
+											curTopic = posts.categoryName; 
+											curPostId = posts.id; %>
 									<div class="feature-img-thumb relative">
 										<div class="overlay overlay-bg"></div>
 										<img class="img-fluid" src="<%=posts.imgLink%>" alt="">
@@ -160,7 +162,7 @@
 												</div>\
 									<div class="comment-form">
 										<h4>Post Comment</h4>
-										<form name="form1" method="POST" action="add/add-comment">
+										<form name="form1" method="POST" action="/news/<%=category%>/<%=subCategory%>/<%=title%>">
 											<!-- <div class="form-group form-inline">
 												<div class="form-group col-lg-6 col-md-12 name">
 													<input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
@@ -176,8 +178,8 @@
 												<input type="text" class="form-control mb-10" rows="5" name="commentContent" id="commentContent" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"
 												 required=""></input>
 											</div>
-											<input type="text" class="d-none" name="userID" value="3">
-											<input type="text" class="d-none" name="postID" value="1">
+											<input type="text" class="d-none" name="userID" value="3" style="visibility: collapse">
+											<input type="text" class="d-none" name="postID" value="<%=curPostId%>" style="visibility: collapse">
 
 											<button type="submit" id="postcomm" onclick="btnClick()" class="primary-btn text-uppercase">Post Comment</button>
 										</form>
