@@ -117,6 +117,18 @@ router.get('/page/:pagenum', function(req, res, next) {
   ).catch(err => {
     console.log(err);
   });
+var posts = require('../model/posts');
+/* GET home page. */
+router.get('/', (req, res) => {
+  var p= posts.all();
+  p.then( rows => {
+      
+      res.render('index', { postall: rows, title: 'Express' });
+      console.log(rows);
+    }
+  ).catch( err =>{
+      console.log(err);
+    });
 });
 router.get('/all', function(req, res, next) {
   var getAllPosts = allPost.all();
