@@ -38,10 +38,10 @@
                 <ul class="nav-menu">
                     <li><a href="/all">TẤT CẢ TIN</a></li>
                     <% topics.forEach(function(topic){%>
-                    <li class="menu-has-children"><a href="/<%=topic.categoryName %>"> <%=topic.categoryName %></a>
+                    <li class="menu-has-children"><a href="/news/<%=topic.categoryName %>"> <%=topic.categoryName %></a>
                         <ul>
                             <% topic.subCategories.forEach(function(subTopic){%>
-                            <li><a href="/<%=topic.categoryName %>/<%=subTopic.subcategoryName %>"> <%=subTopic.subcategoryName %></a></li>
+                            <li><a href="/news/<%=topic.categoryName %>/<%=subTopic.subcategoryName %>"> <%=subTopic.subcategoryName %></a></li>
                             <% }) %>
                         </ul>
                     </li>

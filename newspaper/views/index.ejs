@@ -35,9 +35,9 @@
 							</div>
 							<div class="top-post-details">
 								<ul class="tags">
-									<li><a href="#"><%=post.categoryName %></a></li>
+									<li><a href="/news/<%=post.categoryName%>/<%=post.subCategoryName%>"><%=post.categoryName %> - <%=post.subCategoryName%></a></li>
 								</ul>
-								<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
+								<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
 									<h3><%=post.title %></h3>
 								</a>
 								<ul class="meta">
@@ -58,9 +58,8 @@
 								</div>
 								<div class="top-post-details">
 									<ul class="tags">
-										<li><a href="#"><%=post.categoryName %></a></li>
-									</ul>
-									<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
+										<li><a href="/news/<%=post.categoryName%>/<%=post.subCategoryName%>"><%=post.categoryName %> - <%=post.subCategoryName%></a></li>									</ul>
+									<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
 										<h4><%=post.title %></h4>
 									</a>
 									<ul class="meta">
@@ -101,11 +100,11 @@
 											<img class="img-fluid" src="<%=post.imgLink %>" alt="">
 										</div>
 										<ul class="tags">
-											<li><a href="/<%=post.categoryName %>/<%=post.subCategoryName %>"><%=post.categoryName %> - <%=post.subCategoryName %></a></li>
+											<li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>"><%=post.categoryName %> - <%=post.subCategoryName %></a></li>
 										</ul>
 									</div>
 									<div class="col-lg-7 post-right">
-										<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
+										<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
 											<h4><%=post.title %></h4>
 										</a>
 										<ul class="meta">
@@ -149,9 +148,9 @@
 									</div>
 									<div class="details">
 										<ul class="tags">
-											<li><a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=post.categoryName %> - <%=post.subCategoryName%></a></li>
+											<li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=post.categoryName %> - <%=post.subCategoryName%></a></li>
 										</ul>
-										<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
+										<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
 											<h3><%=post.title %></h3>
 										</a>
 										<ul class="meta">
@@ -175,11 +174,11 @@
 												<img class="img-fluid" src="<%=post.imgLink %>" alt="">
 											</div>
 											<ul class="tags">
-												<li><a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=post.categoryName %> - <%=post.subCategoryName%></a></li>
+												<li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=post.categoryName %> - <%=post.subCategoryName%></a></li>
 											</ul>
 										</div>
 										<div class="details">
-											<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
+											<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
 												<h4><%=post.title %></h4>
 											</a>
 											<ul class="meta">
@@ -228,11 +227,11 @@
 											<img class="img-fluid" src="<%=post.imgLink%>" alt="">
 										</div>
 										<ul class="tags">
-											<li><a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=post.categoryName %> - <%=post.subCategoryName%></a></li>
+											<li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=post.categoryName %> - <%=post.subCategoryName%></a></li>
 										</ul>
 									</div>
 									<div class="details">
-										<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
+										<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
 											<h4 class="mt-20"><%=post.title%></h4>
 										</a>
 										<ul class="meta">
