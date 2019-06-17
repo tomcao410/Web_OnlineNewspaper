@@ -92,9 +92,7 @@ router.get('/TrangCaNhan', function(req, res, next) {
     console.log(err);
   });
 });
-router.get('/:category/:subCategory/:title', function(req, res, next) {
-  res.render('image-post',{title:req.params.title});
-});
+
 
 router.get('/admin/dashboard', function(req, res, next) {
   res.render('dashboard', { title: 'Express' });
@@ -158,7 +156,9 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
     console.log(err);
   });   
 });
-
+router.get('/:category/:subCategory/:title', function(req, res, next) {
+  res.render('image-post',{title:req.params.title});
+});
 });
 
 
