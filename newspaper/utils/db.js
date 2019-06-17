@@ -5,7 +5,7 @@ var createConnection = ()=>{
   return mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : '123456',
+    password : 'tom123456',
     database : 'Newspaper'
   });
 }
@@ -15,7 +15,7 @@ module.exports = {
     return new Promise ((resolve, reject) =>{
       var connection = createConnection();
       connection.connect();
-    
+
       connection.query(sql, function (error, results, fields) {
         if (error) reject(error);
         else {
@@ -31,7 +31,7 @@ module.exports = {
       console.log(sql)
       var connection = createConnection();
       connection.connect();
-    
+
       connection.query(sql, function (error, results, fields) {
         if (error) reject(error);
         else {
