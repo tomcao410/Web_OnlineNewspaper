@@ -56,6 +56,7 @@ router.post('/', (req, res) => {
     {
       console.log('Login succeed');
       console.log(rows)
+      res.redirect('/')
     }
     else
     {
