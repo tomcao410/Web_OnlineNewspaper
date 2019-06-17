@@ -135,6 +135,12 @@ router.get('/all', function(req, res, next) {
 router.get('/admin/dashboard', function(req, res, next) {
   res.render('dashboard', { title: 'Express' });
 });
+router.get('/TrangCaNhan', function(req, res, next) {
+  res.render('infor', { title: 'Express' });
+});
+router.get('/:category/:subCategory/:title', function(req, res, next) {
+  res.render('image-post',{title:req.params.title});
+});
 router.get('/admin/profile', function(req, res, next) {
   res.render('profile', { title: 'Express' });
 
