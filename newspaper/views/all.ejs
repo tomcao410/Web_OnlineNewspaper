@@ -151,87 +151,32 @@
 									</p>
 								</div>
 								<div class="single-sidebar-widget most-popular-widget">
-									<h6 class="title">Chuyên mục khác</h6>
+									<h6 class="title">Mới nhất từ mỗi chuyên mục</h6>
+									<% ftTopTen.forEach(function(post){%>
 									<div class="single-list flex-row d-flex">
 										<div class="thumb">
-											<img src="img/m1.jpg" alt="">
+											<img src="<%=post.imgLink%>" alt="" style="max-width: 100px; max-height: 70px">
+											<!-- <ul class="tags">
+												<li><a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=post.categoryName %> - <%=post.subCategoryName%></a></li>
+											</ul> -->
 										</div>
 										<div class="details">
-											<a href="image-post">
-												<h6>Help Finding Information Online is so easy</h6>
+											<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
+												<h6><%=post.title%></h6>
 											</a>
 											<ul class="meta">
 												<li>
 													<a href="#">
-														<i class="fa fa-calendar"></i> 03 April, 2018</a>
+														<i class="fa fa-calendar"></i> <%=post.publishDate%></a>
 												</li>
 												<li>
 													<a href="#">
-														<i class="fa fa-eye"></i> 06</a>
+														<i class="fa fa-eye"></i> <%=post.views%></a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<div class="single-list flex-row d-flex">
-										<div class="thumb">
-											<img src="img/m2.jpg" alt="">
-										</div>
-										<div class="details">
-											<a href="image-post">
-												<h6>Compatible Inkjet Cartr world famous</h6>
-											</a>
-											<ul class="meta">
-												<li>
-													<a href="#">
-														<i class="fa fa-calendar"></i> 03 April, 2018</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-eye"></i> 06</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<div class="single-list flex-row d-flex">
-										<div class="thumb">
-											<img src="img/m3.jpg" alt="">
-										</div>
-										<div class="details">
-											<a href="image-post">
-												<h6>5 Tips For Offshore Soft Development </h6>
-											</a>
-											<ul class="meta">
-												<li>
-													<a href="#">
-														<i class="fa fa-calendar"></i> 03 April, 2018</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-eye"></i> 06</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<div class="single-list flex-row d-flex">
-										<div class="thumb">
-											<img src="img/m4.jpg" alt="">
-										</div>
-										<div class="details">
-											<a href="image-post">
-												<h6>5 Tips For Offshore Soft Development </h6>
-											</a>
-											<ul class="meta">
-												<li>
-													<a href="#">
-														<i class="fa fa-calendar"></i> 03 April, 2018</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-eye"></i> 06</a>
-												</li>
-											</ul>
-										</div>
-									</div>
+									<% }); %>
 								</div>
 								<div class="single-sidebar-widget social-network-widget">
 									<h6 class="title">Social Networks</h6>

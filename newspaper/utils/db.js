@@ -4,7 +4,9 @@ var createConnection = ()=>{
     host     : 'localhost',
     user     : 'root',
     password : '30111998',
-    database : 'Newspaper'
+    database : 'Newspaper',
+    timezone: 'Z',
+    dateStrings: true
   });
 }
 

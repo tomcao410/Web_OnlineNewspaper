@@ -224,7 +224,7 @@
 									
 											<% allPosts.forEach(function(post){
 												if (count == 10) return true;
-												if(post.categoryName == curTopic){
+												if(post.categoryName == curTopic && post.title != title){
 													count += 1; %>
 											<div class="editors-pick-post">
 												<div class="feature-img-wrap relative">
@@ -233,11 +233,11 @@
 														<img class="img-fluid" src="<%=post.imgLink%>" alt="">
 													</div>
 													<ul class="tags">
-														<li><a href="#"><%=post.categoryName%></a></li>
+														<li><a href="/<%=post.categoryName %>/"><%=post.categoryName%></a></li>
 													</ul>
 												</div>
 												<div class="details">
-													<a href="/<%=post.category %>/<%=post.sub_category %>/<%=post.title %>">
+													<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
 														<h4 class="mt-20"><%=post.title%></h4>
 													</a>
 													<ul class="meta">

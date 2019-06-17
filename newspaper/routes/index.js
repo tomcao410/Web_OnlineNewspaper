@@ -31,22 +31,19 @@ function transformTopics(rows) {
     return rows;
 }
 
-function jsonParse(rows){
-  rows = JSON.parse(JSON.stringify(rows));
-  return rows;
-}
-
 router.get('/', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
   var getFtPosts = ftPosts.all();
   var getTopMost = ftPosts.topMost();
-  Promise.all([getTopics, getAllPosts, getFtPosts, getTopMost]).then(result => {
+  var getTopTen = ftPosts.topTenTopics();
+  Promise.all([getTopics, getAllPosts, getFtPosts, getTopMost, getTopTen]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var ftPosts = JSON.parse(JSON.stringify(result[2]));
     var ftTopMost = JSON.parse(JSON.stringify(result[3]));
-    res.render('index', { topics: topics, allPosts: allPosts, ftPosts: ftPosts, ftTopMost: ftTopMost, title: 'Express' });  
+    var ftTopTen = JSON.parse(JSON.stringify(result[4]));
+    res.render('index', { topics: topics, allPosts: allPosts, ftPosts: ftPosts, ftTopMost: ftTopMost, ftTopTen: ftTopTen,title: 'Express' });  
   }
   ).catch(err => {
     console.log(err);
@@ -67,10 +64,12 @@ router.get('/page/:pagenum', function(req, res, next) {
 router.get('/all', function(req, res, next) {
   var getAllPosts = allPost.all();
   var getTopics = topics.all();
-  Promise.all([getTopics, getAllPosts]).then(result => {
+  var getTopTen = ftPosts.topTenTopics();
+  Promise.all([getTopics, getAllPosts, getTopTen]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
-    res.render('all', {topics: topics, allPosts: allPosts, title: 'Express' });  
+    var ftTopTen = JSON.parse(JSON.stringify(result[2]));
+    res.render('all', {topics: topics, allPosts: allPosts, ftTopTen: ftTopTen,title: 'Express' });  
   }
   ).catch(err => {
     console.log(err);
@@ -100,10 +99,12 @@ router.get('/admin/write-post', function(req, res, next) {
 router.get('/:category', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
-  Promise.all([getTopics, getAllPosts]).then(result => {
+  var getTopTen = ftPosts.topTenTopics();
+  Promise.all([getTopics, getAllPosts, getTopTen]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
-    res.render('category', { topics: topics, allPosts: allPosts, title:req.params.category });  
+    var ftTopTen = JSON.parse(JSON.stringify(result[2]));
+    res.render('category', { topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.category });  
   }
   ).catch(err => {
     console.log(err);
@@ -126,10 +127,12 @@ router.get('/:category/:subCategory/:title', function(req, res, next) {
 router.get('/:category/:subCategory', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
-  Promise.all([getTopics, getAllPosts]).then(result => {
+  var getTopTen = ftPosts.topTenTopics();
+  Promise.all([getTopics, getAllPosts, getTopTen]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
-    res.render('subCategory',{topics: topics, allPosts: allPosts, title:req.params.subCategory});
+    var ftTopTen = JSON.parse(JSON.stringify(result[2]));
+    res.render('subCategory',{topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory});
   }
   ).catch(err => {
     console.log(err);
