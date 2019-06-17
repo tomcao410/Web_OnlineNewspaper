@@ -117,7 +117,7 @@
 									var count = 0;
 									%>
 											<% allPosts.forEach(function(post){
-												if(post.subCategoryName == title && post.categoryName == curTopic  && count <= 10){
+												if(count <= 10){
 													count += 1; %>
 											<div class="editors-pick-post">
 												<div class="feature-img-wrap relative">
@@ -126,7 +126,7 @@
 														<img class="img-fluid" src="<%=post.imgLink%>" alt="">
 													</div>
 													<ul class="tags">
-														<li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=curTopic%> - <%=post.subCategoryName%></a></li>
+														<li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=post.categoryName%> - <%=post.subCategoryName%></a></li>
 													</ul>
 												</div>
 												<div class="details">
