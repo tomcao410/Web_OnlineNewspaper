@@ -43,8 +43,4 @@ app.use(function(err, req, res, next) {
 
 
 
-app.locals.dataTopic = [];
-/*app.locals.datathoisu = require('./model/data.json');
-app.locals.dataTopten = require('./model/topten.json');
-app.locals.datathreepost = require('./model/threepost.json');*/
 module.exports = app;

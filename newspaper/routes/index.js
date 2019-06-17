@@ -31,8 +31,10 @@ function transformTopics(rows) {
     rows = _.map(rowsGroupby, (rowGroupby, key) => ( { categoryName: key, subCategories: rowGroupby }));
     return rows;
 }
-router.post('/news/:category/:subCategory/add/add-comment', (req, res) => {
-    console.log(req.body);
+router.post('/news/:category/:subCategory/:title', (req, res) => {
+  // res.redirect('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
+  console.log(req.body);
+  res.end('...');
 });
 router.get('/', function(req, res, next) {
   var getTopics = topics.all();
@@ -134,12 +136,14 @@ router.get('/news/:category', function(req, res, next) {
 router.get('/news/:category/:subCategory', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
-  var getTopTen = ftPosts.topTenTopics();
-  Promise.all([getTopics, getAllPosts, getTopTen]).then(result => {
+  var getComments = users.comments();
+  var getNewestCmt = users.newestCmtId();
+  Promise.all([getTopics, getAllPosts, getComments, getNewestCmt]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
-    var ftTopTen = JSON.parse(JSON.stringify(result[2]));
-    res.render('subCategory',{topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
+    var comments = JSON.parse(JSON.stringify(result[2]));
+    var newestCmt = JSON.parse(JSON.stringify(result[3]));
+    res.render('image-post',{ topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
   }
   ).catch(err => {
     console.log(err);
