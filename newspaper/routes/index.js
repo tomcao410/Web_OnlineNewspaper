@@ -79,10 +79,22 @@ router.get('/all', function(req, res, next) {
   });
 });
 router.get('/TrangCaNhan', function(req, res, next) {
-  res.render('infor', { title: 'Express' });
+  var getAllPosts = allPost.all();
+  var getTopics = topics.all();
+  var getTopTen = ftPosts.topTenTopics();
+  Promise.all([getTopics, getAllPosts, getTopTen]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    var ftTopTen = JSON.parse(JSON.stringify(result[2]));
+    res.render('infor', {topics: topics, allPosts: allPosts, ftTopTen: ftTopTen,title: 'Express' });  
+  }
+  ).catch(err => {
+    console.log(err);
+  });
 });
 router.get('/:category/:subCategory/:title', function(req, res, next) {
   res.render('image-post',{title:req.params.title});
+});
 
 router.get('/admin/dashboard', function(req, res, next) {
   res.render('dashboard', { title: 'Express' });
@@ -94,8 +106,8 @@ router.get('/admin/profile', function(req, res, next) {
 });
 router.get('/admin/users-table', function(req, res, next) {
   res.render('users-table', { title: 'Express' });
-
 });
+
 router.get('/admin/posts-table', function(req, res, next) {
   res.render('posts-table', { title: 'Express' });
 
