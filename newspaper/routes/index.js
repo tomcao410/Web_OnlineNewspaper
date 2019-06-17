@@ -3,6 +3,7 @@ var router = express.Router();
 var topics = require('../model/topics');
 var ftPosts = require('../model/ftPosts');
 var allPost = require('../model/allPosts');
+var users = require('../model/dataUser');
 var _ = require('lodash');
 /* GET home page. */
 
@@ -30,7 +31,9 @@ function transformTopics(rows) {
     rows = _.map(rowsGroupby, (rowGroupby, key) => ( { categoryName: key, subCategories: rowGroupby }));
     return rows;
 }
-
+router.post('/news/:category/:subCategory/add/add-comment', (req, res) => {
+    console.log(req.body);
+});
 router.get('/', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
@@ -96,7 +99,7 @@ router.get('/admin/write-post', function(req, res, next) {
   res.render('write-post', { title: 'Express' });
 });
 
-router.get('/:category', function(req, res, next) {
+router.get('/news/:category', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
   var getTopTen = ftPosts.topTenTopics();
@@ -112,19 +115,21 @@ router.get('/:category', function(req, res, next) {
 });
 
 
-router.get('/:category/:subCategory/:title', function(req, res, next) {
+router.get('/news/:category/:subCategory/:title', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
-  Promise.all([getTopics, getAllPosts]).then(result => {
+  var getComments = users.comments();
+  Promise.all([getTopics, getAllPosts, getComments]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
-    res.render('image-post',{ topics: topics, allPosts: allPosts,title:req.params.title}); 
+    var comments = JSON.parse(JSON.stringify(result[2]));
+    res.render('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
   }
   ).catch(err => {
     console.log(err);
   });   
 });
-router.get('/:category/:subCategory', function(req, res, next) {
+router.get('/news/:category/:subCategory', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
   var getTopTen = ftPosts.topTenTopics();
@@ -132,7 +137,7 @@ router.get('/:category/:subCategory', function(req, res, next) {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var ftTopTen = JSON.parse(JSON.stringify(result[2]));
-    res.render('subCategory',{topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory});
+    res.render('subCategory',{topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
   }
   ).catch(err => {
     console.log(err);
