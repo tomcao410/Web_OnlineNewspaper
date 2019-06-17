@@ -160,6 +160,7 @@ router.get('/news/:category/:subCategory', function(req, res, next) {
   ).catch(err => {
     console.log(err);
   });  
+});
 router.get('/news/:category/:subCategory/:title', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
@@ -177,8 +178,6 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
 router.get('/:category/:subCategory/:title', function(req, res, next) {
   res.render('image-post',{title:req.params.title});
 });
-});
-
 
 module.exports = router;
 
