@@ -121,11 +121,13 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
   var getComments = users.comments();
-  Promise.all([getTopics, getAllPosts, getComments]).then(result => {
+  var getNewestCmt = users.newestCmtId();
+  Promise.all([getTopics, getAllPosts, getComments, getNewestCmt]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var comments = JSON.parse(JSON.stringify(result[2]));
-    res.render('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
+    var newestCmt = JSON.parse(JSON.stringify(result[3]));
+    res.render('image-post',{ topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
   }
   ).catch(err => {
     console.log(err);

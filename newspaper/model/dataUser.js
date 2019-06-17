@@ -4,6 +4,6 @@ module.exports = {
         return db.load('select C.*, P.title, P.id, U.fullname from comments as C, posts as P, users as U where P.id = C.postId and C.userId = U.id');
     },
     newestCmtId : () => {
-        return db.load('select * from comments where commentId = max(commentId)');
+        return db.load('select C.* from comments as C where C.commentId = (select max(commentId) from comments)');
     },
 }

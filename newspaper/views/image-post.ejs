@@ -77,7 +77,7 @@
 									<div class="content-wrap">
 										<ul class="tags mt-10">
 											<li>
-												<a href="/<%=posts.categoryName%>"><%=posts.categoryName%></a>
+												<a href="/news/<%=posts.categoryName%>/<%=posts.subCategoryName%>"><%=posts.categoryName%> - <%=posts.subCategoryName%></a>
 											</li>
 										</ul>
 										<a href="#">
@@ -159,7 +159,7 @@
 														</h3>
 													</div>
 												</div>
-												</div>\
+												</div>
 									<div class="comment-form">
 										<h4>Post Comment</h4>
 										<form name="form1" method="POST" action="/news/<%=category%>/<%=subCategory%>/<%=title%>">
@@ -178,9 +178,12 @@
 												<input type="text" class="form-control mb-10" rows="5" name="commentContent" id="commentContent" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"
 												 required=""></input>
 											</div>
+											<% newestCmt.forEach(function(newestId){%>
+												<% var curId = newestId.commentId + 1; %>
+												<input type="text" class="d-none" name="commentID" value="<%=curId%>" style="visibility: collapse">
+											<% }); %>
 											<input type="text" class="d-none" name="userID" value="3" style="visibility: collapse">
 											<input type="text" class="d-none" name="postID" value="<%=curPostId%>" style="visibility: collapse">
-
 											<button type="submit" id="postcomm" onclick="btnClick()" class="primary-btn text-uppercase">Post Comment</button>
 										</form>
 									</div>
@@ -204,7 +207,7 @@
 														<img class="img-fluid" src="<%=post.imgLink%>" alt="">
 													</div>
 													<ul class="tags">
-														<li><a href="/news/<%=post.categoryName %>/"><%=post.categoryName%></a></li>
+														<li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName%>"><%=post.categoryName%> - <%=post.subCategoryName%></a></li>
 													</ul>
 												</div>
 												<div class="details">
