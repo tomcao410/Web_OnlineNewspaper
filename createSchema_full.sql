@@ -2,7 +2,7 @@ create database Newspaper;
 use Newspaper;
 
 create table Posts(
-	id int primary key,
+	id int primary key AUTO_INCREMENT,
     authorId int,
     title varchar(255),
     sub_category int,
@@ -43,7 +43,7 @@ create table Tags(
 );
 
 create table Users(
-	id int primary key,
+	id int primary key AUTO_INCREMENT,
     username char(255) unique,
     passwordString char(20),
     userClass int,
@@ -76,11 +76,10 @@ create table Users(
     DLEditor bool
  );
 create table Comments(
-	postId int,
+	commentId int primary key,
+    postId int,
     userId int,
-    commentId int,
-    commentContent text,
-    primary key (postId, userId, commentId)
+    commentContent text
 );
 alter table SubCategories add constraint FK_SubCategories_Categories foreign key (categoryId) references Categories(id);
 alter table Posts add constraint FK_Posts_SubCategories foreign key (sub_category, category) references SubCategories(id, categoryId);

@@ -1,12 +1,12 @@
 var mysql      = require('mysql');
+
+
 var createConnection = ()=>{
   return mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : '30111998',
-    database : 'Newspaper',
-    timezone: 'Z',
-    dateStrings: true
+    password : 'tom123456',
+    database : 'Newspaper'
   });
 }
 
@@ -15,7 +15,23 @@ module.exports = {
     return new Promise ((resolve, reject) =>{
       var connection = createConnection();
       connection.connect();
-    
+
+      connection.query(sql, function (error, results, fields) {
+        if (error) reject(error);
+        else {
+          resolve(results);
+        }
+        connection.end();
+    });
+   });
+  },
+  login: (username, password) =>{
+    return new Promise ((resolve, reject) =>{
+      var sql = `select username, passwordString, userClass from users where username='${username}' AND passwordString='${password}'`
+      console.log(sql)
+      var connection = createConnection();
+      connection.connect();
+
       connection.query(sql, function (error, results, fields) {
         if (error) reject(error);
         else {

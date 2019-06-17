@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+	<head>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="img/fav.png">
+		<!-- Author Meta -->
+		<meta name="author" content="colorlib">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>Magazine</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+		<!--CSS============================================= -->
+		<%include template/css.ejs %>
+	</head>
+	<body>
+
+            <div id="id01" >
+
+                    <!-- Modal Content -->
+                    <form class="modal-content animate">
+                      <div class="imgcontainer">
+                        <img src="images/img_avatar2.png" alt="Avatar" class="avatar">
+                      </div>
+                  
+                      <div class="container">
+                        <label for="uname"><b>Tên đăng nhập</b></label>
+                        <input type="text" placeholder="Enter Username" name="uname" autocomplete="off">
+                  
+                        <label for="psw"><b>Mật khẩu</b></label>
+                        <input type="password" placeholder="Enter Password" name="psw" autocomplete="off">
+                        
+                        <input type="submit" value="Login" class="btn btn-success" style="width: 100%; display: block;">
+                        
+                        <label></label>
+                          <input type="checkbox" checked="checked" name="remember"> Nhớ tài khoản
+                        </label>
+                      </div>
+
+                    </form>
+            </div>
+		<!-- start footer Area -->
+		<%include template/footer.ejs%>
+		<!-- End footer Area -->
+		<%include template/js.ejs %>
+	</body>
+</html>

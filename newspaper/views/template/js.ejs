@@ -13,6 +13,10 @@
 		<script src="/javascripts/owl.carousel.min.js"></script>
 		<script src="/javascripts/mail-script.js"></script>
 		<script src="/javascripts/main.js"></script>
+		
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 		<script>
 			// Get the modal
 			var modal = document.getElementById('id01');
@@ -26,4 +30,26 @@
 				modal_signup.style.display = "none";
 			  }
 			}
+
 		</script>
+
+<script>
+        jQuery.datetimepicker.setLocale('en');
+        jQuery('#dobtimepicker').datetimepicker({
+			i18n:{
+			de:{
+			months:[
+				'January','Febuary','March','April',
+				'May','June','July','August',
+				'September','October','November','December',
+			],
+			dayOfWeek:[
+				"Sun", "Mon", "Tues", "Wed", 
+				"Thurs", "Fri", "Sat",
+			]
+			}
+			},
+			timepicker:false,
+			format:'d.m.Y'
+			});
+  </script>
