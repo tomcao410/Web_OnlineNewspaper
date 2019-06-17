@@ -16,6 +16,9 @@ router.get('/', (req, res) => {
 router.get('/all', function(req, res, next) {
   res.render('all', { title: 'Express' });
 });
+router.get('/TrangCaNhan', function(req, res, next) {
+  res.render('infor', { title: 'Express' });
+});
 router.get('/:category/:subCategory/:title', function(req, res, next) {
   res.render('image-post',{title:req.params.title});
 });
