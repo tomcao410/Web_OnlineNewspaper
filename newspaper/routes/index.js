@@ -47,7 +47,7 @@ router.get('/', function(req, res, next) {
 
 // --------------------Login--------------------
 var userModel = require('../model/user');
-router.post('/', (req, res) => {
+router.post('/login', (req, res) => {
   var entity = {
     username: req.body.username,
     password: req.body.password
@@ -63,12 +63,42 @@ router.post('/', (req, res) => {
     }
     else
     {
-      console.log('Login fail')
+      console.log('Login failed')
+      res.redirect('/')
     }
   }).catch(err => {
     console.log(err);
   });
 })
+
+// --------------------Register--------------------
+router.post('/register', (req, res) => {
+  var entity = {
+    username: req.body.username,
+    password: req.body.password,
+    confirmPass: req.body.confirmPass,
+    fullname: req.body.fullname,
+    email: req.body.email,
+    dob: req.body.dobtimepicker
+  }
+  console.log(entity);
+  var p = userModel.register(entity.username, entity.password, entity.fullname, entity.dob, entity.email);
+  p.then(rows => {
+    if (rows.length > 0)
+    {
+      console.log('Register succeed');
+      console.log(rows);
+      res.redirect('/');
+    }
+    else
+    {
+      console.log('Register failed')
+      res.redirect('/')
+    }
+  }).catch(err => {
+    console.log(err);
+  });
+});
 
 
 // // passportjs
@@ -195,7 +225,7 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var comments = JSON.parse(JSON.stringify(result[2]));
-    res.render('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
+    res.render('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory});
   }
   ).catch(err => {
     console.log(err);

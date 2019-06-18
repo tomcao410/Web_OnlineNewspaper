@@ -23,7 +23,7 @@
                         <img class="img-fluid" src="../../images/logo.png" alt="">
                     </a>
                 </div>
-        
+
                 <div>
                     <button onclick="document.getElementById('id02').style.display='block'";style=" font-size:18px"><i class="fa fa-user-o"></i>Sign Up</button>
                     <button onclick="document.getElementById('id01').style.display='block'"; style=" font-size:18px"><i class="fa fa-user-o"></i> Login</button>
@@ -59,7 +59,7 @@
                     </label>
                     <!-- <span class="Search-close">
                         <span class="lnr lnr-cross fa fa-times"></span>
-                     
+
                     </span> -->
                 </form>
             </div>
@@ -67,29 +67,29 @@
     </div>
 </header>
 <div id="id01" class="modal">
-        <span onclick="document.getElementById('id01').style.display='none'" 
+        <span onclick="document.getElementById('id01').style.display='none'"
       class="close" title="Close Modal">&times;</span>
-      
+
         <!-- Modal Content -->
-        <form class="modal-content animate" method="POST" action="/">
+        <form class="modal-content animate" method="POST" action="/login">
           <div class="imgcontainer">
             <img src="images/img_avatar2.png" alt="Avatar" class="avatar">
           </div>
-      
+
           <div class="container">
             <label for="uname"><b>Tên đăng nhập</b></label>
             <input type="text" placeholder="Enter Username" name="username" id="username" autocomplete="off">
-      
+
             <label for="psw"><b>Mật khẩu</b></label>
             <input type="password" placeholder="Enter Password" name="password" id="password" autocomplete="off">
 
             <input type="submit" value="Login" class="btn btn-success" style="width: 100%; display: block;">
-            
+
             <label></label>
               <input type="checkbox" checked="checked" name="remember"> Nhớ tài khoản
             </label>
           </div>
-      
+
           <div class="container" style="background-color:#f1f1f1">
             <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Hủy bỏ</button>
             <span class="psw"> <a href="#">Quên mật khẩu</a></span>
@@ -98,29 +98,29 @@
 </div>
 <div id="id02" class="modal">
     <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">times;</span>
-    <form class="modal-content" method="POST" action="/">
+    <form class="modal-content" method="POST" action="/register">
       <div class="container">
         <h1>Sign Up</h1>
         <p>Please fill in this form to create an account.</p>
         <hr>
         <label for="Username"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="Username" required>
-  
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-  
-        <label for="psw-repeat"><b>Repeat Password</b></label>
-        <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+        <input type="text" placeholder="Enter Username" name="username" id="username" required>
 
-        <label for="NickName"><b>NickName</b></label>
-        <input type="text" placeholder="Enter NickName" name="NickName" required>
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
+        <label for="psw-repeat"><b>Confirm Password</b></label>
+        <input type="password" placeholder="Repeat Password" name="confirmPass" id="confirmPass" required>
+
+        <label for="NickName"><b>Full name</b></label>
+        <input type="text" placeholder="Enter NickName" name="fullname" id="fullname" required>
 
         <label for="Email"><b>Email</b></label>
-        <input type="text" placeholder="_@asd.xyz" name="Email" required>
+        <input type="text" placeholder="_@asd.xyz" name="email" id="email" required>
 
         <label for="Birthday"><b>Birthday</b></label>
         <input type="text" id="dobtimepicker" placeholder="Enter Birthday" name="dobtimepicker" required>
-  
+
         <label>
           <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
         </label>
