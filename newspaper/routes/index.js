@@ -36,7 +36,7 @@ function transformTopics(rows) {
 
 router.post('/news/:category/:subCategory/:title', (req, res) => {
   // res.redirect('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
-  console.log(req.body);
+  //console.log(req.body);
   // res.end('...');
   var entity = {
     commentId: req.body.commentID,
@@ -53,6 +53,25 @@ router.post('/news/:category/:subCategory/:title', (req, res) => {
   });
 });
 
+router.post('/TrangCaNhan', (req,res) => {
+  console.log(req.body);
+  var entity = {
+    id: req.body.id,
+    username: req.body.username,
+    passwordString: req.body.passwordString,
+    userClass: req.body.userClass,
+    fullname: req.body.fullname,
+    dabirthday: req.body.dabirthday,
+    email: req.body.email
+  };
+  var redirectUrl = "/TrangCaNhan";
+  commentModel.addComment(entity).then(id => {
+    console.log(id);
+    res.redirect(redirectUrl);
+  }).catch(err => {
+    console.log(err);
+  });
+})
 
 router.get('/', function(req, res, next) {
   var getTopics = topics.all();
