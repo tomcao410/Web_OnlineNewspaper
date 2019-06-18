@@ -9,7 +9,9 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-6 header-top-right no-padding">
                     <ul>
-                        <li><a href="/"><span class="lnr lnr-phone-handset"></span><span>1612082 - 1612175 - 1612213</span></a></li>
+                            <% if (isLogin) { %>
+                        <li><a href="/logout" style="font-size: 20px"><span class="lnr lnr-phone-handset"></span><span>Log Out</span></a></li>
+                            <% }%>
                     </ul>
                 </div>
             </div>
@@ -25,9 +27,13 @@
                 </div>
 
                 <div>
+                        <% if (isLogin == false) { %>
                     <button onclick="document.getElementById('id02').style.display='block'";style=" font-size:18px"><i class="fa fa-user-o"></i>Sign Up</button>
                     <button onclick="document.getElementById('id01').style.display='block'"; style=" font-size:18px"><i class="fa fa-user-o"></i> Login</button>
-                    <button><a href="/TrangCaNhan">Trang Cá Nhân</a></button>
+                        <% }%>
+                        <% if (isLogin) { %>
+                    <button><a href="/TrangCaNhan" style="font-size:15px">Trang Cá Nhân</a></button>
+                        <% }%>
                 </div>
             </div>
         </div>
@@ -66,6 +72,7 @@
         </div>
     </div>
 </header>
+
 <div id="id01" class="modal">
         <span onclick="document.getElementById('id01').style.display='none'"
       class="close" title="Close Modal">&times;</span>

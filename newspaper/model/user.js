@@ -6,8 +6,8 @@ module.exports = {
         return db.load('select * from users');
     },
 
-    login : (username, password) => {
-      return db.login(username, password);
+    findUser: username => {
+      return db.findUser(username);
     },
 
     register : (username, password, fullname, dob, email) => {

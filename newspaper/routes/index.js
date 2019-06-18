@@ -15,6 +15,7 @@ var passport = require('passport');
 var app = express();
 
 
+// ----------------
 function transformTopics(rows) {
   rows = JSON.parse(JSON.stringify(rows));
     rowsGroupby = _.groupBy(rows, row => row.categoryName)
@@ -36,16 +37,27 @@ router.get('/', function(req, res, next) {
     var ftPosts = JSON.parse(JSON.stringify(result[2]));
     var ftTopMost = JSON.parse(JSON.stringify(result[3]));
     var ftTopTen = JSON.parse(JSON.stringify(result[4]));
-    res.render('index', { topics: topics, allPosts: allPosts, ftPosts: ftPosts, ftTopMost: ftTopMost, ftTopTen: ftTopTen,title: 'Express' });
+    var isLogin = false;
+    console.log(req.session.username);
+    if (req.session.username)
+    {
+      console.log('There is a user');
+      isLogin = true;
+    }
+    else
+    {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('index', { isLogin: isLogin, topics: topics, allPosts: allPosts, ftPosts: ftPosts, ftTopMost: ftTopMost, ftTopTen: ftTopTen,title: 'Express' });
   }
   ).catch(err => {
     console.log(err);
   });
 });
 
-
-
 // --------------------Login--------------------
+var bcrypt = require('bcrypt');
 var userModel = require('../model/user');
 router.post('/login', (req, res) => {
   var entity = {
@@ -53,13 +65,26 @@ router.post('/login', (req, res) => {
     password: req.body.password
   }
   console.log(entity.username)
-  var p = userModel.login(entity.username, entity.password);
-  p.then(rows => {
-    if (rows.length > 0)
+  var find = userModel.findUser(entity.username);
+  find.then(rowFound => {
+    if (rowFound.length > 0)
     {
-      console.log('Login succeed');
-      console.log(rows)
-      res.redirect('/')
+      console.log(rowFound[0].passwordString);
+      if (bcrypt.compareSync(entity.password, rowFound[0].passwordString))
+      {
+        req.session.userInfo = rowFound;
+        req.session.username = rowFound[0].username;
+        console.log(req.session.username);
+        req.session.op = 1;
+
+        console.log('Login succeed');
+        console.log(rowFound)
+        res.redirect('/')
+      }
+      else{
+        console.log('Login failed (bcrypt)');
+        res.redirect('/')
+      }
     }
     else
     {
@@ -82,10 +107,14 @@ router.post('/register', (req, res) => {
     dob: req.body.dobtimepicker
   }
   console.log(entity);
-  var p = userModel.register(entity.username, entity.password, entity.fullname, entity.dob, entity.email);
+  var passHashed = bcrypt.hashSync(entity.password, 10);
+  console.log(passHashed);
+  var p = userModel.register(entity.username, passHashed, entity.fullname, entity.dob, entity.email);
   p.then(rows => {
     if (rows.length > 0)
     {
+      req.session.user = rowFound;
+      req.session.op = 0;
       console.log('Register succeed');
       console.log(rows);
       res.redirect('/');
@@ -100,42 +129,17 @@ router.post('/register', (req, res) => {
   });
 });
 
-
-// // passportjs
-// app.use(bodyParser.urlencoded({extended: true}));
-// app.use(session({
-//   secret: "websecret",
-//   resave: true,
-//   saveUninitialized: true
-// }));
-// app.use(passport.initialize());
-// app.use(passport.session());
-
-// app.route('/template/header2')
-// .get((req, res) => res.render('/template/header2'))
-// .post(passport.authenticate('/template/header2', {failureRedirect: '/template/header2',
-//                                       successRedirect: '/loginOK'}));
-
-
-// passport.use(new LocalStrategy(
-//   (uname, psw, done) => {
-//     fs.readFile('./user.json', (error, data) => {
-//       const db = JSON.parse(data)
-//       const userRecord = db.find(user => user.usr == uname)
-//       if (userRecord && userRecord.pass == psw)
-//       {
-//         return done(null, userRecord)
-//       }
-//       else{
-//         return done(null, false)
-//       }
-//     })
-//   }
-// ))
-
-// passport.serializeUser((user, done) => {
-//   done(null, user.usr)
-// })
+// ------------------- Log Out ----------------------
+router.get('/logout', function(req, res, next) {
+  req.session.destroy(function (err) {
+    if (err) {
+      res.negotiate(err);
+    }
+    else {
+      res.redirect('/');
+    }
+  })
+})
 
 // --------------------------------------------
 router.get('/page/:pagenum', function(req, res, next) {
@@ -176,7 +180,8 @@ router.get('/TrangCaNhan', function(req, res, next) {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var ftTopTen = JSON.parse(JSON.stringify(result[2]));
-    res.render('infor', {topics: topics, allPosts: allPosts, ftTopTen: ftTopTen,title: 'Express' });
+    var isLogin = true;
+    res.render('infor', { isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen,title: 'Express' });
   }
   ).catch(err => {
     console.log(err);
@@ -245,5 +250,7 @@ router.get('/news/:category/:subCategory', function(req, res, next) {
     console.log(err);
   });
 });
+
+
 
 module.exports = router;
