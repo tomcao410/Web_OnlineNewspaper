@@ -1,6 +1,5 @@
 var mysql      = require('mysql');
 
-
 var createConnection = ()=>{
   return mysql.createConnection({
     host     : 'localhost',
@@ -27,22 +26,7 @@ module.exports = {
     });
    });
   },
-  login: (username, password) =>{
-    return new Promise ((resolve, reject) =>{
-      var sql = `select username, passwordString, userClass from users where username='${username}' AND passwordString='${password}'`
-      console.log(sql)
-      var connection = createConnection();
-      connection.connect();
 
-      connection.query(sql, function (error, results, fields) {
-        if (error) reject(error);
-        else {
-          resolve(results);
-        }
-        connection.end();
-    });
-   });
-  },
   add: (tableName, entity) => {
     return new Promise((resolve, reject) => {
       var sql = `insert into ${tableName} set ?`;
@@ -93,4 +77,38 @@ module.exports = {
       });
     });
   },
+
+  // User logins
+  findUser: username =>{
+    return new Promise ((resolve, reject) =>{
+      var sql = `select username, passwordString, userClass, fullname, DATE_FORMAT(dabirthday, "%Y-%m-%d") as dob, email from users where username='${username}'`
+      console.log(sql)
+      var connection = createConnection();
+      connection.connect();
+      connection.query(sql, function (error, results, fields) {
+        if (error) reject(error);
+        else {
+          resolve(results);
+        }
+        connection.end();
+    });
+   });
+  },
+  
+  // User registers
+  register: (username, password, fullname, dob, email) => {
+    return new Promise((resolve, reject) => {
+      var sql = `INSERT INTO users (username, passwordString, userClass, fullname, dabirthday, email) VALUES ('${username}', '${password}', ${1}, '${fullname}', '${dob}', '${email}')`;
+      console.log(sql);
+      var connection = createConnection();
+      connection.connect();
+      connection.query(sql, function(error, results, fields) {
+        if (error) reject(error);
+        else {
+          resolve(results);
+        }
+        connection.end();
+      })
+    })
+  }
 }
