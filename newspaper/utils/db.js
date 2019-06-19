@@ -4,7 +4,7 @@ var createConnection = ()=>{
   return mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : '123456',
+    password : 'tom123456',
     database : 'Newspaper',
     timezone: 'Z',
     dateStrings: true
@@ -93,7 +93,7 @@ module.exports = {
     });
    });
   },
-  
+
   // User registers
   register: (username, password, fullname, dob, email) => {
     return new Promise((resolve, reject) => {
