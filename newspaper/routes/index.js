@@ -473,12 +473,26 @@ router.get('/news/:category/:subCategory', function(req, res, next) {
 router.get('/searchResult', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
-  var Findresult = findResult.search();
+  // var Findresult = findResult.search();
+  var page = req.query.page || 1;
+  if (page < 1) page = 1;
+  var limit = 10;
+  var offset = (page - 1)* limit;
+  var Findresult = findResult.searchByPage(limit, offset, searchtxt);
   Promise.all([getTopics,getAllPosts, Findresult]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var search = JSON.parse(JSON.stringify(result[2]));
     var isLogin = false;
+    var total = search.length;
+    var nPages = Math.floor(total/ limit);
+    if (total % limit > 0) nPages++;
+    var pages = [];
+    for (i=1; i<= nPages;i++){
+      var obj = {value: i};
+      pages.push(obj);
+    }
+    var searchtxt = req.body.Searchbox;
     if (req.session.username)
     {
       console.log('There is a user');
@@ -489,7 +503,7 @@ router.get('/searchResult', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('searchResult',{ isLogin: isLogin, userInfo: req.session.userInfo, topics: topics,allPosts: allPosts, searchResult: search});
+    res.render('searchResult',{pages: pages, timkiem: searchtxt,isLogin: isLogin, userInfo: req.session.userInfo, topics: topics,allPosts: allPosts, searchResult: search});
 } 
 ).catch(err => {
   console.log(err);
@@ -499,37 +513,44 @@ router.get('/searchResult', function(req, res, next) {
 
 
 router.post('/searchResult', (req, res) => {
-/*   app.locals.searchtxt = req.body.Search-box;
-
- */  
   var entity = {
-  txt: req.body.Searchbox,
-}
+    txt: req.body.Searchbox,
+  }
   var a = entity.txt;
   searchtxt = a;
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
-  var Findresult = findResult.search();
-  Promise.all([getTopics,getAllPosts, Findresult]).then(result => {
+  var page = req.query.page || 1;
+  if (page < 1) page = 1;
+  var limit = 10;
+  var offset = (page - 1)* limit;
+  var Findresult = findResult.searchByPage(limit, offset, searchtxt);
+  Promise.all([getTopics, getAllPosts, Findresult]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var search = JSON.parse(JSON.stringify(result[2]));
     var isLogin = false;
-    if (req.session.username)
-    {
+    var total = search.length;
+    var nPages = Math.floor(total/ limit);
+    if (total % limit > 0) nPages++;
+    var pages = [];
+    for (i=1; i<= nPages;i++){
+      var obj = {value: i};
+      pages.push(obj);
+    }
+    if (req.session.username) {
       console.log('There is a user');
       isLogin = true;
     }
-    else
-    {
+    else {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('searchResult',{ timkiem:searchtxt, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics,allPosts: allPosts, searchResult: search});
-} 
-).catch(err => {
-  console.log(err);
-});  
+    res.render('searchResult', { pages: pages, timkiem: searchtxt, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, searchResult: search });
+  }
+  ).catch(err => {
+    console.log(err);
+  });
 });
 
 router.post("/add-post", (req, res) => {
