@@ -48,7 +48,7 @@ router.get('/', function(req, res, next) {
     var nPages = Math.floor(total/ limit);
     if (total % limit > 0) nPages++;
     var pages = [];
-    for (i=1; i< nPages;i++){
+    for (i=1; i<= nPages;i++){
       var obj = {value: i};
       pages.push(obj);
     }
@@ -192,7 +192,7 @@ router.get('/all', function(req, res, next) {
     var nPages = Math.floor(total/ limit);
     if (total % limit > 0) nPages++;
     var pages = [];
-    for (i=1; i< nPages;i++){
+    for (i=1; i<= nPages;i++){
       var obj = {value: i};
       pages.push(obj);
     }
@@ -273,14 +273,14 @@ router.get('/news/:category', function(req, res, next) {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var ftTopTen = JSON.parse(JSON.stringify(result[2]));
-    var postsByPages = JSON.pasrse(JSON.stringify(result[3]));
-    var postsByCat = JSON.pasrse(JSON.stringify(result[4]));
+    var postsByPages = JSON.parse(JSON.stringify(result[3]));
+    var postsByCat = JSON.parse(JSON.stringify(result[4]));
     var isLogin = false;
     var total = postsByCat.length;
     var nPages = Math.floor(total/ limit);
     if (total % limit > 0) nPages++;
     var pages = [];
-    for (i=1; i< nPages;i++){
+    for (i=1; i<= nPages;i++){
       var obj = {value: i};
       pages.push(obj);
     }
@@ -355,12 +355,28 @@ router.post('/news/:category/:subCategory/:title', (req, res) => {
 router.get('/news/:category/:subCategory', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
+  var postsBySubCat = allPost.bySubCat(req.params.category, req.params.subCategory);
   var getTopTen = ftPosts.topTenTopics();
-  Promise.all([getTopics, getAllPosts, getTopTen]).then(result => {
+  var page = req.query.page || 1;
+  if (page < 1) page = 1;
+  var limit = 10;
+  var offset = (page - 1) * limit;
+  var getAllPostsByPages = allPost.pageBySubCat(req.params.category,req.params.subCategory,limit, offset);
+  Promise.all([getTopics, getAllPosts, getTopTen, getAllPostsByPages, postsBySubCat]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var ftTopTen = JSON.parse(JSON.stringify(result[2]));
+    var postsByPages = JSON.parse(JSON.stringify(result[3]));
+    var postsBySubCat = JSON.parse(JSON.stringify(result[4]));
     var isLogin = false;
+    var total = postsBySubCat.length;
+    var nPages = Math.floor(total/ limit);
+    if (total % limit > 0) nPages++;
+    var pages = [];
+    for (i=1; i<= nPages;i++){
+      var obj = {value: i};
+      pages.push(obj);
+    }
     if (req.session.username)
     {
       console.log('There is a user');
@@ -371,7 +387,7 @@ router.get('/news/:category/:subCategory', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('subCategory',{isLogin: isLogin,topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
+    res.render('subCategory',{pages: pages, postsByPages: postsByPages,isLogin: isLogin,topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
   }
   ).catch(err => {
     console.log(err);

@@ -8,12 +8,15 @@ module.exports = {
         return db.load(`select P.*, C.categoryName, SC.subCategoryName, U.fullname from Posts as P, Categories as C, SubCategories as SC, Writer as W, Users as U where P.category = C.id and P.sub_category = SC.id and SC.categoryId = P.category and W.id = P.authorId and U.id = W.id order by P.publishDate desc limit ${limit} offset ${offset}`);
     },
     pageByCat : (catName, limit, offset) => {
-        return db.load(`select P.*, C.CategoryName, SC.subCategoryName, U.fullname from Posts as P, Categories as C, SubCategories as SC, Writer as W, Users as U where C.categoryName = "${catName}" P.category = C.id and P.sub_category = SC.id and SC.categoryId = P.category and W.id = P.authorId and U.id = W.id order by P.publishDate desc limit ${limit} offset ${offset}`);
+        return db.load(`select P.*, C.categoryName, SC.subCategoryName, U.fullname from Posts as P, Categories as C, SubCategories as SC, Writer as W, Users as U where C.categoryName = "${catName}" and P.sub_category = SC.id and SC.categoryId = P.category and C.id = P.category and W.id = P.authorId and U.id = W.id order by P.publishDate desc limit ${limit} offset ${offset}`);
     },
     pageBySubCat : (catName, subCatName, limit, offset) => {
-        return db.load(`select P.*, C.CategoryName, SC.subCategoryName, U.fullname from Posts as P, Categories as C, SubCategories as SC, Writer as W, Users as U where C.categoryName = "${catName}" and SC.subCategoryName = "${subCatName}" and P.category = C.id and P.sub_category = SC.id and SC.categoryId = P.category and W.id = P.authorId and U.id = W.id order by P.publishDate desc limit ${limit} offset ${offset}`);
+        return db.load(`select P.*, C.categoryName, SC.subCategoryName, U.fullname from Posts as P, Categories as C, SubCategories as SC, Writer as W, Users as U where P.category = C.id and P.sub_category = SC.id and SC.categoryId = P.category and C.categoryName = "${catName}" and SC.subCategoryName = "${subCatName}" and W.id = P.authorId and U.id = W.id order by P.publishDate desc limit ${limit} offset ${offset}`);
     },
     byCat : (catName) => {
         return db.load(`select P.* from Posts as P, Categories as C where P.category = C.id and C.categoryName = "${catName}"`);
-    }
+    },
+    bySubCat : (catName, subCatName) => {
+        return db.load(`select P.* from Posts as P, Categories as C, SubCategories as SC where P.category = C.id and P.sub_category = SC.id and C.categoryName = "${catName}" and SC.subCategoryName = "${subCatName}"`);
+    },
 }
