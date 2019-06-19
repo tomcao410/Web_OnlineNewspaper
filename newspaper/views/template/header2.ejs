@@ -121,19 +121,21 @@
 
         <label for="psw-repeat"><b>Confirm Password</b></label>
         <input type="password" placeholder="Repeat Password" name="confirmPass" id="confirmPass" required>
-
+        <label id="warning1" style="color: red; visibility: hidden;">Mật khẩu không khớp, vui lòng nhập lại</label>
+        <br>
         <label for="NickName"><b>Full name</b></label>
         <input type="text" placeholder="Enter NickName" name="fullname" id="fullname" required>
 
         <label for="Email"><b>Email</b></label>
         <input type="text" placeholder="_@asd.xyz" name="email" id="email" required>
-        
+        <label id="warning2" style="color: red; visibility: hidden;">Email không đúng định dạng</label>
+        <br>
         <label for="Birthday"><b>Birthday</b></label>
         <input type="text" id="dobtimepicker" placeholder="Enter Birthday" name="dobtimepicker" required>
 
         <div class="clearfix">
           <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-          <button type="submit" class="signup">Sign Up</button>
+          <button type="submit" class="signup" onclick="registerClicked()">Sign Up</button>
         </div>
       </div>
     </form>

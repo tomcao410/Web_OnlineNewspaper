@@ -153,26 +153,47 @@ router.post('/register', (req, res) => {
     dob: req.body.dobtimepicker
   }
   console.log(entity);
-  var passHashed = bcrypt.hashSync(entity.password, 10);
-  console.log(passHashed);
-  var p = userModel.register(entity.username, passHashed, entity.fullname, entity.dob, entity.email);
-  p.then(rows => {
-    if (rows.length > 0)
-    {
-      req.session.user = rowFound;
-      req.session.op = 0;
-      console.log('Register succeed');
-      console.log(rows);
-      res.redirect('/');
-    }
-    else
-    {
-      console.log('Register failed')
-      res.redirect('/')
-    }
-  }).catch(err => {
-    console.log(err);
-  });
+  var verify = false;
+  var verPsw = false;
+  var verEmail = false
+  if (entity.password !== entity.confirmPass)
+  {
+    verPsw = false;
+
+  }
+  if (!entity.email.includes("@"))
+  {
+    verEmail = false;
+  }
+  if (verEmail == false || verPsw == false)
+  {
+    verify = false;
+  }
+  if (verify == true) {
+    var passHashed = bcrypt.hashSync(entity.password, 10);
+    console.log(passHashed);
+    var p = userModel.register(entity.username, passHashed, entity.fullname, entity.dob, entity.email);
+    p.then(rows => {
+      if (rows.length > 0) {
+        req.session.user = rowFound;
+        req.session.op = 0;
+        console.log('Register succeed');
+        console.log(rows);
+        res.redirect('/');
+      }
+      else {
+        console.log('Register failed')
+        res.redirect('/')
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+  else
+  {
+    
+    res.redirect('/');
+  }
 });
 
 // ------------------- Log Out ----------------------

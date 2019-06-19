@@ -11,3 +11,21 @@ window.onclick = function(event) {
 	modal.style.display = "none";
 	}
 }
+
+function registerClicked()
+{
+	var warning1 = document.getElementById("warning1");
+	var warning2 = document.getElementById("warning2");
+	var pass = document.getElementById("password").value;
+	var confirmPass = document.getElementById("confirmPass").value;
+	var email = document.getElementById("email").value;
+
+	if (pass !== confirmPass)
+	{
+		warning1.style.visibility = 'visible';
+	}
+	if (!email.includes('@'))
+	{
+		warning2.style.visibility = 'visible';
+	}
+}
