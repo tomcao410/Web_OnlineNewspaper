@@ -34,7 +34,7 @@
                         <% if (isLogin == true) { %>
                     <button><a href="/TrangCaNhan" style="font-size:15px">Trang Cá Nhân</a></button>
                         <% if (userInfo[0].userClass > 1) { %>
-                    <button><a href="/admin/dashboard" style="font-size:15px">Quản Lý</a></button>
+                    <button><a href="/admin/profile" style="font-size:15px">Quản Lý</a></button>
                         <% }%>
                         <% }%>
                 </div>
@@ -127,7 +127,7 @@
 
         <label for="Email"><b>Email</b></label>
         <input type="text" placeholder="_@asd.xyz" name="email" id="email" required>
-        
+
         <label for="Birthday"><b>Birthday</b></label>
         <input type="text" id="dobtimepicker" placeholder="Enter Birthday" name="dobtimepicker" required>
 

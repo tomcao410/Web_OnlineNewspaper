@@ -16,5 +16,9 @@ module.exports = {
 
     update : (idField, entity) => {
       return db.update('users', idField, entity);
+    },
+
+    loadPosts : userID => {
+      return db.load(`SELECT * FROM posts WHERE authorID = ${userID}`);
     }
 }

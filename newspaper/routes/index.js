@@ -7,26 +7,9 @@ var users = require('../model/dataUser');
 var findResult = require('../model/find');
 var commentModel = require('../model/uploadCmt.js');
 var postModel = require('../model/uploadPost');
+var bcrypt = require('bcrypt');
+var userModel = require('../model/user');
 var _ = require('lodash');
-/* GET home page. */
-
-// router.get('*', function(req, res, next) {
-//   var p = topics.all();
-//   p.then(rows => {
-//     rows = JSON.parse(JSON.stringify(rows));
-//     rowsGroupby = _.groupBy(rows, function(row) {
-//       return row.categoryName;
-//     })
-//     rows = _.map(rowsGroupby, function(rowGroupby, key) {
-//       return { categoryName: key, subCategories: rowGroupby };
-//     });
-//     console.log('abc');
-//     res.render('template/header2', { topics: rows, title: 'Express' });  
-//   }
-//   ).catch(err => {
-//     console.log(err);
-//   });
-// });
 
 // ----------------
 function transformTopics(rows) {
@@ -36,25 +19,6 @@ function transformTopics(rows) {
     return rows;
 }
 
-
- router.post('/news/:category/:subCategory/:title', (req, res) => {
-  // res.redirect('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
-  //console.log(req.body);
-  // res.end('...');
-  var entity = {
-    commentId: req.body.commentID,
-    postId: req.body.postID,
-    userId: req.body.userID,
-    commentContent: req.body.commentContent
-  };
-  var redirectUrl = "/news/" + req.params.category + "/" + req.params.subCategory + "/" + req.params.title;
-  commentModel.addComment(entity).then(id => {
-    console.log(id);
-    res.redirect(redirectUrl);
-  }).catch(err => {
-    console.log(err);
-  });
-}); 
 
 // ----------------- HOME page-----------------------
 router.get('/', function(req, res, next) {
@@ -99,12 +63,10 @@ router.get('/', function(req, res, next) {
   }
   ).catch(err => {
     console.log(err);
-  });   
+  });
 });
 
 // --------------------Login--------------------
-var bcrypt = require('bcrypt');
-var userModel = require('../model/user');
 router.post('/login', (req, res) => {
   var entity = {
     username: req.body.username,
@@ -193,7 +155,7 @@ router.get('/page/:pagenum', function(req, res, next) {
   var getTopics = topics.all();
   Promise.all([getTopics]).then(result => {
     var topics = transformTopics(result[0]);
-    res.render('panination',{ topics: topics , title:req.params.pagenum});  
+    res.render('panination',{ topics: topics , title:req.params.pagenum});
   }
   ).catch(err => {
     console.log(err);
@@ -220,7 +182,7 @@ router.get('/all', function(req, res, next) {
     var postsByPages = JSON.parse(JSON.stringify(result[3]));
     var isLogin = false;
     var query = "";
-    
+
     var total = allPosts.length;
     var nPages = Math.floor(total/ limit);
     if (total % limit > 0) nPages++;
@@ -292,20 +254,36 @@ router.post('/updateUserInfo', (req, res) => {
 
 //----------------------DASHBOARD---------------------------
 router.get('/admin/dashboard', function(req, res, next) {
-  res.render('dashboard', { title: 'Express' });
+  let userInfo = req.session.userInfo;
+  res.render('dashboard', { userInfo: userInfo, title: 'Express' });
 });
 
 router.get('/admin/profile', function(req, res, next) {
-  res.render('profile', { title: 'Express' });
+  let userInfo = req.session.userInfo;
+  res.render('profile', { userInfo: userInfo, title: 'Express' });
 
 });
 router.get('/admin/users-table', function(req, res, next) {
-  res.render('users-table', { title: 'Express' });
+  let userInfo = req.session.userInfo;
+  res.render('users-table', { userInfo: userInfo, title: 'Express' });
 });
 
 router.get('/admin/posts-table', function(req, res, next) {
-  res.render('posts-table', { title: 'Express' });
+  let userInfo = req.session.userInfo;
+  var p = userModel.loadPosts(userInfo[0].id);
+  p.then(rows => {
+      if (rows.length > 0)
+      {
 
+        res.render('posts-table', { userInfo: userInfo, title: 'Express' });
+      }
+      else {
+        console.log('There is no post from this writer');
+        res.redirect('/admin/profile');
+      }
+  }).catch(err => {
+    console.log(err);
+  });
 });
 router.get('/admin/write-post', function(req, res, next) {
   var getTopics = topics.all();
@@ -316,11 +294,11 @@ router.get('/admin/write-post', function(req, res, next) {
     var newestPostId = allPosts[allPosts.length - 1].id;
     var isLogin = true; var userInfo = null;
     console.log(req.session.userInfo);
+    var userInfo = req.session.userInfo;
     if (req.session.username)
     {
       console.log('There is a user');
       isLogin = true;
-      userInfo = req.session.userInfo[0];
     }
     else
     {
@@ -333,6 +311,31 @@ router.get('/admin/write-post', function(req, res, next) {
     console.log(err);
   });
 });
+
+router.post("/add-post", (req, res) => {
+  console.log(req.body);
+  var entity = {
+    id: req.body.postID,
+    authorId: req.body.authorID,
+    title: req.body.postTitle,
+    sub_category: req.body.selectBox2,
+    category: req.body.selectBox1,
+    publishDate: req.body.toBePublishedDate,
+    postExcerpt: req.body.postExcerpt,
+    content: req.body.editor1,
+    views: req.body.views,
+    imgLink: req.body.imgLink,
+    approval: req.body.approve,
+    premium: req.body.premium
+  };
+  postModel.addPost(entity).then(id => {
+    console.log(id);
+    res.redirect("/admin/write-post");
+  }).catch(err => {
+    console.log(err);
+  })
+});
+
 //------------------------------------- Browse by category---------------------------------//
 router.get('/news/:category', function(req, res, next) {
   var getTopics = topics.all();
@@ -373,7 +376,7 @@ router.get('/news/:category', function(req, res, next) {
   }
   ).catch(err => {
     console.log(err);
-  });   
+  });
 });
 
 
@@ -402,15 +405,15 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('image-post',{ curUserId: curUserId, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
+    res.render('image-post',{ curUserId: curUserId, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory});
   }
   ).catch(err => {
     console.log(err);
-  });   
+  });
 });
 
 router.post('/news/:category/:subCategory/:title', (req, res) => {
-  // res.redirect('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
+  // res.redirect('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory});
   console.log(req.body);
   // res.end('...');
   var entity = {
@@ -468,7 +471,7 @@ router.get('/news/:category/:subCategory', function(req, res, next) {
   }
   ).catch(err => {
     console.log(err);
-  });  
+  });
 
 });
 router.get('/searchResult', function(req, res, next) {
@@ -505,10 +508,10 @@ router.get('/searchResult', function(req, res, next) {
       isLogin = false;
     }
     res.render('searchResult',{pages: pages, timkiem: searchtxt,isLogin: isLogin, userInfo: req.session.userInfo, topics: topics,allPosts: allPosts, searchResult: search});
-} 
+}
 ).catch(err => {
   console.log(err);
-});  
+});
 
 });
 
@@ -554,28 +557,5 @@ router.post('/searchResult', (req, res) => {
   });
 });
 
-router.post("/add-post", (req, res) => {
-  console.log(req.body);
-  var entity = {
-    id: req.body.postID,
-    authorId: req.body.authorID,
-    title: req.body.postTitle,
-    sub_category: req.body.selectBox2,
-    category: req.body.selectBox1,
-    publishDate: req.body.toBePublishedDate,
-    postExcerpt: req.body.postExcerpt,
-    content: req.body.editor1,
-    views: req.body.views,
-    imgLink: req.body.imgLink,
-    approval: req.body.approve,
-    premium: req.body.premium
-  };
-  postModel.addPost(entity).then(id => {
-    console.log(id);
-    res.redirect("/admin/write-post");
-  }).catch(err => {
-    console.log(err);
-  })
-});
 
 module.exports = router;
