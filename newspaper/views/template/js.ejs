@@ -15,7 +15,7 @@
 		<script src="/javascripts/owl.carousel.min.js"></script>
 		<script src="/javascripts/mail-script.js"></script>
 		<script src="/javascripts/main.js"></script>
-
+		<script src="/javascripts/topicSelector.js"></script>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
@@ -58,6 +58,26 @@
 <script>
         jQuery.datetimepicker.setLocale('en');
         jQuery('#dobtimepicker2').datetimepicker({
+			i18n:{
+			de:{
+			months:[
+				'January','Febuary','March','April',
+				'May','June','July','August',
+				'September','October','November','December',
+			],
+			dayOfWeek:[
+				"Sun", "Mon", "Tues", "Wed",
+				"Thurs", "Fri", "Sat",
+			]
+			}
+			},
+			timepicker:false,
+			format:'Y-m-d'
+			});
+  </script>
+  <script>
+        jQuery.datetimepicker.setLocale('en');
+        jQuery('#publishDatePicker').datetimepicker({
 			i18n:{
 			de:{
 			months:[

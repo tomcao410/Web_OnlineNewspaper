@@ -5,6 +5,7 @@ var ftPosts = require('../model/ftPosts');
 var allPost = require('../model/allPosts');
 var users = require('../model/dataUser');
 var commentModel = require('../model/uploadCmt.js');
+var postModel = require('../model/uploadPost');
 var _ = require('lodash');
 
 var bodyParser = require('body-parser');
@@ -19,7 +20,7 @@ var app = express();
 // ----------------
 function transformTopics(rows) {
   rows = JSON.parse(JSON.stringify(rows));
-    rowsGroupby = _.groupBy(rows, row => row.categoryName)
+    rowsGroupby = _.groupBy(rows, row => row.categoryName);
     rows = _.map(rowsGroupby, (rowGroupby, key) => ( { categoryName: key, subCategories: rowGroupby }));
     return rows;
 }
@@ -37,7 +38,7 @@ router.get('/', function(req, res, next) {
   var offset = (page - 1) * limit;
   var getAllPostsByPages = allPost.pageBy(limit, offset);
   Promise.all([getTopics, getAllPosts, getFtPosts, getTopMost, getTopTen, getAllPostsByPages]).then(result => {
-    var topics = transformTopics(result[0]);
+    var topics = transformTopics(result[0]); console.log(topics);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var ftPosts = JSON.parse(JSON.stringify(result[2]));
     var ftTopMost = JSON.parse(JSON.stringify(result[3]));
@@ -255,9 +256,31 @@ router.get('/admin/posts-table', function(req, res, next) {
 
 });
 router.get('/admin/write-post', function(req, res, next) {
-  res.render('write-post', { title: 'Express' });
+  var getTopics = topics.all();
+  var getAllPosts = allPost.allDefault();
+  Promise.all([getTopics, getAllPosts]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    var newestPostId = allPosts[allPosts.length - 1].id;
+    var isLogin = true; var userInfo = null;
+    console.log(req.session.userInfo);
+    if (req.session.username)
+    {
+      console.log('There is a user');
+      isLogin = true;
+      userInfo = req.session.userInfo[0];
+    }
+    else
+    {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('write-post', { newestPostId: newestPostId,userInfo: userInfo,isLogin: isLogin, topics: topics, allPosts: allPosts,title: 'Đăng bài' });
+  }
+  ).catch(err => {
+    console.log(err);
+  });
 });
-
 //------------------------------------- Browse by category---------------------------------//
 router.get('/news/:category', function(req, res, next) {
   var getTopics = topics.all();
@@ -394,6 +417,28 @@ router.get('/news/:category/:subCategory', function(req, res, next) {
   });
 });
 
-
+router.post("/add-post", (req, res) => {
+  console.log(req.body);
+  var entity = {
+    id: req.body.postID,
+    authorId: req.body.authorID,
+    title: req.body.postTitle,
+    sub_category: req.body.selectBox2,
+    category: req.body.selectBox1,
+    publishDate: req.body.toBePublishedDate,
+    postExcerpt: req.body.postExcerpt,
+    content: req.body.editor1,
+    views: req.body.views,
+    imgLink: req.body.imgLink,
+    approval: req.body.approve,
+    premium: req.body.premium
+  };
+  postModel.addPost(entity).then(id => {
+    console.log(id);
+    res.redirect("/admin/write-post");
+  }).catch(err => {
+    console.log(err);
+  })
+});
 
 module.exports = router;
