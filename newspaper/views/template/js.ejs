@@ -1,19 +1,77 @@
 <script src="/javascripts/postComment.js"></script>
 
 <script src="/javascripts/vendor/jquery-2.2.4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="/javascripts/vendor/bootstrap.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-<script src="/javascripts/easing.min.js"></script>
-<script src="/javascripts/hoverIntent.js"></script>
-<script src="/javascripts/superfish.min.js"></script>
-<script src="/javascripts/jquery.ajaxchimp.min.js"></script>
-<script src="/javascripts/jquery.magnific-popup.min.js"></script>
-<script src="/javascripts/mn-accordion.js"></script>
-<script src="/javascripts/jquery-ui.js"></script>
-<script src="/javascripts/jquery.nice-select.min.js"></script>
-<script src="/javascripts/owl.carousel.min.js"></script>
-<script src="/javascripts/mail-script.js"></script>
-<script src="/javascripts/main.js"></script>
-<script src="/javascripts/loginModal.js"></script>
-<script src="../../javascripts/historyGoBack.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="/javascripts/vendor/bootstrap.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+		<script src="/javascripts/easing.min.js"></script>
+		<script src="/javascripts/hoverIntent.js"></script>
+		<script src="/javascripts/superfish.min.js"></script>
+		<script src="/javascripts/jquery.ajaxchimp.min.js"></script>
+		<script src="/javascripts/jquery.magnific-popup.min.js"></script>
+		<script src="/javascripts/mn-accordion.js"></script>
+		<script src="/javascripts/jquery-ui.js"></script>
+		<script src="/javascripts/jquery.nice-select.min.js"></script>
+		<script src="/javascripts/owl.carousel.min.js"></script>
+		<script src="/javascripts/mail-script.js"></script>
+		<script src="/javascripts/main.js"></script>
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+		<script>
+			// Get the modal
+			var modal = document.getElementById('id01');
+			var modal_signup = document.getElementById('id02');
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+			  if (event.target == modal ) {
+				modal.style.display = "none";
+			  }
+			  if(event.target == modal_signup){
+				modal_signup.style.display = "none";
+			  }
+			}
+
+		</script>
+
+<script>
+        jQuery.datetimepicker.setLocale('en');
+        jQuery('#dobtimepicker').datetimepicker({
+			i18n:{
+			de:{
+			months:[
+				'January','Febuary','March','April',
+				'May','June','July','August',
+				'September','October','November','December',
+			],
+			dayOfWeek:[
+				"Sun", "Mon", "Tues", "Wed",
+				"Thurs", "Fri", "Sat",
+			]
+			}
+			},
+			timepicker:false,
+			format:'Y-m-d'
+			});
+  </script>
+<script>
+        jQuery.datetimepicker.setLocale('en');
+        jQuery('#dobtimepicker2').datetimepicker({
+			i18n:{
+			de:{
+			months:[
+				'January','Febuary','March','April',
+				'May','June','July','August',
+				'September','October','November','December',
+			],
+			dayOfWeek:[
+				"Sun", "Mon", "Tues", "Wed",
+				"Thurs", "Fri", "Sat",
+			]
+			}
+			},
+			timepicker:false,
+			format:'Y-m-d'
+			});
+  </script>

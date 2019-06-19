@@ -1,12 +1,11 @@
 var mysql      = require('mysql');
+
 var createConnection = ()=>{
   return mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : '30111998',
-    database : 'Newspaper',
-    timezone: 'Z',
-    dateStrings: true
+    password : '123456',
+    database : 'Newspaper'
   });
 }
 
@@ -15,7 +14,7 @@ module.exports = {
     return new Promise ((resolve, reject) =>{
       var connection = createConnection();
       connection.connect();
-    
+
       connection.query(sql, function (error, results, fields) {
         if (error) reject(error);
         else {
@@ -25,6 +24,7 @@ module.exports = {
     });
    });
   },
+
   add: (tableName, entity) => {
     return new Promise((resolve, reject) => {
       var sql = `insert into ${tableName} set ?`;
@@ -75,4 +75,38 @@ module.exports = {
       });
     });
   },
+
+  // User logins
+  findUser: username =>{
+    return new Promise ((resolve, reject) =>{
+      var sql = `select username, passwordString, userClass, fullname, DATE_FORMAT(dabirthday, "%Y-%m-%d") as dob, email from users where username='${username}'`
+      console.log(sql)
+      var connection = createConnection();
+      connection.connect();
+      connection.query(sql, function (error, results, fields) {
+        if (error) reject(error);
+        else {
+          resolve(results);
+        }
+        connection.end();
+    });
+   });
+  },
+  
+  // User registers
+  register: (username, password, fullname, dob, email) => {
+    return new Promise((resolve, reject) => {
+      var sql = `INSERT INTO users (username, passwordString, userClass, fullname, dabirthday, email) VALUES ('${username}', '${password}', ${1}, '${fullname}', '${dob}', '${email}')`;
+      console.log(sql);
+      var connection = createConnection();
+      connection.connect();
+      connection.query(sql, function(error, results, fields) {
+        if (error) reject(error);
+        else {
+          resolve(results);
+        }
+        connection.end();
+      })
+    })
+  }
 }
