@@ -7,15 +7,6 @@ var users = require('../model/dataUser');
 var commentModel = require('../model/uploadCmt.js');
 var _ = require('lodash');
 
-var bodyParser = require('body-parser');
-var fs = require('fs')
-var session = require('express-session');
-var LocalStrategy = require('passport-local').Strategy
-var passport = require('passport');
-
-var app = express();
-
-
 // ----------------
 function transformTopics(rows) {
   rows = JSON.parse(JSON.stringify(rows));
@@ -207,7 +198,7 @@ router.get('/all', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('all', { postsByPages: postsByPages, pages: pages ,query: query, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, isLogin: isLogin,title: 'Express' });
+    res.render('all', { postsByPages: postsByPages, pages: pages ,query: query, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, isLogin: isLogin, userInfo: req.session.userInfo, title: 'Express' });
   }
   ).catch(err => {
     console.log(err);
@@ -224,9 +215,6 @@ router.post('/all', (req, res) => {
 });
 
 
-router.get('/admin/dashboard', function(req, res, next) {
-  res.render('dashboard', { title: 'Express' });
-});
 
 // --------------Cap Nhat Thong Tin Ca Nhan--------------
 router.get('/TrangCaNhan', function(req, res, next) {
@@ -273,10 +261,11 @@ router.post('/updateUserInfo', (req, res) => {
 });
 
 
-//------------------------------------------------------------
-router.get('/:category/:subCategory/:title', function(req, res, next) {
-  res.render('image-post',{title:req.params.title});
+//----------------------DASHBOARD---------------------------
+router.get('/admin/dashboard', function(req, res, next) {
+  res.render('dashboard', { title: 'Express' });
 });
+
 router.get('/admin/profile', function(req, res, next) {
   res.render('profile', { title: 'Express' });
 
@@ -329,12 +318,13 @@ router.get('/news/:category', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('category', { postsByPages: postsByPages,pages: pages,isLogin: isLogin, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.category });
+    res.render('category', { postsByPages: postsByPages,pages: pages,isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.category });
   }
   ).catch(err => {
     console.log(err);
   });
 });
+
 
 //-----------------------------Post details---------------------------------//
 router.get('/news/:category/:subCategory/:title', function(req, res, next) {
@@ -360,7 +350,7 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('image-post',{ curUserId: curUserId, isLogin: isLogin, topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
+    res.render('image-post',{ curUserId: curUserId, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
   }
   ).catch(err => {
     console.log(err);
@@ -422,7 +412,7 @@ router.get('/news/:category/:subCategory', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('subCategory',{pages: pages, postsByPages: postsByPages,isLogin: isLogin,topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
+    res.render('subCategory',{pages: pages, postsByPages: postsByPages,isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
   }
   ).catch(err => {
     console.log(err);
