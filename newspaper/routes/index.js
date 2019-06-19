@@ -4,6 +4,7 @@ var topics = require('../model/topics');
 var ftPosts = require('../model/ftPosts');
 var allPost = require('../model/allPosts');
 var users = require('../model/dataUser');
+var commentModel = require('../model/uploadCmt.js');
 var _ = require('lodash');
 
 var bodyParser = require('body-parser');
@@ -22,23 +23,36 @@ function transformTopics(rows) {
     rows = _.map(rowsGroupby, (rowGroupby, key) => ( { categoryName: key, subCategories: rowGroupby }));
     return rows;
 }
-router.post('/news/:category/:subCategory/add/add-comment', (req, res) => {
-    console.log(req.body);
-});
+
+//---------------------------------Homepage--------------------------------------//
 router.get('/', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
   var getFtPosts = ftPosts.all();
   var getTopMost = ftPosts.topMost();
   var getTopTen = ftPosts.topTenTopics();
-  Promise.all([getTopics, getAllPosts, getFtPosts, getTopMost, getTopTen]).then(result => {
+  var page = req.query.page || 1;
+  if (page < 1) page = 1;
+  var limit = 10;
+  var offset = (page - 1) * limit;
+  var getAllPostsByPages = allPost.pageBy(limit, offset);
+  Promise.all([getTopics, getAllPosts, getFtPosts, getTopMost, getTopTen, getAllPostsByPages]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var ftPosts = JSON.parse(JSON.stringify(result[2]));
     var ftTopMost = JSON.parse(JSON.stringify(result[3]));
     var ftTopTen = JSON.parse(JSON.stringify(result[4]));
+    var postsByPages = JSON.parse(JSON.stringify(result[5]));
     var isLogin = false;
-    console.log(req.session.username);
+    var total = allPosts.length;
+    var nPages = Math.floor(total/ limit);
+    if (total % limit > 0) nPages++;
+    var pages = [];
+    for (i=1; i<= nPages;i++){
+      var obj = {value: i};
+      pages.push(obj);
+    }
+    console.log(req.session.userInfo);
     if (req.session.username)
     {
       console.log('There is a user');
@@ -49,7 +63,7 @@ router.get('/', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('index', { isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, ftPosts: ftPosts, ftTopMost: ftTopMost, ftTopTen: ftTopTen,title: 'Express' });
+    res.render('index', { pages: pages,postsByPages: postsByPages, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, ftPosts: ftPosts, ftTopMost: ftTopMost, ftTopTen: ftTopTen,title: 'Express' });
   }
   ).catch(err => {
     console.log(err);
@@ -153,21 +167,62 @@ router.get('/page/:pagenum', function(req, res, next) {
   });
 });
 
-
+//--------------------------------- All posts ---------------------------------------//
 router.get('/all', function(req, res, next) {
   var getAllPosts = allPost.all();
   var getTopics = topics.all();
   var getTopTen = ftPosts.topTenTopics();
-  Promise.all([getTopics, getAllPosts, getTopTen]).then(result => {
+
+  var page = req.query.page || 1;
+  if (page < 1) page = 1;
+  var limit = 10;
+  var offset = (page - 1) * limit;
+
+  var getAllPostsByPages = allPost.pageBy(limit, offset);
+
+  Promise.all([getTopics, getAllPosts, getTopTen, getAllPostsByPages]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var ftTopTen = JSON.parse(JSON.stringify(result[2]));
-    res.render('all', {topics: topics, allPosts: allPosts, ftTopTen: ftTopTen,title: 'Express' });
+    var postsByPages = JSON.parse(JSON.stringify(result[3]));
+    var isLogin = false;
+    var query = "";
+    
+    var total = allPosts.length;
+    var nPages = Math.floor(total/ limit);
+    if (total % limit > 0) nPages++;
+    var pages = [];
+    for (i=1; i<= nPages;i++){
+      var obj = {value: i};
+      pages.push(obj);
+    }
+
+    if (req.session.username)
+    {
+      console.log('There is a user');
+      isLogin = true;
+    }
+    else
+    {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('all', { postsByPages: postsByPages, pages: pages ,query: query, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, isLogin: isLogin,title: 'Express' });
   }
   ).catch(err => {
     console.log(err);
   });
 });
+
+router.post('/all', (req, res) => {
+  req.params.query = req.body.Searchbox;
+  console.log(req.params.query);
+  console.log("index.js");
+
+  res.redirect('/all');
+  
+});
+
 
 router.get('/admin/dashboard', function(req, res, next) {
   res.render('dashboard', { title: 'Express' });
@@ -183,7 +238,7 @@ router.get('/TrangCaNhan', function(req, res, next) {
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var ftTopTen = JSON.parse(JSON.stringify(result[2]));
     var isLogin = true;
-    res.render('infor', { isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen,title: 'Express' });
+    res.render('infor', {isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen,title: 'Express' });
   }
   ).catch(err => {
     console.log(err);
@@ -238,45 +293,136 @@ router.get('/admin/write-post', function(req, res, next) {
   res.render('write-post', { title: 'Express' });
 });
 
+//------------------------------------- Browse by category---------------------------------//
 router.get('/news/:category', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
+  var getPostsByCat = allPost.byCat(req.params.category);
   var getTopTen = ftPosts.topTenTopics();
-  Promise.all([getTopics, getAllPosts, getTopTen]).then(result => {
+  var page = req.query.page || 1;
+  if (page < 1) page = 1;
+  var limit = 10;
+  var offset = (page - 1) * limit;
+  var getAllPostsByPages = allPost.pageByCat(req.params.category,limit, offset);
+  Promise.all([getTopics, getAllPosts, getTopTen, getAllPostsByPages, getPostsByCat]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var ftTopTen = JSON.parse(JSON.stringify(result[2]));
-    res.render('category', { topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.category });
+    var postsByPages = JSON.parse(JSON.stringify(result[3]));
+    var postsByCat = JSON.parse(JSON.stringify(result[4]));
+    var isLogin = false;
+    var total = postsByCat.length;
+    var nPages = Math.floor(total/ limit);
+    if (total % limit > 0) nPages++;
+    var pages = [];
+    for (i=1; i<= nPages;i++){
+      var obj = {value: i};
+      pages.push(obj);
+    }
+    if (req.session.username)
+    {
+      console.log('There is a user');
+      isLogin = true;
+    }
+    else
+    {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('category', { postsByPages: postsByPages,pages: pages,isLogin: isLogin, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.category });
   }
   ).catch(err => {
     console.log(err);
   });
 });
 
-
+//-----------------------------Post details---------------------------------//
 router.get('/news/:category/:subCategory/:title', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
   var getComments = users.comments();
-  Promise.all([getTopics, getAllPosts, getComments]).then(result => {
+  var getNewestCmt = users.newestCmtId();
+  Promise.all([getTopics, getAllPosts, getComments, getNewestCmt]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var comments = JSON.parse(JSON.stringify(result[2]));
-    res.render('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory});
+    var newestCmt = JSON.parse(JSON.stringify(result[3]));
+    var curUserId;
+    var isLogin = false;
+    if (req.session.username)
+    {
+      console.log('There is a user');
+      isLogin = true;
+      curUserId = req.session.userInfo[0].id;
+    }
+    else
+    {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('image-post',{ curUserId: curUserId, isLogin: isLogin, topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
   }
   ).catch(err => {
     console.log(err);
   });
 });
+
+router.post('/news/:category/:subCategory/:title', (req, res) => {
+  // res.redirect('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
+  console.log(req.body);
+  // res.end('...');
+  var entity = {
+    commentId: req.body.commentID,
+    postId: req.body.postID,
+    userId: req.body.userID,
+    commentContent: req.body.commentContent
+  };
+  var redirectUrl = "/news/" + req.params.category + "/" + req.params.subCategory + "/" + req.params.title;
+  commentModel.addComment(entity).then(id => {
+    console.log(id);
+    res.redirect(redirectUrl);
+  }).catch(err => {
+    console.log(err);
+  });
+});
+
+//------------------------------------- Browse by sub-category---------------------------------//
 router.get('/news/:category/:subCategory', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
+  var postsBySubCat = allPost.bySubCat(req.params.category, req.params.subCategory);
   var getTopTen = ftPosts.topTenTopics();
-  Promise.all([getTopics, getAllPosts, getTopTen]).then(result => {
+  var page = req.query.page || 1;
+  if (page < 1) page = 1;
+  var limit = 10;
+  var offset = (page - 1) * limit;
+  var getAllPostsByPages = allPost.pageBySubCat(req.params.category,req.params.subCategory,limit, offset);
+  Promise.all([getTopics, getAllPosts, getTopTen, getAllPostsByPages, postsBySubCat]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var ftTopTen = JSON.parse(JSON.stringify(result[2]));
-    res.render('subCategory',{topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
+    var postsByPages = JSON.parse(JSON.stringify(result[3]));
+    var postsBySubCat = JSON.parse(JSON.stringify(result[4]));
+    var isLogin = false;
+    var total = postsBySubCat.length;
+    var nPages = Math.floor(total/ limit);
+    if (total % limit > 0) nPages++;
+    var pages = [];
+    for (i=1; i<= nPages;i++){
+      var obj = {value: i};
+      pages.push(obj);
+    }
+    if (req.session.username)
+    {
+      console.log('There is a user');
+      isLogin = true;
+    }
+    else
+    {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('subCategory',{pages: pages, postsByPages: postsByPages,isLogin: isLogin,topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
   }
   ).catch(err => {
     console.log(err);

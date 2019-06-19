@@ -65,9 +65,7 @@
 							<!-- Start latest-post Area -->
 							<div class="latest-post-wrap">
 								<h4 class="cat-title">Tin mới nhất</h4>
-								<% allPosts.forEach(function(post){
-									console.log(post);
-                                    if (post.categoryName == title){%>
+								<% postsByPages.forEach(function(post){ %>
 									<div class="single-latest-post row align-items-center">
 										<div class="col-lg-5 post-left">
 											<div class="feature-img relative">
@@ -75,11 +73,11 @@
 												<img class="img-fluid" src="<%=post.imgLink %>" alt="">
 											</div>
 											<ul class="tags">
-                                                <li><a href="/<%=post.categoryName %>/<%=post.subCategoryName %>"><%=post.categoryName %> - <%=post.subCategoryName %></a></li>
+                                                <li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>"><%=post.categoryName %> - <%=post.subCategoryName %></a></li>
                                             </ul>
 										</div>
 										<div class="col-lg-7 post-right">
-											<a href="/news/<%=post.categoryName %>/<%=post.title %>">
+											<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName%>/<%=post.title %>">
 												<h4><%=post.title %></h4>
 											</a>
 											<ul class="meta">
@@ -101,13 +99,20 @@
 											</p>
 										</div>
                                     </div>
-                                    <% } %>
 								<% })%>
 
 									
-										<div class="load-more">
-											<a href="#" class="primary-btn">Load More Posts</a>
-										</div>
+										<!--Pagination-->
+										<nav aria-label="Page navigation example">
+												<ul class="pagination justify-content-center">
+												  <li class="page-item disabled">
+													<a class="page-link" tabindex="-1">Trang:</a>
+												  </li>
+												  <% pages.forEach(function(page){ %>
+												  <li class="page-item"><a class="page-link" href="?page=<%=page.value%>"><%=page.value%></a></li>
+												  <% }); %>
+												</ul>
+											  </nav>
 							</div>
 							<!-- End latest-post Area -->
 						</div>
@@ -128,7 +133,7 @@
 									var count = 0;
 									%>
 											<% allPosts.forEach(function(post){
-												if(post.categoryName == title && count <= 10){
+												if(count <= 10){
 													count += 1; %>
 											<div class="editors-pick-post">
 												<div class="feature-img-wrap relative">
@@ -137,11 +142,11 @@
 														<img class="img-fluid" src="<%=post.imgLink %>" alt="">
 													</div>
 													<ul class="tags">
-														<li><a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=post.categoryName%> - <%=post.subCategoryName%></a></li>
+														<li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>"><%=post.categoryName%> - <%=post.subCategoryName%></a></li>
 													</ul>
 												</div>
 												<div class="details">
-													<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
+													<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
 														<h4 class="mt-20"><%=post.title%></h4>
 													</a>
 													<ul class="meta">
@@ -189,7 +194,7 @@
 											<img src="<%=post.imgLink%>" alt="" style="max-width: 100px; max-height: 70px">
 										</div>
 										<div class="details">
-												<a href="/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
+												<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
 													<h6><%=post.title%></h6>
 												</a>
 											<ul class="meta">
