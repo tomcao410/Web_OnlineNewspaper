@@ -6,4 +6,7 @@ module.exports = {
     newestCmtId : () => {
         return db.load('select C.* from comments as C where C.commentId = (select max(commentId) from comments)');
     },
+    inforuser : () =>{
+        return db.load('select * from users where id = 1');
+    }
 }

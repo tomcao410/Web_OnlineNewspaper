@@ -4,18 +4,29 @@ var topics = require('../model/topics');
 var ftPosts = require('../model/ftPosts');
 var allPost = require('../model/allPosts');
 var users = require('../model/dataUser');
+var findResult = require('../model/find');
 var commentModel = require('../model/uploadCmt.js');
 var postModel = require('../model/uploadPost');
 var _ = require('lodash');
+/* GET home page. */
 
-var bodyParser = require('body-parser');
-var fs = require('fs')
-var session = require('express-session');
-var LocalStrategy = require('passport-local').Strategy
-var passport = require('passport');
-
-var app = express();
-
+// router.get('*', function(req, res, next) {
+//   var p = topics.all();
+//   p.then(rows => {
+//     rows = JSON.parse(JSON.stringify(rows));
+//     rowsGroupby = _.groupBy(rows, function(row) {
+//       return row.categoryName;
+//     })
+//     rows = _.map(rowsGroupby, function(rowGroupby, key) {
+//       return { categoryName: key, subCategories: rowGroupby };
+//     });
+//     console.log('abc');
+//     res.render('template/header2', { topics: rows, title: 'Express' });  
+//   }
+//   ).catch(err => {
+//     console.log(err);
+//   });
+// });
 
 // ----------------
 function transformTopics(rows) {
@@ -25,7 +36,27 @@ function transformTopics(rows) {
     return rows;
 }
 
-//---------------------------------Homepage--------------------------------------//
+
+ router.post('/news/:category/:subCategory/:title', (req, res) => {
+  // res.redirect('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
+  //console.log(req.body);
+  // res.end('...');
+  var entity = {
+    commentId: req.body.commentID,
+    postId: req.body.postID,
+    userId: req.body.userID,
+    commentContent: req.body.commentContent
+  };
+  var redirectUrl = "/news/" + req.params.category + "/" + req.params.subCategory + "/" + req.params.title;
+  commentModel.addComment(entity).then(id => {
+    console.log(id);
+    res.redirect(redirectUrl);
+  }).catch(err => {
+    console.log(err);
+  });
+}); 
+
+// ----------------- HOME page-----------------------
 router.get('/', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
@@ -64,11 +95,11 @@ router.get('/', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('index', { pages: pages,postsByPages: postsByPages, isLogin: isLogin, topics: topics, allPosts: allPosts, ftPosts: ftPosts, ftTopMost: ftTopMost, ftTopTen: ftTopTen,title: 'Express' });
+    res.render('index', { pages: pages,postsByPages: postsByPages, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, ftPosts: ftPosts, ftTopMost: ftTopMost, ftTopTen: ftTopTen,title: 'Express' });
   }
   ).catch(err => {
     console.log(err);
-  });
+  });   
 });
 
 // --------------------Login--------------------
@@ -161,7 +192,7 @@ router.get('/page/:pagenum', function(req, res, next) {
   var getTopics = topics.all();
   Promise.all([getTopics]).then(result => {
     var topics = transformTopics(result[0]);
-    res.render('panination',{ topics: topics , title:req.params.pagenum});
+    res.render('panination',{ topics: topics , title:req.params.pagenum});  
   }
   ).catch(err => {
     console.log(err);
@@ -208,25 +239,11 @@ router.get('/all', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('all', { postsByPages: postsByPages, pages: pages ,query: query, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, isLogin: isLogin,title: 'Express' });
+    res.render('all', { postsByPages: postsByPages, pages: pages ,query: query, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, isLogin: isLogin, userInfo: req.session.userInfo, title: 'Express' });
   }
   ).catch(err => {
     console.log(err);
   });
-});
-
-router.post('/all', (req, res) => {
-  req.params.query = req.body.Searchbox;
-  console.log(req.params.query);
-  console.log("index.js");
-
-  res.redirect('/all');
-  
-});
-
-
-router.get('/admin/dashboard', function(req, res, next) {
-  res.render('dashboard', { title: 'Express' });
 });
 router.get('/TrangCaNhan', function(req, res, next) {
   var getAllPosts = allPost.all();
@@ -243,14 +260,48 @@ router.get('/TrangCaNhan', function(req, res, next) {
     console.log(err);
   });
 });
+
+router.post('/updateUserInfo', (req, res) => {
+  var passHashed = bcrypt.hashSync(req.body.pass, 10);
+  var entity = {
+    id: req.session.userInfo[0].id,
+    fullname: req.body.fullname,
+    email: req.body.email,
+    dabirthday: req.body.dobtimepicker,
+    passwordString: passHashed
+  }
+  var p = userModel.update('id', entity);
+  p.then(row => {
+    var find = userModel.findUser(req.session.username);
+    find.then(rowFound => {
+      if (rowFound.length > 0)
+      {
+        req.session.userInfo = rowFound;
+        console.log(rowFound);
+        res.redirect('/');
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+  }).catch(err => {
+    console.log(err);
+  });
+});
+
+
+//----------------------DASHBOARD---------------------------
+router.get('/admin/dashboard', function(req, res, next) {
+  res.render('dashboard', { title: 'Express' });
+});
+
 router.get('/admin/profile', function(req, res, next) {
   res.render('profile', { title: 'Express' });
 
 });
 router.get('/admin/users-table', function(req, res, next) {
   res.render('users-table', { title: 'Express' });
-
 });
+
 router.get('/admin/posts-table', function(req, res, next) {
   res.render('posts-table', { title: 'Express' });
 
@@ -317,12 +368,13 @@ router.get('/news/:category', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('category', { postsByPages: postsByPages,pages: pages,isLogin: isLogin, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.category });
+    res.render('category', { postsByPages: postsByPages,pages: pages,isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.category });
   }
   ).catch(err => {
     console.log(err);
-  });
+  });   
 });
+
 
 //-----------------------------Post details---------------------------------//
 router.get('/news/:category/:subCategory/:title', function(req, res, next) {
@@ -330,6 +382,7 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
   var getAllPosts = allPost.all();
   var getComments = users.comments();
   var getNewestCmt = users.newestCmtId();
+
   Promise.all([getTopics, getAllPosts, getComments, getNewestCmt]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
@@ -348,11 +401,11 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('image-post',{ curUserId: curUserId, isLogin: isLogin, topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
+    res.render('image-post',{ curUserId: curUserId, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
   }
   ).catch(err => {
     console.log(err);
-  });
+  });   
 });
 
 router.post('/news/:category/:subCategory/:title', (req, res) => {
@@ -410,11 +463,73 @@ router.get('/news/:category/:subCategory', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('subCategory',{pages: pages, postsByPages: postsByPages,isLogin: isLogin,topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
+    res.render('subCategory',{pages: pages, postsByPages: postsByPages,isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
   }
   ).catch(err => {
     console.log(err);
-  });
+  });  
+
+});
+router.get('/searchResult', function(req, res, next) {
+  var getTopics = topics.all();
+  var getAllPosts = allPost.all();
+  var Findresult = findResult.search();
+  Promise.all([getTopics,getAllPosts, Findresult]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    var search = JSON.parse(JSON.stringify(result[2]));
+    var isLogin = false;
+    if (req.session.username)
+    {
+      console.log('There is a user');
+      isLogin = true;
+    }
+    else
+    {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('searchResult',{ isLogin: isLogin, userInfo: req.session.userInfo, topics: topics,allPosts: allPosts, searchResult: search});
+} 
+).catch(err => {
+  console.log(err);
+});  
+
+});
+
+
+router.post('/searchResult', (req, res) => {
+/*   app.locals.searchtxt = req.body.Search-box;
+
+ */  
+  var entity = {
+  txt: req.body.Searchbox,
+}
+  var a = entity.txt;
+  searchtxt = a;
+  var getTopics = topics.all();
+  var getAllPosts = allPost.all();
+  var Findresult = findResult.search();
+  Promise.all([getTopics,getAllPosts, Findresult]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    var search = JSON.parse(JSON.stringify(result[2]));
+    var isLogin = false;
+    if (req.session.username)
+    {
+      console.log('There is a user');
+      isLogin = true;
+    }
+    else
+    {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('searchResult',{ timkiem:searchtxt, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics,allPosts: allPosts, searchResult: search});
+} 
+).catch(err => {
+  console.log(err);
+});  
 });
 
 router.post("/add-post", (req, res) => {

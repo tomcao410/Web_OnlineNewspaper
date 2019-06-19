@@ -4,10 +4,10 @@ var createConnection = ()=>{
   return mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : '30111998',
+    password : 'root',
     database : 'Newspaper',
-    timezone: 'Z',
-    dateStrings: true
+    timezone : 'Z',
+    dateString  : true
   });
 }
 
@@ -47,7 +47,6 @@ module.exports = {
     return new Promise((resolve, reject) => {
       var id = entity.id;
       delete entity.id;
-
       var sql = `update ${tableName} set ? where ${idField} = ?`;
       var connection = createConnection();
       connection.connect();
@@ -81,7 +80,7 @@ module.exports = {
   // User logins
   findUser: username =>{
     return new Promise ((resolve, reject) =>{
-      var sql = `select id, username, passwordString, userClass, fullname, userClass, DATE_FORMAT(dabirthday, "%Y-%m-%d") as dob, email from users where username='${username}'`
+      var sql = `select *, DATE_FORMAT(dabirthday, "%Y-%m-%d") as dob from users where username='${username}'`
       console.log(sql)
       var connection = createConnection();
       connection.connect();
