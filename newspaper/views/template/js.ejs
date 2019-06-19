@@ -34,6 +34,15 @@
 			}
 
 		</script>
+<script>
+	function search(ele) {
+    if(event.key === 'Enter') {
+		
+		alert(ele.value);   
+		window.location.href="/SearchResult";     
+    }
+}
+</script>
 
 <script>
         jQuery.datetimepicker.setLocale('en');
@@ -75,3 +84,24 @@
 			format:'Y-m-d'
 			});
   </script>
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('Searchbox');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myUL");
+  li = ul.getElementsByTagName('li');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>

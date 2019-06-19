@@ -4,6 +4,7 @@ var topics = require('../model/topics');
 var ftPosts = require('../model/ftPosts');
 var allPost = require('../model/allPosts');
 var users = require('../model/dataUser');
+var findResult = require('../model/find');
 var commentModel = require('../model/uploadCmt.js');
 var _ = require('lodash');
 /* GET home page. */
@@ -210,7 +211,8 @@ router.get('/all', function(req, res, next) {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var ftTopTen = JSON.parse(JSON.stringify(result[2]));
-    res.render('all', {topics: topics, allPosts: allPosts, ftTopTen: ftTopTen,title: 'Express' });  
+    var isLogin = false;
+    res.render('all', {topics: topics, isLogin:isLogin, allPosts: allPosts, ftTopTen: ftTopTen,title: 'Express' });  
   }
   ).catch(err => {
     console.log(err);
@@ -260,7 +262,8 @@ router.get('/news/:category', function(req, res, next) {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var ftTopTen = JSON.parse(JSON.stringify(result[2]));
-    res.render('category', { topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.category });  
+    var isLogin = false;
+    res.render('category', { isLogin: isLogin, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.category });  
   }
   ).catch(err => {
     console.log(err);
@@ -272,12 +275,14 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
   var getAllPosts = allPost.all();
   var getComments = users.comments();
   var getNewestCmt = users.newestCmtId();
+
   Promise.all([getTopics, getAllPosts, getComments, getNewestCmt]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var comments = JSON.parse(JSON.stringify(result[2]));
     var newestCmt = JSON.parse(JSON.stringify(result[3]));
-    res.render('image-post',{ topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
+    var isLogin = false;
+    res.render('image-post',{ isLogin: isLogin, topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
   }
   ).catch(err => {
     console.log(err);
@@ -290,12 +295,43 @@ router.get('/news/:category/:subCategory', function(req, res, next) {
   Promise.all([getTopics, getAllPosts, getTopTen]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
-    var ftTopTen = JSON.parse(JSON.stringify(result[2]));
-    res.render('subCategory',{topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
+    var ftTopTen = JSON.parse(JSON.stringify(result[2])); 
+    var isLogin = false;
+    res.render('subCategory',{ isLogin: isLogin, topics: topics, allPosts: allPosts, ftTopTen: ftTopTen, title:req.params.subCategory, category:req.params.category});
   }
   ).catch(err => {
     console.log(err);
   });  
+
+});
+router.get('/searchResult', function(req, res, next) {
+  var getTopics = topics.all();
+  var getAllPosts = allPost.all();
+  var Findresult = findResult.search();
+  Promise.all([getTopics,getAllPosts, Findresult]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    var search = JSON.parse(JSON.stringify(result[2]));
+    var isLogin = false;
+    res.render('searchResult',{ isLogin: isLogin, topics: topics,allPosts: allPosts, searchResult: search});
+} 
+).catch(err => {
+  console.log(err);
+});  
+
+});
+
+
+router.post('/searchResult', (req, res) => {
+/*   app.locals.searchtxt = req.body.Search-box;
+
+ */  
+  var entity = {
+  txt: req.body.Searchbox,
+}
+  var a = entity.txt;
+  searchtxt = a;
+  res.render('searchResult');
 });
 
 
