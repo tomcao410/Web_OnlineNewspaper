@@ -33,6 +33,9 @@
                         <% }%>
                         <% if (isLogin) { %>
                     <button><a href="/TrangCaNhan" style="font-size:15px">Trang Cá Nhân</a></button>
+                        <% if (userInfo[0].userClass > 1) { %>
+                    <button><a href="/admin/dashboard" style="font-size:15px">Quản Lý</a></button>
+                        <% }%>
                         <% }%>
                 </div>
             </div>
@@ -128,9 +131,6 @@
         <label for="Birthday"><b>Birthday</b></label>
         <input type="text" id="dobtimepicker" placeholder="Enter Birthday" name="dobtimepicker" required>
 
-        <label>
-          <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-        </label>
         <div class="clearfix">
           <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
           <button type="submit" class="signup">Sign Up</button>

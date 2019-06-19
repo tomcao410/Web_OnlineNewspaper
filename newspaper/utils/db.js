@@ -43,9 +43,8 @@ module.exports = {
 
   update: (tableName, idField, entity) => {
     return new Promise((resolve, reject) => {
-      var id = entity[idField];
-      delete entity[idField];
-
+      var id = entity.id;
+      delete entity.id;
       var sql = `update ${tableName} set ? where ${idField} = ?`;
       var connection = createConnection();
       connection.connect();
@@ -79,7 +78,7 @@ module.exports = {
   // User logins
   findUser: username =>{
     return new Promise ((resolve, reject) =>{
-      var sql = `select username, passwordString, userClass, fullname, DATE_FORMAT(dabirthday, "%Y-%m-%d") as dob, email from users where username='${username}'`
+      var sql = `select *, DATE_FORMAT(dabirthday, "%Y-%m-%d") as dob from users where username='${username}'`
       console.log(sql)
       var connection = createConnection();
       connection.connect();

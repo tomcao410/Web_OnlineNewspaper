@@ -49,7 +49,7 @@ router.get('/', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('index', { isLogin: isLogin, topics: topics, allPosts: allPosts, ftPosts: ftPosts, ftTopMost: ftTopMost, ftTopTen: ftTopTen,title: 'Express' });
+    res.render('index', { isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, ftPosts: ftPosts, ftTopMost: ftTopMost, ftTopTen: ftTopTen,title: 'Express' });
   }
   ).catch(err => {
     console.log(err);
@@ -172,6 +172,8 @@ router.get('/all', function(req, res, next) {
 router.get('/admin/dashboard', function(req, res, next) {
   res.render('dashboard', { title: 'Express' });
 });
+
+// --------------Cap Nhat Thong Tin Ca Nhan--------------
 router.get('/TrangCaNhan', function(req, res, next) {
   var getAllPosts = allPost.all();
   var getTopics = topics.all();
@@ -187,6 +189,36 @@ router.get('/TrangCaNhan', function(req, res, next) {
     console.log(err);
   });
 });
+
+router.post('/updateUserInfo', (req, res) => {
+  var passHashed = bcrypt.hashSync(req.body.pass, 10);
+  var entity = {
+    id: req.session.userInfo[0].id,
+    fullname: req.body.fullname,
+    email: req.body.email,
+    dabirthday: req.body.dobtimepicker,
+    passwordString: passHashed
+  }
+  var p = userModel.update('id', entity);
+  p.then(row => {
+    var find = userModel.findUser(req.session.username);
+    find.then(rowFound => {
+      if (rowFound.length > 0)
+      {
+        req.session.userInfo = rowFound;
+        console.log(rowFound);
+        res.redirect('/');
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+  }).catch(err => {
+    console.log(err);
+  });
+});
+
+
+//------------------------------------------------------------
 router.get('/:category/:subCategory/:title', function(req, res, next) {
   res.render('image-post',{title:req.params.title});
 });
