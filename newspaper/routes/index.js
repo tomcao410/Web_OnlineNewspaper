@@ -359,12 +359,14 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
   var getAllPosts = allPost.all();
   var getComments = users.comments();
   var getNewestCmt = users.newestCmtId();
+  var tags = allPost.loadtags();
 
-  Promise.all([getTopics, getAllPosts, getComments, getNewestCmt]).then(result => {
+  Promise.all([getTopics, getAllPosts, getComments, getNewestCmt, tags]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var comments = JSON.parse(JSON.stringify(result[2]));
     var newestCmt = JSON.parse(JSON.stringify(result[3]));
+    var tags = JSON.parse(JSON.stringify(result[4]));
     var curUserId;
     var isLogin = false;
     if (req.session.username)
@@ -378,7 +380,7 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('image-post',{ curUserId: curUserId, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
+    res.render('image-post',{ tagsNews: tags, curUserId: curUserId, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
   }
   ).catch(err => {
     console.log(err);
@@ -508,6 +510,32 @@ router.post('/searchResult', (req, res) => {
   console.log(err);
 });  
 });
+router.get('/tag/:idP/:tagName', function(req, res, next) {
+  var getTopics = topics.all();
+  var getAllPosts = allPost.all(); 
+  var tags = allPost.loadtags();
+  Promise.all([getTopics,getAllPosts,  tags]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    var tags = JSON.parse(JSON.stringify(result[2]));
+    var isLogin = false;
+    if (req.session.username)
+    {
+      console.log('There is a user');
+      isLogin = true;
+    }
+    else
+    {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('tagSearch',{ idPo:req.params.idP, title:req.params.tagName, tagsNews: tags, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics,allPosts: allPosts});
+  } 
+  ).catch(err => {
+    console.log(err);
+  });  
+});
+
 
 
 

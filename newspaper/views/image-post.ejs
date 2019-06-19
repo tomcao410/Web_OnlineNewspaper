@@ -28,6 +28,7 @@
 	<% var curSubTopic; %>
 	<% var curTopic; %>
 	<% var count = 0; %>
+	<%var curPostId = 0;%>
 		<div class="site-main-container">
 			<!-- Start top-post Area -->
 			<!-- <section class="top-post-area pt-10">
@@ -64,7 +65,7 @@
 						<div class="col-lg-8 post-list">
 							<!-- Start single-post Area -->
 							<div class="single-post-wrap">
-								<%var curPostId = 0;%>
+								
 								<% allPosts.forEach(function(posts){
 										if(posts.title == title){
 											curSubTopic = posts.subCategoryName;
@@ -154,9 +155,13 @@
 												<div class="block_tag width_common">
 													<div class="txt_tag">Tags:</div>
 													<div>
-														<h3>
-															<a href="#" class="tag_item"> </a>
-														</h3>
+														<% tagsNews.forEach(function(tag){
+															if (tag.postId == curPostId){%>
+																<h3>
+																		<a href="/tag/<%=tag.postId%>/<%=tag.tagName%>" class="tag_item" name="nameTag" style = "color: red"> <%=tag.tagName%> </a>
+																	</h3>	
+														<%}%>
+														<%})%>
 													</div>
 												</div>
 												</div>

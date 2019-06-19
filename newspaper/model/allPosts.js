@@ -19,4 +19,8 @@ module.exports = {
     bySubCat : (catName, subCatName) => {
         return db.load(`select P.* from Posts as P, Categories as C, SubCategories as SC where P.category = C.id and P.sub_category = SC.id and C.categoryName = "${catName}" and SC.subCategoryName = "${subCatName}"`);
     },
+    loadtags : () =>{
+        return db.load("select * from tags;");
+    },
+
 }
