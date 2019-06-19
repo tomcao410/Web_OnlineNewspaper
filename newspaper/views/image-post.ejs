@@ -160,6 +160,7 @@
 													</div>
 												</div>
 												</div>
+									<% if (isLogin) {%>
 									<div class="comment-form">
 										<h4>Bình luận:</h4>
 										<form name="form1" method="POST" action="/news/<%=category%>/<%=subCategory%>/<%=title%>">
@@ -182,11 +183,17 @@
 												<% var curId = newestId.commentId + 1; %>
 												<input type="text" class="d-none" name="commentID" value="<%=curId%>" style="visibility: collapse">
 											<% }); %>
-											<input type="text" class="d-none" name="userID" value="3" style="visibility: collapse">
+											<input type="text" class="d-none" name="userID" value="<%=curUserId%>" style="visibility: collapse">
 											<input type="text" class="d-none" name="postID" value="<%=curPostId%>" style="visibility: collapse">
-											<button type="submit" id="postcomm" onclick="btnClick()" class="primary-btn text-uppercase">Đăng bình luận</button>
+											<button type="submit" id="postcomm" class="primary-btn text-uppercase">Đăng</button>
 										</form>
 									</div>
+									<% } %>
+									<%if (!isLogin) {%>
+										<div class="comment-form">
+											<h4 onclick="document.getElementById('id01').style.display='block'"; style=" font-size:18px">Hãy đăng nhập để có thể bình luận</h4>
+										</div>
+									<% } %>
 							</div>
 							<!-- End single-post Area -->
 						</div>

@@ -92,7 +92,7 @@
 							<div class="latest-post-wrap">
 								<h4 class="cat-title">Tin mới nhất</h4>
 								
-								<% allPosts.forEach(function(post){%>
+								<% postsByPages.forEach(function(post){%>
 								<div class="single-latest-post row align-items-center">
 									<div class="col-lg-5 post-left">
 										<div class="feature-img relative">
@@ -118,15 +118,17 @@
 									</div>
 								</div>
 								<% }) %>
+								<!--Pagination-->
 								<nav aria-label="Page navigation example">
-									<ul class="pagination justify-content-center">
-									  
-									  <li class="page-item"><a class="page-link" href="/page/1">1</a></li>
-									  <li class="page-item"><a class="page-link" href="/page/2">2</a></li>
-									  <li class="page-item"><a class="page-link" href="/page/3">3</a></li>
-									  
-									</ul>
-								  </nav>
+										<ul class="pagination justify-content-center">
+										  <li class="page-item disabled">
+											<a class="page-link" tabindex="-1">Trang:</a>
+										  </li>
+										  <% pages.forEach(function(page){ %>
+										  <li class="page-item"><a class="page-link" href="?page=<%=page.value%>"><%=page.value%></a></li>
+										  <% }); %>
+										</ul>
+									  </nav>
 							</div>
 							<!-- End latest-post Area -->
 							

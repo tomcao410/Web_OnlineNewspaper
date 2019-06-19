@@ -34,13 +34,14 @@
                     <tr><td class="justify-content: center; align-items: center;" style=" font-size:18px"><b>Họ tên:</b></td><td><input type="text" name="fullname" value="<%= userInfo[0].fullname %>"/></td></tr>
                     <tr><td class="justify-content: center; align-items: center;" style=" font-size:18px"><b>Email:</b></td><td><input type="text" name="email" value="<%= userInfo[0].email %>"/></td></tr>
                     <tr><td class="justify-content: center; align-items: center;" style=" font-size:18px"><b>Ngày sinh:</b></td><td><input type="text" name="dobtimepicker" id="dobtimepicker2" value="<%= userInfo[0].dob %>" autocomplete="off"/></td></tr>
-                    <tr><td class="justify-content: center; align-items: center;" style=" font-size:18px"><b>Username:</b></td><td><input type="text" name="username" value="<%= userInfo[0].username %>"/></td></tr>
+                    <tr><td class="justify-content: center; align-items: center;" style=" font-size:18px"><b>Username:</b></td><td><input type="text" name="username" disabled="disabled" value="<%= userInfo[0].username %>"/></td></tr>
                     <tr><td class="justify-content: center; align-items: center;" style=" font-size:18px"><b>Password:</b></td><td><input type="password" name="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></td></tr>
                     <tr><td class="justify-content: center; align-items: center;" style=" font-size:18px"><b>Nhập lại Password:</b></td><td><input type="password" name="re_pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></td></tr>
                 </table>
+                <button type="submit" style=" font-size:18px; text-align:center">Lưu thông tin</button>
             </form>
         </div>
-        <button type="submit"  style="font-size:18px; text-align:center">Lưu thông tin</button>
+        
     </div>
     
 

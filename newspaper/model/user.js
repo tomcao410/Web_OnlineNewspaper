@@ -12,5 +12,9 @@ module.exports = {
 
     register : (username, password, fullname, dob, email) => {
       return db.register(username, password, fullname, dob, email);
+    },
+
+    update : (idField, entity) => {
+      return db.update('users', idField, entity);
     }
 }

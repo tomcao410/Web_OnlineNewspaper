@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-6 header-top-right no-padding">
                     <ul>
-                            <% if (isLogin) { %>
+                            <% if (isLogin == true) { %>
                         <li><a href="/logout" style="font-size: 20px"><span class="lnr lnr-phone-handset"></span><span>Log Out</span></a></li>
                             <% }%>
                     </ul>
@@ -22,7 +22,7 @@
             <div class="row justify-content-between align-items-center">
                 <div class="col-lg-4 col-md-4 col-sm-12 logo-left no-padding">
                     <a href="/">
-                        <img class="img-fluid" src="../../images/logo.png" alt="">
+                        <img class="img-fluid" src="images/logo.png" alt="">
                     </a>
                 </div>
 
@@ -31,8 +31,11 @@
                     <button onclick="document.getElementById('id02').style.display='block'";style=" font-size:18px"><i class="fa fa-user-o"></i>Sign Up</button>
                     <button onclick="document.getElementById('id01').style.display='block'"; style=" font-size:18px"><i class="fa fa-user-o"></i> Login</button>
                         <% }%>
-                        <% if (isLogin) { %>
+                        <% if (isLogin == true) { %>
                     <button><a href="/TrangCaNhan" style="font-size:15px">Trang Cá Nhân</a></button>
+                        <% if (userInfo[0].userClass > 1) { %>
+                    <button><a href="/admin/dashboard" style="font-size:15px">Quản Lý</a></button>
+                        <% }%>
                         <% }%>
                 </div>
             </div>
@@ -128,9 +131,6 @@
         <label for="Birthday"><b>Birthday</b></label>
         <input type="text" id="dobtimepicker" placeholder="Enter Birthday" name="dobtimepicker" required>
 
-        <label>
-          <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-        </label>
         <div class="clearfix">
           <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
           <button type="submit" class="signup">Sign Up</button>
