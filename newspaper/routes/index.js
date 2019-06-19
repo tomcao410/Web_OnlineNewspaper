@@ -116,19 +116,20 @@ router.post('/register', (req, res) => {
   console.log(passHashed);
   var p = userModel.register(entity.username, passHashed, entity.fullname, entity.dob, entity.email);
   p.then(rows => {
-    if (rows.length > 0)
-    {
-      req.session.user = rowFound;
-      req.session.op = 0;
-      console.log('Register succeed');
-      console.log(rows);
-      res.redirect('/');
-    }
-    else
-    {
-      console.log('Register failed')
-      res.redirect('/')
-    }
+      var find = userModel.findUser(entity.username);
+      find.then(rowFound => {
+        if (rowFound.length > 0)
+        {
+          req.session.userInfo = rowFound;
+          req.session.username = rowFound[0].username;
+          req.session.op = 0;
+          console.log('Register succeed');
+          console.log(rowFound);
+          res.redirect('/');
+        }
+      }).catch(err => {
+        console.log(err);
+      });
   }).catch(err => {
     console.log(err);
   });
