@@ -36,7 +36,7 @@ function transformTopics(rows) {
 }
 
 
-router.post('/news/:category/:subCategory/:title', (req, res) => {
+ router.post('/news/:category/:subCategory/:title', (req, res) => {
   // res.redirect('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
   //console.log(req.body);
   // res.end('...');
@@ -53,7 +53,7 @@ router.post('/news/:category/:subCategory/:title', (req, res) => {
   }).catch(err => {
     console.log(err);
   });
-});
+}); 
 
 // ----------------- HOME page-----------------------
 router.get('/', function(req, res, next) {
@@ -484,7 +484,29 @@ router.post('/searchResult', (req, res) => {
 }
   var a = entity.txt;
   searchtxt = a;
-  res.render('searchResult');
+  var getTopics = topics.all();
+  var getAllPosts = allPost.all();
+  var Findresult = findResult.search();
+  Promise.all([getTopics,getAllPosts, Findresult]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    var search = JSON.parse(JSON.stringify(result[2]));
+    var isLogin = false;
+    if (req.session.username)
+    {
+      console.log('There is a user');
+      isLogin = true;
+    }
+    else
+    {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('searchResult',{ timkiem:searchtxt, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics,allPosts: allPosts, searchResult: search});
+} 
+).catch(err => {
+  console.log(err);
+});  
 });
 
 

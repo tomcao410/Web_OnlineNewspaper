@@ -22,52 +22,56 @@
 		<%include template/css.ejs %>
 	</head>
 	<body>
-		<%include template/header2.ejs %>
-        <div class="latest-post-wrap">
-            <h4 class="cat-title">Kết quả tìm kiếm</h4>
-            <% searchResult.forEach(function(post){
-                if (post.subCategoryName == title){%>
-                <div class="single-latest-post row align-items-center">
-                    <div class="col-lg-5 post-left">
-                        <div class="feature-img relative">
-                            <div class="overlay overlay-bg"></div>
-                            <img class="img-fluid" src="<%=post.imgLink %>" alt="">
+        <%include template/header2.ejs %>
+        <section class="latest-post-area pb-120">
+                <div class="container no-padding">
+                        <div class="row">
+                                <div class="col-lg-8 post-list">
+                                        <div class="latest-post-wrap">
+                                            <h4 class="cat-title">Kết quả tìm kiếm cho " <%=timkiem%> "</h4>
+                                            <% searchResult.forEach(function(post){%>
+                                                <div class="single-latest-post row align-items-center">
+                                                    <div class="col-lg-5 post-left">
+                                                        <div class="feature-img relative">
+                                                            <div class="overlay overlay-bg"></div>
+                                                            <img class="img-fluid" src="<%=post.imgLink %>" alt="">
+                                                        </div>
+                                                        <ul class="tags">
+                                                            <li><a href="/news/<%=post.categoryName %>/<%=post.subcategoryName %>"><%=post.categoryName %> - <%=post.subcategoryName %></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-lg-7 post-right">
+                                                        <a href="/news/<%=post.categoryName %>/<%=post.subcategoryName %>/<%=post.title %>">
+                                                            <h4><%=post.title %></h4>
+                                                        </a>
+                                                        <ul class="meta">
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="fa fa-pencil"></i> <%=post.fullname %></a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="fa fa-calendar"></i> <%=post.publishDate %></a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="fa fa-eye"></i> <%=post.views %> Views</a>
+                                                            </li>
+                                                        </ul>
+                                                        <p class="excert">
+                                                            <%=post.postExcerpt %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            <% })%>
+                                        </div>
+                                    </div>
                         </div>
-                        <ul class="tags">
-                            <li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>"><%=post.categoryName %> - <%=post.subCategoryName %></a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-7 post-right">
-                        <a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
-                            <h4><%=post.title %></h4>
-                        </a>
-                        <ul class="meta">
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-pencil"></i> <%=post.fullname %></a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-calendar"></i> <%=post.publishDate %></a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-eye"></i> <%=post.views %> Views</a>
-                            </li>
-                        </ul>
-                        <p class="excert">
-                            <%=post.postExcerpt %>
-                        </p>
-                    </div>
                 </div>
-                <% } %>
-            <% })%>
-
-                
-                    <div class="load-more">
-                        <a href="#" class="primary-btn">Load More Posts</a>
-                    </div>
-        </div>
+        </section>
+        
+        
+    
         <%include template/footer.ejs%>
 		<%include template/js.ejs %>
 	</body>
