@@ -4,18 +4,59 @@ var topics = require('../model/topics');
 var ftPosts = require('../model/ftPosts');
 var allPost = require('../model/allPosts');
 var users = require('../model/dataUser');
+var findResult = require('../model/find');
 var commentModel = require('../model/uploadCmt.js');
+var postModel = require('../model/uploadPost');
 var _ = require('lodash');
+/* GET home page. */
+
+// router.get('*', function(req, res, next) {
+//   var p = topics.all();
+//   p.then(rows => {
+//     rows = JSON.parse(JSON.stringify(rows));
+//     rowsGroupby = _.groupBy(rows, function(row) {
+//       return row.categoryName;
+//     })
+//     rows = _.map(rowsGroupby, function(rowGroupby, key) {
+//       return { categoryName: key, subCategories: rowGroupby };
+//     });
+//     console.log('abc');
+//     res.render('template/header2', { topics: rows, title: 'Express' });  
+//   }
+//   ).catch(err => {
+//     console.log(err);
+//   });
+// });
 
 // ----------------
 function transformTopics(rows) {
   rows = JSON.parse(JSON.stringify(rows));
-    rowsGroupby = _.groupBy(rows, row => row.categoryName)
+    rowsGroupby = _.groupBy(rows, row => row.categoryName);
     rows = _.map(rowsGroupby, (rowGroupby, key) => ( { categoryName: key, subCategories: rowGroupby }));
     return rows;
 }
 
-//---------------------------------Homepage--------------------------------------//
+
+ router.post('/news/:category/:subCategory/:title', (req, res) => {
+  // res.redirect('image-post',{ topics: topics, allPosts: allPosts, comments: comments,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
+  //console.log(req.body);
+  // res.end('...');
+  var entity = {
+    commentId: req.body.commentID,
+    postId: req.body.postID,
+    userId: req.body.userID,
+    commentContent: req.body.commentContent
+  };
+  var redirectUrl = "/news/" + req.params.category + "/" + req.params.subCategory + "/" + req.params.title;
+  commentModel.addComment(entity).then(id => {
+    console.log(id);
+    res.redirect(redirectUrl);
+  }).catch(err => {
+    console.log(err);
+  });
+}); 
+
+// ----------------- HOME page-----------------------
 router.get('/', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.all();
@@ -28,7 +69,7 @@ router.get('/', function(req, res, next) {
   var offset = (page - 1) * limit;
   var getAllPostsByPages = allPost.pageBy(limit, offset);
   Promise.all([getTopics, getAllPosts, getFtPosts, getTopMost, getTopTen, getAllPostsByPages]).then(result => {
-    var topics = transformTopics(result[0]);
+    var topics = transformTopics(result[0]); console.log(topics);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var ftPosts = JSON.parse(JSON.stringify(result[2]));
     var ftTopMost = JSON.parse(JSON.stringify(result[3]));
@@ -58,7 +99,7 @@ router.get('/', function(req, res, next) {
   }
   ).catch(err => {
     console.log(err);
-  });
+  });   
 });
 
 // --------------------Login--------------------
@@ -152,7 +193,7 @@ router.get('/page/:pagenum', function(req, res, next) {
   var getTopics = topics.all();
   Promise.all([getTopics]).then(result => {
     var topics = transformTopics(result[0]);
-    res.render('panination',{ topics: topics , title:req.params.pagenum});
+    res.render('panination',{ topics: topics , title:req.params.pagenum});  
   }
   ).catch(err => {
     console.log(err);
@@ -205,19 +246,6 @@ router.get('/all', function(req, res, next) {
     console.log(err);
   });
 });
-
-router.post('/all', (req, res) => {
-  req.params.query = req.body.Searchbox;
-  console.log(req.params.query);
-  console.log("index.js");
-
-  res.redirect('/all');
-  
-});
-
-
-
-// --------------Cap Nhat Thong Tin Ca Nhan--------------
 router.get('/TrangCaNhan', function(req, res, next) {
   var getAllPosts = allPost.all();
   var getTopics = topics.all();
@@ -273,16 +301,38 @@ router.get('/admin/profile', function(req, res, next) {
 });
 router.get('/admin/users-table', function(req, res, next) {
   res.render('users-table', { title: 'Express' });
-
 });
+
 router.get('/admin/posts-table', function(req, res, next) {
   res.render('posts-table', { title: 'Express' });
 
 });
 router.get('/admin/write-post', function(req, res, next) {
-  res.render('write-post', { title: 'Express' });
+  var getTopics = topics.all();
+  var getAllPosts = allPost.allDefault();
+  Promise.all([getTopics, getAllPosts]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    var newestPostId = allPosts[allPosts.length - 1].id;
+    var isLogin = true; var userInfo = null;
+    console.log(req.session.userInfo);
+    if (req.session.username)
+    {
+      console.log('There is a user');
+      isLogin = true;
+      userInfo = req.session.userInfo[0];
+    }
+    else
+    {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('write-post', { newestPostId: newestPostId,userInfo: userInfo,isLogin: isLogin, topics: topics, allPosts: allPosts,title: 'Đăng bài' });
+  }
+  ).catch(err => {
+    console.log(err);
+  });
 });
-
 //------------------------------------- Browse by category---------------------------------//
 router.get('/news/:category', function(req, res, next) {
   var getTopics = topics.all();
@@ -323,7 +373,7 @@ router.get('/news/:category', function(req, res, next) {
   }
   ).catch(err => {
     console.log(err);
-  });
+  });   
 });
 
 
@@ -333,6 +383,7 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
   var getAllPosts = allPost.all();
   var getComments = users.comments();
   var getNewestCmt = users.newestCmtId();
+
   Promise.all([getTopics, getAllPosts, getComments, getNewestCmt]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
@@ -355,7 +406,7 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
   }
   ).catch(err => {
     console.log(err);
-  });
+  });   
 });
 
 router.post('/news/:category/:subCategory/:title', (req, res) => {
@@ -417,9 +468,114 @@ router.get('/news/:category/:subCategory', function(req, res, next) {
   }
   ).catch(err => {
     console.log(err);
-  });
+  });  
+
+});
+router.get('/searchResult', function(req, res, next) {
+  var getTopics = topics.all();
+  var getAllPosts = allPost.all();
+  // var Findresult = findResult.search();
+  var page = req.query.page || 1;
+  if (page < 1) page = 1;
+  var limit = 10;
+  var offset = (page - 1)* limit;
+  var Findresult = findResult.searchByPage(limit, offset, searchtxt);
+  Promise.all([getTopics,getAllPosts, Findresult]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    var search = JSON.parse(JSON.stringify(result[2]));
+    var isLogin = false;
+    var total = search.length;
+    var nPages = Math.floor(total/ limit);
+    if (total % limit > 0) nPages++;
+    var pages = [];
+    for (i=1; i<= nPages;i++){
+      var obj = {value: i};
+      pages.push(obj);
+    }
+    var searchtxt = req.body.Searchbox;
+    if (req.session.username)
+    {
+      console.log('There is a user');
+      isLogin = true;
+    }
+    else
+    {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('searchResult',{pages: pages, timkiem: searchtxt,isLogin: isLogin, userInfo: req.session.userInfo, topics: topics,allPosts: allPosts, searchResult: search});
+} 
+).catch(err => {
+  console.log(err);
+});  
+
 });
 
 
+router.post('/searchResult', (req, res) => {
+  var entity = {
+    txt: req.body.Searchbox,
+  }
+  var a = entity.txt;
+  searchtxt = a;
+  var getTopics = topics.all();
+  var getAllPosts = allPost.all();
+  var page = req.query.page || 1;
+  if (page < 1) page = 1;
+  var limit = 10;
+  var offset = (page - 1)* limit;
+  var Findresult = findResult.searchByPage(limit, offset, searchtxt);
+  Promise.all([getTopics, getAllPosts, Findresult]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    var search = JSON.parse(JSON.stringify(result[2]));
+    var isLogin = false;
+    var total = search.length;
+    var nPages = Math.floor(total/ limit);
+    if (total % limit > 0) nPages++;
+    var pages = [];
+    for (i=1; i<= nPages;i++){
+      var obj = {value: i};
+      pages.push(obj);
+    }
+    if (req.session.username) {
+      console.log('There is a user');
+      isLogin = true;
+    }
+    else {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('searchResult', { pages: pages, timkiem: searchtxt, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, searchResult: search });
+  }
+  ).catch(err => {
+    console.log(err);
+  });
+});
+
+router.post("/add-post", (req, res) => {
+  console.log(req.body);
+  var entity = {
+    id: req.body.postID,
+    authorId: req.body.authorID,
+    title: req.body.postTitle,
+    sub_category: req.body.selectBox2,
+    category: req.body.selectBox1,
+    publishDate: req.body.toBePublishedDate,
+    postExcerpt: req.body.postExcerpt,
+    content: req.body.editor1,
+    views: req.body.views,
+    imgLink: req.body.imgLink,
+    approval: req.body.approve,
+    premium: req.body.premium
+  };
+  postModel.addPost(entity).then(id => {
+    console.log(id);
+    res.redirect("/admin/write-post");
+  }).catch(err => {
+    console.log(err);
+  })
+});
 
 module.exports = router;

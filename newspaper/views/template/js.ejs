@@ -15,7 +15,7 @@
 		<script src="/javascripts/owl.carousel.min.js"></script>
 		<script src="/javascripts/mail-script.js"></script>
 		<script src="/javascripts/main.js"></script>
-
+		<script src="/javascripts/topicSelector.js"></script>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
@@ -34,6 +34,15 @@
 			}
 
 		</script>
+<script>
+	function search(ele) {
+    if(event.key === 'Enter') {
+		
+		alert(ele.value);   
+		window.location.href="/SearchResult";     
+    }
+}
+</script>
 
 <script>
         jQuery.datetimepicker.setLocale('en');
@@ -75,3 +84,44 @@
 			format:'Y-m-d'
 			});
   </script>
+  <script>
+        jQuery.datetimepicker.setLocale('en');
+        jQuery('#publishDatePicker').datetimepicker({
+			i18n:{
+			de:{
+			months:[
+				'January','Febuary','March','April',
+				'May','June','July','August',
+				'September','October','November','December',
+			],
+			dayOfWeek:[
+				"Sun", "Mon", "Tues", "Wed",
+				"Thurs", "Fri", "Sat",
+			]
+			}
+			},
+			timepicker:false,
+			format:'Y-m-d'
+			});
+  </script>
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('Searchbox');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myUL");
+  li = ul.getElementsByTagName('li');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>
