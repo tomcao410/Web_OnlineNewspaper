@@ -4,7 +4,7 @@ module.exports = {
         return db.load("select P.id, P.title, C.categoryName, SC.subCategoryName, date(P.publishDate) as publishDate, P.postExcerpt, P.content, P.views, P.imgLink, U.fullname from Posts as P, SubCategories as SC, Categories as C, Users as U where P.category = C.id and P.sub_category = SC.id and SC.categoryId = P.category and U.id = P.authorId order by P.publishDate desc");
     },
     allDefault : () => {
-        return db.load("select * from Posts");
+        return db.load("select P.*, C.categoryName, SC.subCategoryName, U.fullname from Posts as P, SubCategories as SC, Categories as C, Users as U where P.category = C.id and P.sub_category = SC.id and SC.categoryId = C.id and U.id = P.authorId");
     },
     pageBy : (limit, offset) => {
         return db.load(`select P.*, C.categoryName, SC.subCategoryName, U.fullname from Posts as P, Categories as C, SubCategories as SC, Users as U where P.category = C.id and P.sub_category = SC.id and SC.categoryId = P.category and U.id = P.authorId order by P.publishDate desc limit ${limit} offset ${offset}`);

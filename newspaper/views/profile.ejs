@@ -2,13 +2,7 @@
 <html lang="en">
 
 <head>
-
-
-
-
     <% include template/header-admin.ejs%>
-
-
 </head>
 
 <body id="page-top">
@@ -68,12 +62,12 @@
                         <form class="user">
 
                             <div class="form-group">
-                                <label for="">Username:</label>
+                                <label for="">Tên đăng nhập:</label>
 
                                 <input type="email" class="form-control form-control-user" id="username" value="<%= userInfo[0].username %>" disabled>
                             </div>
                             <div class="form-group">
-                                <label for="">Full name</label>
+                                <label for="">Họ tên</label>
 
                                 <input type="email" class="form-control form-control-user" id="fullname" value="<%= userInfo[0].fullname %>" disabled>
                             </div>
@@ -83,13 +77,13 @@
                                 <input type="email" class="form-control form-control-user" id="email" value="<%= userInfo[0].email %>" disabled>
                             </div>
                             <div class="form-group">
-                                <label for="">Day of Birth</label>
+                                <label for="">Ngày sinh</label>
 
                                 <input type="email" class="form-control form-control-user" id="dob" value="<%= userInfo[0].dob %>" disabled>
                             </div>
                             <% if (userInfo[0].userClass == 2) { %>
                             <div class="form-group">
-                                <label for="">Role</label>
+                                <label for="">Phân hệ</label>
 
                                 <input type="email" class="form-control form-control-user" id="userclass" value="Writer" disabled>
                             </div>

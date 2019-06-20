@@ -4,7 +4,7 @@ var createConnection = ()=>{
   return mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : '123456',
+    password : '30111998',
     database : 'Newspaper',
     timezone: 'Z',
     dateStrings: true

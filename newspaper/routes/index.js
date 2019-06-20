@@ -115,27 +115,46 @@ router.post('/register', (req, res) => {
     dob: req.body.dobtimepicker
   }
   console.log(entity);
-  var passHashed = bcrypt.hashSync(entity.password, 10);
-  console.log(passHashed);
-  var p = userModel.register(entity.username, passHashed, entity.fullname, entity.dob, entity.email);
-  p.then(rows => {
-      var find = userModel.findUser(entity.username);
-      find.then(rowFound => {
-        if (rowFound.length > 0)
-        {
-          req.session.userInfo = rowFound;
-          req.session.username = rowFound[0].username;
-          req.session.op = 0;
-          console.log('Register succeed');
-          console.log(rowFound);
-          res.redirect('/');
-        }
-      }).catch(err => {
-        console.log(err);
-      });
-  }).catch(err => {
-    console.log(err);
-  });
+  var verify = false;
+  var verPsw = false;
+  var verEmail = false
+  if (entity.password !== entity.confirmPass)
+  {
+    verPsw = false;
+  }
+  if (!entity.email.includes("@"))
+  {
+    verEmail = false;
+  }
+  if (verEmail == false || verPsw == false)
+  {
+    verify = false;
+  }
+  if (verify == true) {
+    var passHashed = bcrypt.hashSync(entity.password, 10);
+    console.log(passHashed);
+    var p = userModel.register(entity.username, passHashed, entity.fullname, entity.dob, entity.email);
+    p.then(rows => {
+      if (rows.length > 0) {
+        req.session.user = rowFound;
+        req.session.op = 0;
+        console.log('Register succeed');
+        console.log(rows);
+        res.redirect('/');
+      }
+      else {
+        console.log('Register failed')
+        res.redirect('/')
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+  else
+  {
+    
+    res.redirect('/');
+  }
 });
 
 // ------------------- Log Out ----------------------
@@ -271,20 +290,39 @@ router.get('/admin/users-table', function(req, res, next) {
 router.get('/admin/posts-table', function(req, res, next) {
   let userInfo = req.session.userInfo;
   var p = userModel.loadPosts(userInfo[0].id);
-  p.then(rows => {
-      if (rows.length > 0)
-      {
-        let posts = rows;
-        res.render('posts-table', { posts: posts, userInfo: userInfo, title: 'Express' });
-      }
-      else {
-        console.log('There is no post from this writer');
-        res.redirect('/admin/profile');
-      }
-  }).catch(err => {
+  var getAllPosts = allPost.allDefault();
+  Promise.all([getAllPosts, userInfo]).then(result => {
+    var allPosts = JSON.parse(JSON.stringify(result[0]));
+    var user = JSON.parse(JSON.stringify(result[1]));
+    var isLogin;
+    if (req.session.username)
+    {
+      console.log('There is a user');
+      isLogin = true;
+    }
+    else
+    {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('posts-table', {allPosts: allPosts, isLogin: isLogin, userInfo: req.session.userInfo, title: 'Posts table' });
+  }
+  ).catch(err => {
     console.log(err);
   });
 });
+router.post('/admin/del-post', function(req, res, next){
+  var fid = req.body.postID;
+  var field = "id";
+  postModel.delPost(field, fid).then(id => {
+    console.log(id);
+    res.redirect("/admin/posts-table");
+  }).catch(err => {
+    console.log(err);
+  })
+})
+
+
 router.get('/admin/write-post', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.allDefault();
