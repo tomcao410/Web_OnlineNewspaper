@@ -175,11 +175,12 @@
                         <td>
                           <form action="/admin/del-post" method="POST" >
                             <button class="btn btn-danger" style="max-height: 30px; max-width: 30px;"><i class="fa fa-trash"></i></button>
-                            <input type="text" name="postID" value="<%=post.id%>" style="visibility: collapse">
+                            <input type="text" name="postID" value="<%=post.id%>" style="visibility: collapse; display: none">
                           </form>
                           <%if (post.approval != 1) {%>
-                          <form action="/admin/write-post" method="POST">
-                            <button class="btn btn-primary" style="max-height: 30px; max-width: 30px"><i class="fa fa-pencil"></i></button>
+                          <form action="/admin/edit-post" method="GET">
+                            <button class="btn btn-primary" style="max-height: 30px; max-width: 30px"><i class="fa fa-pencil"></i></button> 
+                            <input type="text" name="postID" value="<%=post.id%>" style="visibility: collapse; display: none">
                           </form>
                           <%}%>                   
                         </td>

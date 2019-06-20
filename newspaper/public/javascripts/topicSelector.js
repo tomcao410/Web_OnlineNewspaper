@@ -5,7 +5,6 @@ function selectBoxOneChange()
     var allSubCatName = document.getElementById("inputGroupSelect00_subCatName");
     var subCatSB = document.getElementById("inputGroupSelect02");
     var catSB = document.getElementById("inputGroupSelect01").value;
-    alert(catSB);
     subCatSB.innerHTML="";
     for (var i = 0; i < allCatId.length; i++)
     {

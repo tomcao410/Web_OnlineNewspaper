@@ -322,6 +322,45 @@ router.post('/admin/del-post', function(req, res, next){
   })
 })
 
+router.post("/saved", function(req, res, next){
+  console.log(req.body);
+  var entity = {
+    id: req.body.postID,
+    authorId: req.body.authorID,
+    title: req.body.postTitle,
+    sub_category: req.body.selectBox2,
+    category: req.body.selectBox1,
+    publishDate: req.body.toBePublishedDate,
+    postExcerpt: req.body.postExcerpt,
+    content: req.body.editor1,
+    views: req.body.views,
+    imgLink: req.body.imgLink,
+    approval: req.body.approve,
+    premium: req.body.premium
+  }
+  postModel.editPost(entity, "id").then(id => {
+    console.log(id);
+    res.redirect('/admin/posts-table');
+  }).catch(err => {
+    console.log(err);
+  });
+});
+
+router.get('/admin/edit-post', function (req, res, next) {
+  var queryParam = req.url;
+  var postId = queryParam.slice(queryParam.lastIndexOf('=') + 1);
+  console.log(postId);
+  var getPostDetail = allPost.byPostId(postId);
+  var getTopics = topics.all();
+  Promise.all([getPostDetail, getTopics]).then(result => {
+    var postDetail = JSON.parse(JSON.stringify(result[0]));
+    var topics = transformTopics(result[1]);
+    console.log(postDetail);
+    res.render('edit-post', { topics: topics, postDetail: postDetail, userInfo: req.session.userInfo, title: 'Sửa bài đăng' });
+  }).catch(err => {
+    console.log(err);
+  })
+});
 
 router.get('/admin/write-post', function(req, res, next) {
   var getTopics = topics.all();
@@ -366,6 +405,7 @@ router.post("/add-post", (req, res) => {
     approval: req.body.approve,
     premium: req.body.premium
   };
+  console.log(entity);
   postModel.addPost(entity).then(id => {
     console.log(id);
     res.redirect("/admin/write-post");

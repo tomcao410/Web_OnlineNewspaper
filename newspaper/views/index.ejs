@@ -162,12 +162,14 @@
 											
 										</ul>
 									</div>
-								</div> -->
+								</div>  -->
 								<!-- <% }) %> -->
 								<!--Top 10 mục (1 dòng 2 cột)-->
-								
+								<%var count = 0;%>
 								<div class="row mt-20 medium-gutters" style="overflow-y: scroll; height: 500px;">
-									<% ftTopTen.forEach(function(post){%>								
+									<% ftTopTen.forEach(function(post){
+										if (count < 10) {
+											count++; %>								
 									<!--Top 10 mục (1 dòng 2 cột)-->
 									<div class="col-lg-6 single-popular-post">
 										<div class="feature-img-wrap relative">
@@ -193,6 +195,7 @@
 											</p>
 										</div>
 									</div>
+									<%}%>
 									<% }) 	%>
 								</div>
 							</div>
