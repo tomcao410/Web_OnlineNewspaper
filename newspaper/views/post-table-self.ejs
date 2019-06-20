@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <% include template/header-admin.ejs %>
+    <% include template/css.ejs %>
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <%include template/sidebarAdmin.ejs%>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <!-- Topbar Search -->
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+
+
+
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <% include template/user-infomation.ejs %>
+
+
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Quản lý bài đăng</h1>
+
+          <% if (userInfo[0].userClass == 2) { %>
+          <a href="/admin/write-post" class="btn btn-primary btn-icon-split mr-4">
+            <span class="icon text-white  ">
+              <i class="fa fa-plus"></i>
+            </span>
+            <span class="text">Add Post</span>
+          </a>
+          <% } %>
+          <a href="#" class="btn btn-danger btn-icon-split mr-4">
+            <span class="icon text-white  ">
+              <i class="fa fa-trash"></i>
+            </span>
+            <span class="text">Delete</span>
+          </a>
+          <a href="#" class="btn btn-success btn-icon-split mr-4">
+            <span class="icon text-white  ">
+              <i class="fa fa-upload"></i>
+            </span>
+            <span class="text">Publish</span>
+          </a>
+          <% if (userInfo[0].userClass > 2) { %>
+          <a href="#" class="btn btn-warning btn-icon-split">
+              <span class="icon text-white  ">
+                  <i class="fa fa-check"></i>
+              </span>
+              <span class="text">Approve</span>
+            </a>
+            <% } %>
+          <!-- DataTales Users -->
+          <%
+            var curClass = userInfo[0].userClass;
+            var temp = [];
+            if (curClass == 2)
+            {
+              for (var i = 0; i < allPosts.length; i++)
+              {
+                if (allPosts[i].authorId == userInfo[0].id)
+                {
+                  temp.push(allPosts[i]);
+                }
+              }
+            }
+            else
+            {
+              for (var i = 0; i < allPosts.length; i++)
+              {
+                temp.push(allPosts[i]);
+              }
+            }
+          %>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Danh sách bài đăng</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Tiêu đề</th>
+                      <th>Chuyên mục</th>
+                      <th>Tag</th>
+                      <th>Tác giả</th>
+                      <th>Ngày viết</th>
+                      <th>Ngày đăng
+                      <th>Tình trạng</th>
+                      <th>Thao tác </th>
+                    </tr>
+                  </thead>
+                <tbody>
+                    <% temp.forEach(function(post) {%>
+                    <tr>
+                        <td><%=post.id%></td>
+                        <td><%=post.title%></td>
+                        <td><%=post.categoryName%>-<%=post.subCategoryName%></td>
+                        <td></td>
+                        <td><%=post.fullname%></td>
+                        <td><%=post.publishDate%></td>
+                        <td></td>
+                        <%if (post.approval == 1) {%>
+                        <td>Đã duyệt</td>
+                        <%}%>
+                        <%if (post.approval != 1) {%>
+                            <td>Chưa duyệt</td>
+                        <%}%>
+                        <% if (userInfo[0].userClass == 2) { %>
+                        <td>
+                            <button class="btn btn-primary" style="max-height: 30px; max-width: 30px"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-primary" style="max-height: 30px; max-width: 30px"><i class="fa fa-trash"></i></button>
+                        </td>
+                        <% } %>
+                    </tr>
+                    <%})%>
+                </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2019</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <% include template/logout-modal.ejs %>
+
+<% include template/footer-admin.ejs %>
+<% include template/js.ejs %>
+
+</body>
+
+</html>

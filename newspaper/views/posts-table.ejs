@@ -91,21 +91,21 @@
             <span class="icon text-white  ">
               <i class="fa fa-plus"></i>
             </span>
-            <span class="text">Add Post</span>
+            <span class="text">Thêm bài đăng</span>
           </a>
           <% } %>
-          <a href="#" class="btn btn-danger btn-icon-split mr-4">
+          <!-- <a href="#" class="btn btn-danger btn-icon-split mr-4">
             <span class="icon text-white  ">
               <i class="fa fa-trash"></i>
             </span>
-            <span class="text">Delete</span>
-          </a>
-          <a href="#" class="btn btn-success btn-icon-split mr-4">
+            <span class="text">Xóa bài</span>
+          </a> -->
+          <!-- <a href="#" class="btn btn-success btn-icon-split mr-4">
             <span class="icon text-white  ">
               <i class="fa fa-upload"></i>
             </span>
             <span class="text">Publish</span>
-          </a>
+          </a> -->
           <% if (userInfo[0].userClass > 2) { %>
           <a href="#" class="btn btn-warning btn-icon-split">
               <span class="icon text-white  ">
@@ -115,6 +115,27 @@
             </a>
             <% } %>
           <!-- DataTales Users -->
+          <%
+            var curClass = userInfo[0].userClass;
+            var temp = [];
+            if (curClass == 2)
+            {
+              for (var i = 0; i < allPosts.length; i++)
+              {
+                if (allPosts[i].authorId == userInfo[0].id)
+                {
+                  temp.push(allPosts[i]);
+                }
+              }
+            }
+            else
+            {
+              for (var i = 0; i < allPosts.length; i++)
+              {
+                temp.push(allPosts[i]);
+              }
+            }
+          %>
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Danh sách bài đăng</h6>
@@ -124,41 +145,61 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th></th>
+                      <th>ID</th>
                       <th>Tiêu đề</th>
                       <th>Chuyên mục</th>
                       <th>Tag</th>
                       <th>Tác giả</th>
-                      <th>Ngày viết</th>
                       <th>Ngày đăng
                       <th>Tình trạng</th>
-
                       <th>Thao tác </th>
                     </tr>
                   </thead>
-                  <tbody>
-
+                <tbody>
+                    <% temp.forEach(function(post) {%>
                     <tr>
-                      <td>
-                        <input type="checkbox">
-                      </td>
-
-                      <td>Ashton Cox</td>
-                      <td>Junior Technical Author</td>
-                      <td>San Francisco</td>
-                      <td>66</td>
-                      <td>2009/01/12</td>
-                      <td>$86,000</td>
-
-                      <td>Unpublish</td>
-                      <% if (userInfo[0].userClass == 2) { %>
-                      <td>
-                        <button class="btn btn-primary">Chỉnh sửa</button>
-                      </td>
-                      <% } %>
+                        <td><%=post.id%></td>
+                        <td><%=post.title%></td>
+                        <td><%=post.categoryName%>-<%=post.subCategoryName%></td>
+                        <td></td>
+                        <td><%=post.fullname%></td>
+                        <td><%=post.publishDate%></td>
+                        <%if (post.approval == 1) {%>
+                        <td>Đã duyệt</td>
+                        <%}%>
+                        <%if (post.approval != 1) {%>
+                            <td>Chưa duyệt</td>
+                        <%}%>
+                        <!-- Writer -->
+                        <% if (userInfo[0].userClass == 2) { %>
+                        <td>
+                          <form action="/admin/del-post" method="POST" >
+                            <button class="btn btn-danger" style="max-height: 30px; max-width: 30px;"><i class="fa fa-trash"></i></button>
+                            <input type="text" name="postID" value="<%=post.id%>" style="visibility: collapse">
+                          </form>
+                          <%if (post.approval != 1) {%>
+                          <form action="/admin/write-post" method="POST">
+                            <button class="btn btn-primary" style="max-height: 30px; max-width: 30px"><i class="fa fa-pencil"></i></button>
+                          </form>
+                          <%}%>                   
+                        </td>
+                        <% } %>
+                        <!-- Editor -->
+                        <% if (userInfo[0].userClass == 3) { %>
+                          <td>
+                            <button class="btn btn-success" style="max-height: 30px; max-width: 30px;"><i class="fa fa-check"></i></button>
+                          </td>
+                        <% } %>
+                        <!-- Admin -->
+                        <% if (userInfo[0].userClass == 4) { %>
+                        <td>
+                          <button class="btn btn-success" style="max-height: 30px; max-width: 30px;"><i class="fa fa-check"></i></button>
+                          <button class="btn btn-danger" style="max-height: 30px; max-width: 30px;"><i class="fa fa-trash"></i></button>
+                        </td>
+                        <% } %>
                     </tr>
-
-                  </tbody>
+                    <%})%>
+                </tbody>
                 </table>
               </div>
             </div>
