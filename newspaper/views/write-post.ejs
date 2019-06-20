@@ -3,11 +3,9 @@
 
 <head>
 
-
-
-
     <% include template/header-admin.ejs%>
     <% include template/css.ejs%>
+
 
 </head>
 
@@ -28,48 +26,8 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -83,68 +41,103 @@
                 <!-- Begin Page Content -->
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800 ml-5">Đăng bài</h1>
-
-                <div class="input-group mb-3 ml-5 w-25">
-                    <select class="custom-select" id="inputGroupSelect02" onchange="categorySelect()">
-                        <option selected>Chọn chuyên mục</option>
-                        <% dataTopic.chuyenmuc.forEach(function(motChuyenMuc){
-                            motChuyenMuc.sub_category.forEach(function(chuyenMucCon){ %>
-                        <option value="<%=motChuyenMuc.name %> - <%=chuyenMucCon %>"><%=motChuyenMuc.name%> - <%=chuyenMucCon %> %></option>
-                        <%})%>
-                        <%})%>
-                        <!-- <option value="Supercars">Supercars</option>
-                        <option value="Humor">Humor</option> -->
-                    </select>
-                    
-                    <div class="input-group-append">
-                        <label class="input-group-text bg-gradient-primary text-light" for="inputGroupSelect02" style="background: rgba(0, 0, 0, 0.4)">Chuyên mục</label>
+                <form method="POST" action="/add-post">
+                    <div class="input-group mb-3 ml-5 w-25" style="width: 500px">
+                        <div class="input-group-append">
+                            <label class="input-group-text bg-gradient-primary text-light" for="inputGroupSelect02"
+                                style="background: rgba(0, 0, 0, 0.4)">Chuyên mục</label>
+                            <select class="custom-select" id="inputGroupSelect01" name="selectBox1" style="min-width: 100px" onchange="selectBoxOneChange()">
+                                <% topics.forEach(function(topic){ %>
+                                <option value="<%=topic.subCategories[0].categoryId %>">
+                                    <%=topic.categoryName%>
+                                </option>
+                                <%})%>
+                            </select>
+                            <select class="custom-select" id="inputGroupSelect02" name="selectBox2" style="min-width: 150px">
+                                <% topics.forEach(function(topic){
+                                    topic.subCategories.forEach(function(subTopic){
+                                        if (subTopic.categoryId == 1) {%>
+                                <option value="<%=subTopic.id %>"><%=subTopic.subcategoryName%></option>
+                                <% } %>
+                                <%})%>
+                                <%})%>
+                            </select>
+                            <select class="custom-select" id="inputGroupSelect00_catId" style="min-width: 150px; visibility: collapse">
+                                <% topics.forEach(function(topic){
+                                    topic.subCategories.forEach(function(subTopic){ %>
+                                <option value="<%=subTopic.categoryId %>"></option>
+                                <%})%>
+                                <%})%>
+                            </select>
+                            <select class="custom-select" id="inputGroupSelect00_subCatId" style="min-width: 150px; visibility: collapse">
+                                <% topics.forEach(function(topic){
+                                                                    topic.subCategories.forEach(function(subTopic){ %>
+                                <option value="<%=subTopic.id %>"></option>
+                                <%})%>
+                                <%})%>
+                            </select>
+                            <select class="custom-select" id="inputGroupSelect00_subCatName" style="min-width: 150px; visibility: collapse">
+                                <% topics.forEach(function(topic){
+                                                                                                    topic.subCategories.forEach(function(subTopic){ %>
+                                <option value="<%=subTopic.subcategoryName %>"></option>
+                                <%})%>
+                                <%})%>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="d-flex justify-content-between container-fluid">
-                    <div class="ml-4">
-                        <label for="" class="">Tags: </label>
-                        <input type="text" value="" data-role="tagsinput">
-                        
+                    <div class="d-flex justify-content-between container-fluid">
+                        <button style="width: 200px" type="submit">
+                            <a class=" btn btn-warning  btn-icon-split" style="background: rgba(0, 0, 0, 0.4);">
+                                <span class="icon text-white  ">
+                                    <i class="fa fa-upload"></i>
+                                </span>
+                                <span class="text text-white">Đăng bài</span>
+                            </a>
+                        </button>
                     </div>
-
-
-                </div>
-                <div class="d-flex justify-content-between container-fluid">
-                <a href="#" id="btn-submit" class=" btn btn-warning  btn-icon-split" style="background: rgba(0, 0, 0, 0.4);">
-                        <span class="icon text-white  ">
-                            <i class="fa fa-upload"></i>
-                        </span>
-                        <span class="text text-white">Đăng bài</span>
-                    </a>
-                </div>
-                <div class=" form-group ml-5 w-50 mt-3">
-
-                    <label for="inputTitle">Title: </label>
-
-
-                    <input type="text" class="form-control font-weight-bold" id="inputAddress" placeholder="*tên bài đăng">
-
-                </div>
-                <!-- /.container-fluid -->
-                <div class="row d-flex justify-content-center">
-                    <textarea name="editor1" id="editor1">&lt;p&gt;*văn bản&lt;/p&gt;</textarea>
-                    <script>
-                        CKEDITOR.replace('editor1');
-                        CKEDITOR.config.width = "93%";
-                        CKEDITOR.config.height = 850;
-                    </script>
-
-                </div>
-
-            </div>
+                    <div class=" form-group ml-5 w-50 mt-3">
+                        <label for="inputTitle">Tiêu đề: </label>
+                        <input type="text" class="form-control font-weight-bold" name="postTitle"
+                            placeholder="*tên bài đăng" required>
+                    </div>
+                    <div class=" form-group ml-5 w-50 mt-3">
+                            <label for="inputTitle">Đường dẫn ảnh bìa: </label>
+                            <input type="text" class="form-control font-weight-bold" name="imgLink"
+                                placeholder="URL ảnh" required>
+                        </div>
+                    <div class=" form-group ml-5 w-50 mt-3">
+                        <label for="inputTitle">Mô tả: </label>
+                        <input type="text" class="form-control font-weight-bold" name="postExcerpt"
+                            placeholder="*đoạn trích, mô tả" required>
+                    </div>
+                    <div class=" form-group ml-5 w-50 mt-3">
+                        <label for="inputTitle">Ngày đăng: </label>
+                        <input type="date" class="form-control font-weight-bold" name="toBePublishedDate" id="publishDatePicker" style="width: 200px" required>
+                    </div>
+                    <!-- /.container-fluid -->
+                    <div class="row d-flex justify-content-center">
+                        <textarea name="editor1" id="editor1" required></textarea>
+                        <script>
+                            CKEDITOR.replace('editor1');
+                            CKEDITOR.config.width = "93%";
+                            CKEDITOR.config.height = 850;
+                        </script>
+                    </div>
+                    <%var curPostId = newestPostId + 1;%>
+                    <input type="text" name="authorID" value="<%=userInfo.id%>" style="visibility:collapse">
+                    <input type="text" name="postID" value="<%=curPostId%>" style="visibility:collapse">
+                    <input type="text" name="views" value="10" style="visibility:collapse">
+                    <input type="text" name="approve" value="1" style="visibility:collapse">
+                    <input type="text" name="premium" value="0" style="visibility:collapse">
+                    </div>
+                </form>
             <!-- End of Main Content -->
 
             <!-- Footer -->
             <!-- <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        
+
                     </div>
                 </div>
             </footer> -->
@@ -163,12 +156,11 @@
 
     <!-- Logout Modal-->
     <% include template/logout-modal.ejs %>
-        <!-- Bootstrap core JavaScript-->
-        <% include template/footer-admin.ejs%>
-            <script src="../../javascripts/write-post.js"></script>
-            <!-- <script src="../../javascripts/selecSubCategory.js"></script> -->
-            <script type="text/javascript" src="../model/topic.json"></script>
-            <% include template/js.ejs %>
+    <!-- Bootstrap core JavaScript-->
+    <% include template/footer-admin.ejs%>
+    <script src="../../javascripts/write-post.js"></script>
+    <script type="text/javascript" src="../model/topic.json"></script>
+    <% include template/js.ejs %>
 </body>
 
 </html>
