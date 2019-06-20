@@ -137,17 +137,17 @@
                     </tr>
                   </thead>
                   <tbody>
-
+                    <% posts.forEach(function(post) { %>
                     <tr>
                       <td>
                         <input type="checkbox">
                       </td>
 
-                      <td>Ashton Cox</td>
-                      <td>Junior Technical Author</td>
+                      <td><%= post.title %></td>
+                      <td><%= post.title %></td>
                       <td>San Francisco</td>
                       <td>66</td>
-                      <td>2009/01/12</td>
+                      <td><%= post.publishDate %></td>
                       <td>$86,000</td>
 
                       <td>Unpublish</td>
@@ -157,7 +157,7 @@
                       </td>
                       <% } %>
                     </tr>
-
+                    <% }) %>
                   </tbody>
                 </table>
               </div>
