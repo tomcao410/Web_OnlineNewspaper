@@ -29,52 +29,15 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
 
                         <!-- Nav Item - Alerts -->
-                 
+
 
                         <!-- Nav Item - Messages -->
-            
+
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -103,49 +66,48 @@
                     <div class="p-5 col-lg-6">
 
                         <form class="user">
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="">Tên</label>
-                                    <input type="text" class="form-control form-control-user" id="exampleFirstName" value="Tên của bạn" placeholder="First Name">
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="">Họ</label>
 
-                                    <input type="text" class="form-control form-control-user" id="exampleLastName" value="" placeholder="Họ của bạn">
-                                </div>
+                            <div class="form-group">
+                                <label for="">Username:</label>
+
+                                <input type="email" class="form-control form-control-user" id="username" value="<%= userInfo[0].username %>" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Full name</label>
+
+                                <input type="email" class="form-control form-control-user" id="fullname" value="<%= userInfo[0].fullname %>" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="">Email</label>
 
-                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" value="" placeholder="abcxyz@domain">
+                                <input type="email" class="form-control form-control-user" id="email" value="<%= userInfo[0].email %>" disabled>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="">Phân hệ</label>
+                            <div class="form-group">
+                                <label for="">Day of Birth</label>
 
-                                    <input type="text" class="form-control form-control-user" disabled id="exampleInputEmail" value="Admin">
-
-                                </div>
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label for="">Bài đã đăng</label>
-    
-                                        <input type="text" class="form-control form-control-user" disabled id="exampleInputEmail" value="15" placeholder="Email Address">
-    
-                                    </div>
+                                <input type="email" class="form-control form-control-user" id="dob" value="<%= userInfo[0].dob %>" disabled>
                             </div>
-                            <!-- <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="">Password</label>
+                            <% if (userInfo[0].userClass == 2) { %>
+                            <div class="form-group">
+                                <label for="">Role</label>
 
-                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" value="8534118" placeholder="Password">
-                                </div>
+                                <input type="email" class="form-control form-control-user" id="userclass" value="Writer" disabled>
+                            </div>
+                            <% } %>
+                            <% if (userInfo[0].userClass == 3) { %>
+                            <div class="form-group">
+                                <label for="">Role</label>
 
-                            </div> -->
-                            <a href="/admin/profile" class="btn btn-primary btn-user btn-block">
-                                UPDATE
-                            </a>
+                                <input type="email" class="form-control form-control-user" id="userclass" value="Editor" disabled>
+                            </div>
+                            <% } %>
+                            <% if (userInfo[0].userClass == 4) { %>
+                            <div class="form-group">
+                                <label for="">Role</label>
 
-
+                                <input type="email" class="form-control form-control-user" id="userclass" value="Admin" disabled>
+                            </div>
+                            <% } %>
                         </form>
 
 

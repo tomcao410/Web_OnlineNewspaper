@@ -16,5 +16,9 @@ module.exports = {
 
     update : (idField, entity) => {
       return db.update('users', idField, entity);
+    },
+
+    loadPosts : userID => {
+      return db.load(`SELECT *, DATE_FORMAT(publishDate, "%Y-%m-%d") as publishDate FROM posts WHERE authorID = ${userID}`);
     }
 }
