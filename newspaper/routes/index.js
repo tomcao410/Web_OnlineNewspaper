@@ -9,6 +9,7 @@ var commentModel = require('../model/uploadCmt.js');
 var postModel = require('../model/uploadPost');
 var bcrypt = require('bcrypt');
 var userModel = require('../model/user');
+var catModel = require('../model/uploadCat');
 var _ = require('lodash');
 
 // ----------------
@@ -287,6 +288,74 @@ router.get('/admin/users-table', function(req, res, next) {
   res.render('users-table', { userInfo: userInfo, title: 'Express' });
 });
 
+router.get('/admin/categories-table', function(req, res, next) {
+  let userInfo = req.session.userInfo;
+  var getTopics = topics.cat();
+  var getSubTopics = topics.topicMng();
+  Promise.all([getTopics, getSubTopics]).then(result => {
+    var allTopics = JSON.parse(JSON.stringify(result[0]));
+    var allSubtopics = JSON.parse(JSON.stringify(result[1]));
+    res.render('categories-table', { userInfo: userInfo, topics: allTopics, subTopics: allSubtopics, title: 'Express' });
+  }).catch(err => {
+    console.log(err);
+  })
+});
+
+router.get('/admin/add-categories', function(req, res, next) {
+  let userInfo = req.session.userInfo;
+  var getTopics = topics.cat();
+  var getSubTopics = topics.subCat();
+  Promise.all([getTopics, getSubTopics]).then(result => {
+    var allTopics = JSON.parse(JSON.stringify(result[0]));
+    var allSubtopics = JSON.parse(JSON.stringify(result[1]));
+    res.render('add-categories', {userInfo: userInfo, topics: allTopics, subTopics: allSubtopics, title: 'Express' });
+  }).catch(err => {
+    console.log(err);
+  })
+});
+
+router.post('/add-categories', (req, res) => {
+  console.log(req.body);
+  var isNewCat = req.body.categoryName;
+  var getSubCatByCat = topics.subCatByCatId(req.body.selectBox);
+  
+  if (isNewCat.length == 0)
+  {
+    Promise.all([getSubCatByCat]).then(result => {
+      var subCatByCat = JSON.parse(JSON.stringify(result[0]));
+      var subCatId = subCatByCat[subCatByCat.length - 1].id + 1;
+      var subCatEntity = {
+        id: subCatId,
+        categoryId: req.body.selectBox,
+        subCategoryName: req.body.subCategoryName
+      }
+      catModel.addSubCat(subCatEntity).then(id => {
+        console.log(id);
+        res.redirect('/admin/add-categories');
+      }).catch(err => {
+        console.log(err);
+      })
+    }).catch(err => {
+      console.log(err);
+    });
+    
+  }
+  else
+  {
+    var catEntity = {
+      id: req.body.topicId,
+      categoryName: req.body.categoryName
+    }
+    catModel.addCat(catEntity).then(id => {
+      console.log(id);
+      res.redirect('/admin/add-categories');
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+})
+
+//-------------------------------------Posts section----------------------------------//
 router.get('/admin/posts-table', function(req, res, next) {
   let userInfo = req.session.userInfo;
   var p = userModel.loadPosts(userInfo[0].id);
@@ -311,6 +380,7 @@ router.get('/admin/posts-table', function(req, res, next) {
     console.log(err);
   });
 });
+
 router.post('/admin/del-post', function(req, res, next){
   var fid = req.body.postID;
   var field = "id";
