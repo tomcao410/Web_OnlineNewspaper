@@ -274,8 +274,8 @@ router.get('/admin/posts-table', function(req, res, next) {
   p.then(rows => {
       if (rows.length > 0)
       {
-
-        res.render('posts-table', { userInfo: userInfo, title: 'Express' });
+        let posts = rows;
+        res.render('posts-table', { posts: posts, userInfo: userInfo, title: 'Express' });
       }
       else {
         console.log('There is no post from this writer');

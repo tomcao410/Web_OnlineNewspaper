@@ -19,6 +19,6 @@ module.exports = {
     },
 
     loadPosts : userID => {
-      return db.load(`SELECT * FROM posts WHERE authorID = ${userID}`);
+      return db.load(`SELECT *, DATE_FORMAT(publishDate, "%Y-%m-%d") as publishDate FROM posts WHERE authorID = ${userID}`);
     }
 }
