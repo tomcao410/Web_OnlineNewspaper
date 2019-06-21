@@ -439,6 +439,86 @@ router.post('/add-categories', (req, res) => {
   }
 })
 
+router.post('/admin/del-cat', (req, res) => {
+  console.log(req.body);
+  postModel.delPost("category", req.body.topicID).then(id => {
+    console.log(id);
+  }).catch(err => {
+    console.log(err);
+  });
+  catModel.delSubCat("categoryId", req.body.topicID).then(id => {
+    console.log(id);
+  }).catch(err => {
+    console.log(err);
+  });
+  catModel.delCat("id", req.body.topicID).then(id => {
+    console.log(id);
+  }).catch(err => {
+    console.log(err);
+  })
+  res.redirect('/admin/categories-table');
+})
+
+router.post('/admin/del-subCat', (req, res) => {
+  console.log(req.body);
+  postModel.delPostsWithSubCat("category", "sub_category", req.body.topicID, req.body.subTopicID).then(id => {
+    console.log(id);
+  }).catch(err => {
+    console.log(err);
+  });
+  catModel.delSubCatOnly("id", "categoryId", req.body.subTopicID, req.body.topicID).then(id => {
+    console.log(id);
+  }).catch(err => {
+    console.log(err);
+  });
+  res.redirect('/admin/categories-table');
+})
+
+router.get('/admin/edit-cat', function(req, res, next){
+  var queryParam = req.url;
+  var topicId = queryParam.slice(queryParam.lastIndexOf('=') + 1);
+  var getTopicDetail = topics.catById(topicId);
+  Promise.all([getTopicDetail]).then(result => {
+    var topicDetail = JSON.parse(JSON.stringify(result[0]));
+    res.render('edit-cat', {topicDetail: topicDetail, userInfo: req.session.userInfo, title: 'Sửa chuyên mục'});
+  })
+})
+
+router.post('/catEditSaved', (req, res) => {
+  var entity = {
+    id: req.body.topicID,
+    categoryName: req.body.newName
+  }
+  catModel.updateTopic(entity, "id").then(id => {
+    console.log(id);
+    res.redirect('/admin/categories-table')
+  }).catch(err => {
+    console.log(err);
+  });
+})
+
+router.get('/admin/edit-subCat', function(req, res, next){
+  var queryParam = req.url;
+  var subTopicId = queryParam.slice(queryParam.lastIndexOf('-') + 1);
+  var topicId = queryParam.slice(queryParam.lastIndexOf('=') + 1, queryParam.lastIndexOf('-'));
+  var getSubTopicDetail = topics.subCatDetail(topicId, subTopicId);
+  var getTopicDetail = topics.catById(topicId);
+  Promise.all([getSubTopicDetail, getTopicDetail]).then(result => {
+    var subTopicDetail = JSON.parse(JSON.stringify(result[0]));
+    var topicDetail = JSON.parse(JSON.stringify(result[1]));
+    res.render('edit-subCat', {topicDetail: topicDetail ,subTopicDetail: subTopicDetail, userInfo: req.session.userInfo, title: 'Sửa chuyên mục'});
+  })
+})
+
+router.post('/subCatEditSaved', (req, res) => {
+  catModel.updateSubTopic("categoryId","id",req.body.topicID, req.body.subTopicID,req.body.newName).then(id => {
+    console.log(id);
+    res.redirect('/admin/categories-table')
+  }).catch(err => {
+    console.log(err);
+  });
+})
+
 //-------------------------------------Posts section----------------------------------//
 router.get('/admin/posts-table', function(req, res, next) {
   let userInfo = req.session.userInfo;
@@ -521,12 +601,6 @@ router.post('/admin/approve-post', function(req, res, next){
     console.log(err);
   });
   res.redirect('/admin/posts-table');
-  // postModel.approvePost("id", req.body.postID).then(id => {
-  //   console.log(id);
-  // }).catch(err => {
-  //   console.log(err);
-  // });
-  // res.redirect('/admin/posts-table');
 });
 
 router.get('/admin/edit-post', function (req, res, next) {
@@ -548,10 +622,12 @@ router.get('/admin/edit-post', function (req, res, next) {
 router.get('/admin/write-post', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.allDefault();
-  Promise.all([getTopics, getAllPosts]).then(result => {
+  var getNewestPost = allPost.newestPostId();
+  Promise.all([getTopics, getAllPosts, getNewestPost]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
-    var newestPostId = allPosts[allPosts.length - 1].id;
+    var newestPost = JSON.parse(JSON.stringify(result[2]));
+    var newestPostId = newestPost[0].id;
     var isLogin = true; var userInfo = null;
     console.log(req.session.userInfo);
     var userInfo = req.session.userInfo;

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <% include template/header-admin.ejs%>
+    <% include template/css.ejs%>
+
+
+</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <%include template/sidebarAdmin.ejs%>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <% include template/user-infomation.ejs %>
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+
+                <!-- Page Heading -->
+                <form method="POST" action="/subCatEditSaved">
+                    <div class="d-flex justify-content-between container-fluid">
+                        <button style="width: 230px" type="submit">
+                            <a class=" btn btn-warning  btn-icon-split" style="background: rgba(0, 0, 0, 0.4);">
+                                <span class="icon text-white  ">
+                                    <i class="fa fa-check"></i>
+                                </span>
+                                <span class="text text-white">Lưu thay đổi</span>
+                            </a>
+                        </button>
+                    </div>
+                    <%topicDetail.forEach(function(detail) {%>
+                    <div class=" form-group ml-5 w-50 mt-3">
+                        <label for="inputTitle">Tên chuyên mục: </label>
+                        <input type="text" class="form-control font-weight-bold" name="topicName"
+                            value="<%=detail.categoryName%>" disabled>
+                        <input type="text" name="topicID" value="<%=detail.id%>" style="visibility: collapse; display: none">
+                    </div>
+                    <%})%>
+                    <%subTopicDetail.forEach(function(detail){%>
+                    <div class=" form-group ml-5 w-50 mt-3">
+                        <label for="inputTitle">Tên cũ: </label>
+                        <input type="text" class="form-control font-weight-bold" name="oldName"
+                            placeholder="*tên bài đăng"  value="<%=detail.subcategoryName%>" disabled>
+                    </div>
+                    <div class=" form-group ml-5 w-50 mt-3">
+                            <label for="inputTitle">Tên mới: </label>
+                            <input type="text" class="form-control font-weight-bold" name="newName"
+                                placeholder="*tên mới"  required>
+                        </div>
+                    </div>
+                    <input type="text" name="subTopicID" value="<%=detail.id%>" style="visibility: collapse; display: none">
+                    <%})%>
+                </form>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <!-- <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+
+                    </div>
+                </div>
+            </footer> -->
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <% include template/logout-modal.ejs %>
+    <!-- Bootstrap core JavaScript-->
+    <% include template/footer-admin.ejs%>
+    <script src="../../javascripts/write-post.js"></script>
+    <script type="text/javascript" src="../model/topic.json"></script>
+    <% include template/js.ejs %>
+</body>
+
+</html>
