@@ -185,7 +185,18 @@
                         <!-- Editor -->
                         <% if (userInfo[0].userClass == 3) { %>
                           <td>
-                            <button class="btn btn-success" style="max-height: 30px; max-width: 30px;"><i class="fa fa-check"></i></button>
+                            <%if (post.approval != 1) {%>
+                            <form action="/admin/approve-post" method="POST" style="display: inline-block">
+                              <button class="btn btn-success" style="max-height: 30px; max-width: 30px;"><i class="fa fa-check"></i></button>
+                              <input type="text" name="postID" value="<%=post.id%>" style="visibility: collapse; display: none">
+                            </form>
+                            <%}%>
+                            <%if (post.approval == 1) {%>
+                            <form action="/admin/disapprove-post" method="POST" style="display: inline-block">
+                              <button class="btn btn-danger" style="max-height: 30px; max-width: 30px;"><i class="fa fa-times"></i></button>
+                              <input type="text" name="postID" value="<%=post.id%>" style="visibility: collapse; display: none">
+                            </form>
+                            <%}%>
                           </td>
                         <% } %>
                         <!-- Admin -->
