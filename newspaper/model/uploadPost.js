@@ -17,5 +17,8 @@ module.exports = {
     },
     publishDateUpdate : (idField, id, dateString) => {
         return db.publishDateUpdate(idField, id, dateString);
-    }
+    },
+    delPostsWithSubCat: (catIdField, subCatIdField, catId, subCatId) => {
+        return db.delPostsWithSubCat(catIdField, subCatIdField, catId, subCatId);
+    },
 }

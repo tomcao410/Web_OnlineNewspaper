@@ -184,13 +184,13 @@
                                             <td><%=topic.categoryName%></td>
                                             <td><%=topic.subCategoryName%></td>
                                             <td>
-                                                <form action="/admin/del-cat" method="POST" style="display: inline-block">
+                                                <form action="/admin/del-subCat" method="POST" style="display: inline-block">
                                                     <button class="btn btn-danger" style="max-height: 30px; max-width: 30px;"><i
                                                             class="fa fa-trash"></i></button>
-                                                    <input type="text" name="subTopicID" value="<%=topic.id%>"
-                                                        style="visibility: collapse; display: none">
+                                                    <input type="text" name="subTopicID" value="<%=topic.id%>" style="visibility: collapse; display: none">
+                                                    <input type="text" name="topicID" value="<%=topic.categoryId%>" style="visibility: collapse; display: none">
                                                 </form>
-                                                <form action="/admin/edit-cat" method="GET" style="display: inline-block">
+                                                <form action="/admin/edit-subCat" method="GET" style="display: inline-block">
                                                     <button class="btn btn-primary" style="max-height: 30px; max-width: 30px"><i
                                                             class="fa fa-pencil"></i></button>
                                                     <input type="text" name="subTopicID" value="<%=topic.categoryId%>-<%=topic.id%>"

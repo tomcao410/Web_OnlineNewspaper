@@ -95,12 +95,61 @@ module.exports = {
     });
   },
 
+  updateSubCat: (catIdField, subCatIdField, catId, subCatId, newName) => {
+    return new Promise((resolve, reject) => {
+      var sql = `update SubCategories set subcategoryName = '${newName}' where ${catIdField} = ${catId} and ${subCatIdField} = ${subCatId}`;
+      var connection = createConnection();
+      connection.connect();
+      connection.query(sql, [catId, subCatId, newName], (error, value) => {
+        if (error){
+          reject(error);
+        }
+        else{
+          resolve(value.changedRows);
+        }
+        connection.end();
+      });
+    });
+  },
+
   delete: (tableName, idField, id) => {
     return new Promise((resolve, reject) => {
       var sql = `delete from ${tableName} where ${idField} = ?`;
       var connection = createConnection();
       connection.connect();
       connection.query(sql, id, (error, value) => {
+        if (error)
+          reject(error);
+        else {
+          resolve(value.affectedRows);
+        }
+        connection.end();
+      });
+    });
+  },
+
+  delSubCatOnly: (idField, catIdField, id, catId) => {
+    return new Promise((resolve, reject) => {
+      var sql = `delete from SubCategories where ${idField} = ${id} and ${catIdField} = ${catId}`;
+      var connection = createConnection();
+      connection.connect();
+      connection.query(sql, [id, catId], (error, value) => {
+        if (error)
+          reject(error);
+        else {
+          resolve(value.affectedRows);
+        }
+        connection.end();
+      });
+    });
+  },
+
+  delPostsWithSubCat: (catIdField, subCatIdField, catId, subCatId) => {
+    return new Promise((resolve, reject) => {
+      var sql = `delete from Posts where ${catIdField} = ${catId} and ${subCatIdField} = ${subCatId}`;
+      var connection = createConnection();
+      connection.connect();
+      connection.query(sql, [catId, subCatId], (error, value) => {
         if (error)
           reject(error);
         else {
