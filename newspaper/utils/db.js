@@ -4,7 +4,7 @@ var createConnection = ()=>{
   return mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : '123456',
+    password : '30111998',
     database : 'Newspaper',
     timezone: 'Z',
     dateStrings: true
@@ -55,6 +55,39 @@ module.exports = {
         if (error)
           reject(error);
         else {
+          resolve(value.changedRows);
+        }
+        connection.end();
+      });
+    });
+  },
+
+  disapprovalUpdate: (idField, id) => {
+    return new Promise((resolve, reject) => {
+      var sql = `update Posts set approval = 0 where ${idField} = ${id}`;
+      var connection = createConnection();
+      connection.connect();
+      connection.query(sql, [id], (error, value) => {
+        if (error){
+          reject(error);
+        }
+        else{
+          resolve(value.changedRows);
+        }
+        connection.end();
+      });
+    });
+  },
+  publishDateUpdate: (idField, id, dateString) => {
+    return new Promise((resolve, reject) => {
+      var sql = `update Posts set publishDate = '${dateString}', approval = 1 where ${idField} = ${id}`;
+      var connection = createConnection();
+      connection.connect();
+      connection.query(sql, [id, dateString], (error, value) => {
+        if (error){
+          reject(error);
+        }
+        else{
           resolve(value.changedRows);
         }
         connection.end();

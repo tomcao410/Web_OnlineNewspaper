@@ -12,7 +12,7 @@ var userModel = require('../model/user');
 var catModel = require('../model/uploadCat');
 var _ = require('lodash');
 
-// ----------------
+// ---------------- Reconfig object -----------------//
 function transformTopics(rows) {
   rows = JSON.parse(JSON.stringify(rows));
     rowsGroupby = _.groupBy(rows, row => row.categoryName);
@@ -119,18 +119,25 @@ router.post('/register', (req, res) => {
   var verify = false;
   var verPsw = false;
   var verEmail = false
-  if (entity.password !== entity.confirmPass)
+  if (entity.password == entity.confirmPass)
   {
-    verPsw = false;
+    verPsw = true;
   }
-  if (!entity.email.includes("@"))
+  console.log(entity.password);
+  console.log(entity.confirmPass);
+  console.log(entity.email);
+  if (entity.email.includes("@"))
   {
-    verEmail = false;
+    verEmail = true;
   }
-  if (verEmail == false || verPsw == false)
+  if (verEmail == true && verPsw == true)
   {
-    verify = false;
+    verify = true;
   }
+  console.log("---------");
+  console.log(verify);
+  console.log("---------");
+  
   if (verify == true) {
     var passHashed = bcrypt.hashSync(entity.password, 10);
     console.log(passHashed);
@@ -489,6 +496,36 @@ router.post("/saved", function(req, res, next){
   }).catch(err => {
     console.log(err);
   });
+});
+
+router.post('/admin/disapprove-post', function(req, res, next){
+  console.log(req.body);
+  postModel.disapprovePost("id", req.body.postID).then(id => {
+    console.log(id);
+    res.redirect('/admin/posts-table');
+  }).catch(err => {
+    console.log(err);
+  });
+});
+
+router.post('/admin/approve-post', function(req, res, next){
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2,'0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+  var dateStr = yyyy + '-' + mm + '-' + dd;
+  postModel.publishDateUpdate("id", req.body.postID, dateStr).then(id => {
+    console.log(id);
+  }).catch(err => {
+    console.log(err);
+  });
+  res.redirect('/admin/posts-table');
+  // postModel.approvePost("id", req.body.postID).then(id => {
+  //   console.log(id);
+  // }).catch(err => {
+  //   console.log(err);
+  // });
+  // res.redirect('/admin/posts-table');
 });
 
 router.get('/admin/edit-post', function (req, res, next) {
