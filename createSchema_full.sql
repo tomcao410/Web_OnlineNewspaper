@@ -14,6 +14,7 @@ create table Posts(
     imgLink varchar(255),
     approval int, 
     premium bool
+    
 );
 /*
 approval - xét duyệt
@@ -49,7 +50,8 @@ create table Users(
     userClass int,
     fullname char(100),    
     dabirthday date,
-    email char(50)
+    email char(50),
+    isDelete bool
 );
 
 /*
@@ -83,7 +85,7 @@ create table Comments(
 );
 alter table SubCategories add constraint FK_SubCategories_Categories foreign key (categoryId) references Categories(id);
 alter table Posts add constraint FK_Posts_SubCategories foreign key (sub_category, category) references SubCategories(id, categoryId);
-alter table Posts add constraint FK_Posts_Tags foreign key (id) references Tags(postId);
+
 alter table Posts add constraint FK_Posts_Users foreign key (authorId) references Users(id);
 alter table Comments add constraint FK_Comments_Posts foreign key (postId) references Posts(id);
 
@@ -104,17 +106,17 @@ insert into SubCategories values(2,4,"Tennis");
 insert into SubCategories values(1,5,"Việt Nam");
 insert into SubCategories values(2,5,"Thế giới");
 
-insert into Users values(1,"dang","123",4,"Dang Nguyen","1998-08-01","dangnguyen181998@gmail.com");
-insert into Users values(2,"hoang","123",3,"Tom Cao","1998-08-01","dangnguyen181998@gmail.com");
-insert into Users values(3,"hao","123",1,"Te Hao","1998-08-01","dangnguyen181998@gmail.com");
-insert into Users values(4,"duy","123",2,"Duy Trần","1998-08-01","dangnguyen181998@gmail.com");
-insert into Users values(5,"an","123",2,"Ân Nguyễn","1998-08-01","dangnguyen181998@gmail.com");
-insert into Users values(6,"bao","123",2,"Bảo Lam","1998-08-01","dangnguyen181998@gmail.com");
-insert into Users values(7,"minh","123",2,"Nhật Minh","1998-08-01","dangnguyen181998@gmail.com");
-insert into Users values(8,"anh","123",2,"Nhật Ánh","1998-08-01","dangnguyen181998@gmail.com");
-insert into Users values(9,"ngoc","123",2,"Bảo Ngọc","1998-08-01","dangnguyen181998@gmail.com");
-insert into Users values(10,"phuong","123",2,"Phương Vũ","1998-08-01","dangnguyen181998@gmail.com");
-insert into Users values(11,"dat","123",2,"Đạt Phan","1998-08-01","dangnguyen181998@gmail.com");
+insert into Users values(1,"dang","123",4,"Dang Nguyen","1998-08-01","dangnguyen181998@gmail.com", false);
+insert into Users values(2,"hoang","123",3,"Tom Cao","1998-08-01","dangnguyen181998@gmail.com", false);
+insert into Users values(3,"hao","123",1,"Te Hao","1998-08-01","dangnguyen181998@gmail.com", false);
+insert into Users values(4,"duy","123",2,"Duy Trần","1998-08-01","dangnguyen181998@gmail.com", false);
+insert into Users values(5,"an","123",2,"Ân Nguyễn","1998-08-01","dangnguyen181998@gmail.com", false);
+insert into Users values(6,"bao","123",2,"Bảo Lam","1998-08-01","dangnguyen181998@gmail.com", false);
+insert into Users values(7,"minh","123",2,"Nhật Minh","1998-08-01","dangnguyen181998@gmail.com", false);
+insert into Users values(8,"anh","123",2,"Nhật Ánh","1998-08-01","dangnguyen181998@gmail.com", false);
+insert into Users values(9,"ngoc","123",2,"Bảo Ngọc","1998-08-01","dangnguyen181998@gmail.com", false);
+insert into Users values(10,"phuong","123",2,"Phương Vũ","1998-08-01","dangnguyen181998@gmail.com", false);
+insert into Users values(11,"dat","123",2,"Đạt Phan","1998-08-01","dangnguyen181998@gmail.com", false);
 
 insert into writer values(4,"Duy Trần");
 insert into writer values(5,"Ân Nguyễn");
@@ -164,6 +166,8 @@ insert into Tags values(32,'đóng gói nông sản');
 insert into Tags values(33,'khai thác hải sản');
 insert into Tags values(34,'Cua hoàng đế Alaska');
 
+insert into Tags values(29,'Guaido');
+
 insert into posts values(1,4,'Sài Gòn sắp vào mùa mưa',1,1,'2019-04-29','Những ngày tới TP HCM có mưa dông buổi chiều, gia tăng trên diện rộng báo hiệu bước vào mùa mưa.','<p>Dịp lễ 30/4 và 1/5, nắng nóng tại TP HCM và khu vực Nam bộ chỉ xảy ra cục bộ, nền nhiệt phổ biến 33-35 độ C.</p><p>Đài khí tượng thuỷ văn khu vực cho biết, mưa dông đang có xu hướng gia tăng vào chiều tối kèm nguy cơ xảy ra lốc, sét, mưa đá và gió giật mạnh. Riêng TP HCM ban ngày có mưa rào và dông. Đây cũng là kiểu thời tiết đặc trưng trong những ngày đầu tháng 5 đánh dấu Nam bộ vào giai đoạn chuyển mùa mưa.</p><p>Thời gian qua, TP HCM trải qua đợt nắng nóng kéo dài. Nền nhiệt cao nhất duy trì ở mức 37-39 độ C. Do bức xạ, đô thị hoá, nhiệt độ ngoài trời cao hơn lều khí tượng 3-4 độ C khiến người dân luôn mệt mỏi vì oi bức.</p><p>Đến ngày 27 và 28/4, Sài Gòn và Nam bộ đón liên tiếp mưa \’giải nhiệt\’. Lưu lượng mưa ghi nhận đến 89 mm ở Bình Phước, 86 mm ở Bình Dương còn Cà Mau là 36 mm. Tại TP HCM lưu lượng cao nhất đo được ở huyện Hóc Môn là 44,6 mm.</p><p>Nguyên nhân xuất hiện mưa do rãnh thấp xích đạo hoạt động khá mạnh. Ngoài ra, trên cao có áp cao cận nhiệt đới gây nên những nhiễu động, hình thành mây dông gây mưa.</p><p>Dự báo sau đợt nghỉ lễ dài ngày, mưa dông gia tăng, thường kèm lốc, gió giật mạnh và sét nên người dân cần đề phòng khi ra đường.</p><p><strong>Duy Trần</strong></p>',50,'https://i-vnexpress.vnecdn.net/2019/04/29/muangap11536404098680x0-155652-1334-3060-1556520742_500x300.jpg',1, false);
 insert into posts values(2,4,'Biển Cửa Lò ken đặc người trong dịp nghỉ lễ',1,1,'2019-04-29','Trong ba ngày, hơn 200.000 người đã đến bãi biển Cửa Lò \(Nghệ An\), khách sạn đều kín phòng.','<p>Dịp lễ 30/4 và 1/5, nắng nóng tại TP HCM và khu vực Nam bộ chỉ xảy ra cục bộ, nền nhiệt phổ biến 33-35 độ C.</p><p>Đài khí tượng thuỷ văn khu vực cho biết, mưa dông đang có xu hướng gia tăng vào chiều tối kèm nguy cơ xảy ra lốc, sét, mưa đá và gió giật mạnh. Riêng TP HCM ban ngày có mưa rào và dông. Đây cũng là kiểu thời tiết đặc trưng trong những ngày đầu tháng 5 đánh dấu Nam bộ vào giai đoạn chuyển mùa mưa.</p><p>Thời gian qua, TP HCM trải qua đợt nắng nóng kéo dài. Nền nhiệt cao nhất duy trì ở mức 37-39 độ C. Do bức xạ, đô thị hoá, nhiệt độ ngoài trời cao hơn lều khí tượng 3-4 độ C khiến người dân luôn mệt mỏi vì oi bức.</p><p>Đến ngày 27 và 28/4, Sài Gòn và Nam bộ đón liên tiếp mưa \’giải nhiệt\’. Lưu lượng mưa ghi nhận đến 89 mm ở Bình Phước, 86 mm ở Bình Dương còn Cà Mau là 36 mm. Tại TP HCM lưu lượng cao nhất đo được ở huyện Hóc Môn là 44,6 mm.</p><p>Nguyên nhân xuất hiện mưa do rãnh thấp xích đạo hoạt động khá mạnh. Ngoài ra, trên cao có áp cao cận nhiệt đới gây nên những nhiễu động, hình thành mây dông gây mưa.</p><p>Dự báo sau đợt nghỉ lễ dài ngày, mưa dông gia tăng, thường kèm lốc, gió giật mạnh và sét nên người dân cần đề phòng khi ra đường.</p><p><strong>Duy Trần</strong></p>',50,'https://i-dulich.vnecdn.net/2019/04/28/cua-lo-2-1556467395_680x0.jpg',1,false);
 insert into posts values(3,5,'Scarlett Johansson khổ luyện để diện đồ bó của Black Widow',1,3,'2019-04-30','Người đẹp tập từ ba đến sáu tuần và duy trì chế độ ăn nghiêm ngặt để vào vai điệp viên gợi cảm của Marvel.','<p>Khi Avengers: Endgame công chiếu, tên tuổi Scarlett Johansson lại được hâm nóng với vai Black Widow. Cô là một trong các diễn viên gắn bó lâu nhất với Vũ trụ Điện ảnh Marvel, từ Iron Man 2 (2010). Trên Hollywood Reporter, người đẹp kể chế độ tập luyện đế hóa nữ điệp viên nóng bỏng, thường xuyên xuất hiện trong trang phục bó sát.</p><p>Scarlett chưa từng tập gym trước lúc đóng Black Widow. Khi chuẩn bị quay Iron Man 2, cô làm việc cùng chuyên gia Eric Johnson - người từng huấn luyện Ryan Gosling và Sebastian Stan. Diễn viên quan tâm đến khả năng vận động và mặc vừa trang phục nhiều hơn cân nặng.</p><p>Quá trình tập của Scarlett thường từ ba đến sáu tuần, được chia làm ba giai đoạn. Lúc đầu, cô tập các bài chuyển động để có sự gắn kết giữa tâm trí và cơ thể. Giai đoạn hai nhằm nâng cao sức mạnh, chủ yếu là các bài với tạ. Eric cho biết muốn Scarlett có sức khỏe gần giống nhân vật cô đóng. \’Black Widow có thể nâng 226 kg. Chúng tôi cố tái tạo hình tượng nhân vật đó với một người bình thường\’. Scarlett Johansson - cao 1,6 m -  hiện có thể nâng 111kg và chống đẩy với tạ 20kg trên lưng.</p><p>Ở chặng cuối, Scarlett tập để có cơ thể săn chắc khi lên hình. Người đẹp không thích các bài cardio (tập làm tăng nhịp tim) truyền thống. Cô chạy tăng tốc, tập với dây và tạ chuông (kettlebell). Scarlett chọn các bài này còn vì tư thế đẹp, tao nhã khi tập. \’Nhiều người hay nhăn nhó khi tập nhưng cô ấy không có khuôn mặt đó, trừ khi gặp thử thách mới hoặc bài quá khó\’, huấn luyện viên Johnson nói. Một số môn khác được đưa vào chương trình là thể dục dụng cụ, yoga và pilates (môn gồm chuỗi các bài tập cơ thể).</p><p>Với Avengers: Endgame, Scarlett cho biết gặp khó khăn về tuổi tác và gia đình. Người đẹp đã 34 tuổi khi chuẩn bị quay bom tấn, đồng thời đang chăm sóc con gái 5 tuổi. \’Thật khó để cân bằng giữa việc làm mẹ, tập luyện và công việc\’, cô nói. Cô tập bốn hoặc năm ngày một tuần, mỗi buổi từ 45 phút đến một giờ, bắt đầu từ sáu giờ sáng, trước khi con gái thức giấc.</p><p>Scarlett Johansson còn tuân thủ chế độ ăn nghiêm ngặt để giữ dáng và duy trì năng lượng. Nếu bữa ăn cuối cùng trong ngày lúc chín giờ tối, cô sẽ không ăn tiếp trước chín giờ sáng hôm sau. Trước buổi tập, cô ăn trứng, rau xanh và có thể thêm một số chất khác.</p><p>Trong vài ngày trước khi ghi hình, cô giảm lượng carbohydrate để có đường cong đẹp hơn. Ở những ngày tiêu thụ ít carbohydrate (low-carb), người đẹp nạp chính xác 115 gram protein, 75 gram carbohydrate và 50 gram chất béo. Ở những ngày khác, con số này là 105 gram protein, 125 gram carbohydrate và 35 gram chất béo.</p><p>Nhìn lại quá trình tập luyện, Scarlett Johansson hài lòng với tiến bộ bản thân: \’Tôi mạnh hơn và có khả năng vận động tốt hơn 10 năm trước. Điều đó thật tuyệt vời. Sự khỏe mạnh là môt trong những thứ tuyệt nhất khi làm việc cho Marvel\’. Sắp tới, sao nữ hóa thân Black Widow trong tác phẩm kể về quá khứ nhân vật.</p><p><strong>Ân Nguyễn</strong></p>',50,'https://i-giaitri.vnecdn.net/2019/04/29/Scarlett-Johansson-trong-The-A-3864-7366-1556547901.jpg',1, false);
@@ -202,4 +206,12 @@ insert into posts values(34,10,'Hải sản ngoại tiền triệu được săn
 insert into comments values(1,1,3,'ahihi');
 insert into comments values(2,1,3,'ahoho');
 insert into comments values(3,2,3,'ahohi');
+
+insert into tags values(23,'Châu Á');
+insert into tags values(19,'Châu Á');
+insert into tags values(20,'Châu Á');
+insert into tags values(21,'Châu Á');
+insert into tags values(24,'Châu Á');
+insert into tags values(18,'Châu Á');
+
 

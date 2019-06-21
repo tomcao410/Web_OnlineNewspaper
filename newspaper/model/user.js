@@ -3,7 +3,7 @@ var db = require('../utils/db');
 
 module.exports = {
     all : () => {
-        return db.load('select * from users');
+        return db.load('select *,DATE_FORMAT(dabirthday, "%Y-%m-%d") as dabirthday from users');
     },
 
     findUser: username => {

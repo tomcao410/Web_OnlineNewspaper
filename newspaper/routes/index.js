@@ -136,17 +136,20 @@ router.post('/register', (req, res) => {
     console.log(passHashed);
     var p = userModel.register(entity.username, passHashed, entity.fullname, entity.dob, entity.email);
     p.then(rows => {
-      if (rows.length > 0) {
-        req.session.user = rowFound;
-        req.session.op = 0;
-        console.log('Register succeed');
-        console.log(rows);
-        res.redirect('/');
-      }
-      else {
-        console.log('Register failed')
-        res.redirect('/')
-      }
+      var find = userModel.findUser(entity.username);
+      find.then(rowFound => {
+        if (rowFound.length > 0)
+        {
+          req.session.userInfo = rowFound;
+          req.session.username = rowFound[0].username;
+          req.session.op = 0;
+          console.log('Register succeed');
+          console.log(rowFound);
+          res.redirect('/');
+        }
+      }).catch(err => {
+        console.log(err);
+      });
     }).catch(err => {
       console.log(err);
     });
@@ -285,7 +288,80 @@ router.get('/admin/profile', function(req, res, next) {
 });
 router.get('/admin/users-table', function(req, res, next) {
   let userInfo = req.session.userInfo;
-  res.render('users-table', { userInfo: userInfo, title: 'Express' });
+  var listUsers = userModel.all();
+  listUsers.then(rows =>{
+    if (rows.length > 0)
+    {
+      res.render('users-table', { userInfo: userInfo, listUsers: rows, title: 'Express' });
+    }
+    else
+    {
+      console.log('Loading users failed');
+      res.redirect('admin/profile');
+    }
+  }).catch(err => {
+    console.log(err);
+  });
+});
+
+router.get('/admin/update-user', function(req, res, next) {
+  let userInfo = req.session.userInfo;
+  var passHashed = bcrypt.hashSync(req.body.pass, 10);
+  var entity = {
+    id: req.session.userInfo[0].id,
+    fullname: req.body.fullname,
+    email: req.body.email,
+    dabirthday: req.body.dobtimepicker,
+    passwordString: passHashed
+  }
+  var p = userModel.update('id', entity);
+  p.then(row => {
+    var find = userModel.findUser(req.session.username);
+    find.then(rowFound => {
+      if (rowFound.length > 0)
+      {
+        req.session.userInfo = rowFound;
+        console.log(rowFound);
+        res.redirect('/');
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+  }).catch(err => {
+    console.log(err);
+  });
+  res.render('update-user', { userInfo: userInfo, title: 'Express' });
+
+});
+
+router.post('/admin/update-user', function(req, res, next) {
+  let userInfo = req.session.userInfo;
+  var passHashed = bcrypt.hashSync(req.body.pass, 10);
+  var entity = {
+    id: req.session.userInfo[0].id,
+    fullname: req.body.fullname,
+    email: req.body.email,
+    dabirthday: req.body.dobtimepicker,
+    passwordString: passHashed
+  }
+  var p = userModel.update('id', entity);
+  p.then(row => {
+    var find = userModel.findUser(req.session.username);
+    find.then(rowFound => {
+      if (rowFound.length > 0)
+      {
+        req.session.userInfo = rowFound;
+        console.log(rowFound);
+        res.redirect('/');
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+  }).catch(err => {
+    console.log(err);
+  });
+  res.render('update-user', { userInfo: userInfo, title: 'Express' });
+
 });
 
 router.get('/admin/categories-table', function(req, res, next) {

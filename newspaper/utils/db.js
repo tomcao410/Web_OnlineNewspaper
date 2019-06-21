@@ -98,7 +98,7 @@ module.exports = {
   // User registers
   register: (username, password, fullname, dob, email) => {
     return new Promise((resolve, reject) => {
-      var sql = `INSERT INTO users (username, passwordString, userClass, fullname, dabirthday, email) VALUES ('${username}', '${password}', ${1}, '${fullname}', '${dob}', '${email}')`;
+      var sql = `INSERT INTO users (username, passwordString, userClass, fullname, dabirthday, email, isDelete) VALUES ('${username}', '${password}', ${1}, '${fullname}', '${dob}', '${email}', ${0})`;
       console.log(sql);
       var connection = createConnection();
       connection.connect();
