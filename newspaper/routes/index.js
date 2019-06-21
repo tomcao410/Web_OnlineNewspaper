@@ -12,7 +12,7 @@ var userModel = require('../model/user');
 var catModel = require('../model/uploadCat');
 var _ = require('lodash');
 
-// ----------------
+// ---------------- Reconfig object -----------------//
 function transformTopics(rows) {
   rows = JSON.parse(JSON.stringify(rows));
     rowsGroupby = _.groupBy(rows, row => row.categoryName);
@@ -428,6 +428,26 @@ router.post('/admin/disapprove-post', function(req, res, next){
   }).catch(err => {
     console.log(err);
   });
+});
+
+router.post('/admin/approve-post', function(req, res, next){
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2,'0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+  var dateStr = yyyy + '-' + mm + '-' + dd;
+  postModel.publishDateUpdate("id", req.body.postID, dateStr).then(id => {
+    console.log(id);
+  }).catch(err => {
+    console.log(err);
+  });
+  res.redirect('/admin/posts-table');
+  // postModel.approvePost("id", req.body.postID).then(id => {
+  //   console.log(id);
+  // }).catch(err => {
+  //   console.log(err);
+  // });
+  // res.redirect('/admin/posts-table');
 });
 
 router.get('/admin/edit-post', function (req, res, next) {

@@ -192,7 +192,7 @@
                         <% if (userInfo[0].userClass == 4) { %>
                         <td style="display: inline-block; width: 100%">
                           <%if (post.approval != 1) {%>
-                          <form action="/admin/aprrove-post" method="POST" style="display: inline-block">
+                          <form action="/admin/approve-post" method="POST" style="display: inline-block">
                             <button class="btn btn-success" style="max-height: 30px; max-width: 30px;"><i class="fa fa-check"></i></button>
                             <input type="text" name="postID" value="<%=post.id%>" style="visibility: collapse; display: none">
                           </form>
