@@ -6,4 +6,7 @@ module.exports = {
     delPost : (idField, id) => {
         return db.delete("Posts", idField, id);
     },
+    editPost: (entity, idField) => {
+        return db.update("Posts", idField, entity);
+    },
 }
