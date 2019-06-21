@@ -9,6 +9,8 @@ var commentModel = require('../model/uploadCmt.js');
 var postModel = require('../model/uploadPost');
 var bcrypt = require('bcrypt');
 var userModel = require('../model/user');
+var dataTAgs = require('../model/loadtags');
+var datatagtitle = require('../model/loadtags');
 var _ = require('lodash');
 
 // ----------------
@@ -86,7 +88,7 @@ router.post('/login', (req, res) => {
         req.session.op = 1;
 
         console.log('Login succeed');
-        console.log(rowFound)
+        
         res.redirect('/')
       }
       else{
@@ -267,6 +269,16 @@ router.get('/admin/users-table', function(req, res, next) {
   let userInfo = req.session.userInfo;
   res.render('users-table', { userInfo: userInfo, title: 'Express' });
 });
+router.get('/admin/admin-tag', function(req, res, next) {
+  var tags = dataTAgs.loadall();
+  var title = datatagtitle.loadtitle();
+  Promise.all([tags, title]).then(result => {
+    var alltags = JSON.parse(JSON.stringify(result[0]));
+    var alltt = JSON.parse(JSON.stringify(result[1]));
+    let userInfo = req.session.userInfo;
+    res.render('manageTag', { alltt:alltt, userInfo: userInfo, alltags: alltags, title: 'Express' });
+  })
+});
 
 router.get('/admin/posts-table', function(req, res, next) {
   let userInfo = req.session.userInfo;
@@ -285,6 +297,37 @@ router.get('/admin/posts-table', function(req, res, next) {
     console.log(err);
   });
 });
+
+router.post('/admin/del-tag', function(req, res, next){
+  var fid = req.body.tagname;
+  console.log(fid);
+  var field = "tagName";
+  dataTAgs.delTag(field, fid).then(id => {
+    res.redirect("/admin/admin-tag");
+  }).catch(err => {
+    console.log(err);
+  })
+})
+
+router.post('/admin/update-tag', function(req, res, next){
+  var entity = {
+    txt: req.body.newTag,
+    aa: req.body.oldtag,
+  }
+  var a = entity.txt;
+  var b = entity.aa;
+  NewTagName = a;
+  OldTagName = b;
+  console.log(a);
+  console.log(b);
+  var db1 = require('../utils/db');
+  var sql = "update tags set tags.tagName ='" + NewTagName +"' where tags.tagName like '%"+OldTagName +"%'";
+  console.log(sql);
+  db1.load(sql);
+
+  res.redirect("/admin/admin-tag");
+})
+
 router.get('/admin/write-post', function(req, res, next) {
   var getTopics = topics.all();
   var getAllPosts = allPost.allDefault();
@@ -335,6 +378,8 @@ router.post("/add-post", (req, res) => {
     console.log(err);
   })
 });
+
+
 
 //------------------------------------- Browse by category---------------------------------//
 router.get('/news/:category', function(req, res, next) {

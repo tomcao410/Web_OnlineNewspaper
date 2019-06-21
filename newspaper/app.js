@@ -53,5 +53,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
+app.locals.OldTagName = 'ttt';
 app.locals.searchtxt = 'timkiem';
+app.locals.NewTagName = 'tag';
