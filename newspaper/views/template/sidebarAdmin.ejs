@@ -4,14 +4,15 @@
             <img class="img-fluid" src="../../images/logo.png" alt="" style="max-height: 50px; max-width: 50px">
         </a>
         <!-- Nav Item - Dashboard -->
-        <% if (userInfo[0].userClass == 4) { %>
+        <!-- <% if (userInfo[0].userClass == 4) { %>
         <li class="nav-item ">
             <a class="nav-link" href="/admin/dashboard">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
         </li>
-        <% } %>
+        <% } %>-->
+        
         <!-- Heading -->
         <div class="sidebar-heading"> Cá nhân </div>
         <!-- Divider -->
@@ -22,16 +23,16 @@
                 <span>Thông tin cá nhân</span>
             </a>
         </li>
+        <% if (userInfo[0].userClass == 2) { %>
         <div class="sidebar-heading">Đăng bài</div>
         <hr class="sidebar-divider">
-            <% if (userInfo[0].userClass == 2) { %>
             <li class="nav-item">
                 <a class="nav-link" href="/admin/write-post">
                     <i class="fa fa-pencil"></i>
                     <span>Viết bài đăng</span>
                 </a>
             </li>
-            <% } %>
+        <% } %>    
         <div class="sidebar-heading">
             Quản lý
         </div>

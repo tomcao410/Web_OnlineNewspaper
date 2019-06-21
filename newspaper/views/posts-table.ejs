@@ -26,12 +26,12 @@
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-          <!-- Sidebar Toggle (Topbar) -->
+          <!-- Sidebar Toggle (Topbar) 
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
 
-          <!-- Topbar Search -->
+           Topbar Search
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
               <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
@@ -41,18 +41,18 @@
                 </button>
               </div>
             </div>
-          </form>
+          </form>-->
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <!-- Nav Item - Search Dropdown (Visible Only XS)
             <li class="nav-item dropdown no-arrow d-sm-none">
               <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 <i class="fas fa-search fa-fw"></i>
               </a>
-              <!-- Dropdown - Messages -->
+               Dropdown - Messages
               <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                 <form class="form-inline mr-auto w-100 navbar-search">
                   <div class="input-group">
@@ -65,7 +65,7 @@
                   </div>
                 </form>
               </div>
-            </li>
+            </li> -->
 
 
 
@@ -93,6 +93,7 @@
             </span>
             <span class="text">Thêm bài đăng</span>
           </a>
+          </a>
           <% } %>
           <!-- <a href="#" class="btn btn-danger btn-icon-split mr-4">
             <span class="icon text-white  ">
@@ -106,14 +107,12 @@
             </span>
             <span class="text">Publish</span>
           </a> -->
-          <% if (userInfo[0].userClass > 2) { %>
-          <a href="#" class="btn btn-warning btn-icon-split">
-              <span class="icon text-white  ">
-                  <i class="fa fa-check"></i>
-              </span>
-              <span class="text">Approve</span>
-            </a>
-            <% } %>
+            <button class="btn btn-warning btn-icon-split mr-4" style="width: 300px" onclick="sortTable(6)">
+                <span class="icon text-white">
+                  <i class="fa fa-pencil"></i>
+                </span>
+                <span class="text text-white">Gom nhóm theo tình trạng</span>
+            </button>
           <!-- DataTales Users -->
           <%
             var curClass = userInfo[0].userClass;
@@ -149,10 +148,10 @@
                       <th>Tiêu đề</th>
                       <th>Chuyên mục</th>
                       <th>Tag</th>
-                      <th>Tác giả</th>
+                      <th >Tác giả</th>
                       <th>Ngày đăng
-                      <th>Tình trạng</th>
-                      <th>Thao tác </th>
+                      <th style="max-width: 100px">Tình trạng (filter)</th>
+                      <th style="max-width: 10px">Thao tác </th>
                     </tr>
                   </thead>
                 <tbody>
@@ -168,23 +167,21 @@
                         <td>Đã duyệt</td>
                         <%}%>
                         <%if (post.approval != 1) {%>
-                            <td>Chưa duyệt</td>
+                            <td>Chờ duyệt</td>
                         <%}%>
                         <!-- Writer -->
                         <% if (userInfo[0].userClass == 2) { %>
                         <td>
-                          <form action="/admin/del-post" method="POST" >
-                            <button class="btn btn-danger" style="max-height: 30px; max-width: 30px;"><i class="fa fa-trash"></i></button>
-                            <td>
-                                <button class="btn btn-primary">Chỉnh sửa</button>
-                            </td>
-                            <input type="text" name="postID" value="<%=post.id%>" style="visibility: collapse">
-                          </form>
                           <%if (post.approval != 1) {%>
-                          <form action="/admin/write-post" method="POST">
-                            <button class="btn btn-primary" style="max-height: 30px; max-width: 30px"><i class="fa fa-pencil"></i></button>
+                          <form action="/admin/write-post" method="POST" >
+                              <button class="btn btn-primary" style="max-height: 30px; max-width: 30px"><i class="fa fa-pencil"></i></button>
                           </form>
-                          <%}%>                   
+                          <%}%>   
+                          <form action="/admin/del-post" method="POST" >
+                            <button class="btn btn-danger" style="height: 30px; width: 30px;"><i class="fa fa-trash"></i></button>
+                            <input type="text" name="postID" value="<%=post.id%>" style="visibility: collapse; max-height: 1px; max-width: 1px;">
+                          </form>
+                                          
                         </td>
                         <% } %>
                         <!-- Editor -->

@@ -289,7 +289,6 @@ router.get('/admin/users-table', function(req, res, next) {
 
 router.get('/admin/posts-table', function(req, res, next) {
   let userInfo = req.session.userInfo;
-  var p = userModel.loadPosts(userInfo[0].id);
   var getAllPosts = allPost.allDefault();
   Promise.all([getAllPosts, userInfo]).then(result => {
     var allPosts = JSON.parse(JSON.stringify(result[0]));
