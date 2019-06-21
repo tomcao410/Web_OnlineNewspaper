@@ -9,4 +9,7 @@ module.exports = {
     editPost: (entity, idField) => {
         return db.update("Posts", idField, entity);
     },
+    disapprovePost : (idField, id) => {
+        return db.approvalUpdate(idField, id);
+    }
 }

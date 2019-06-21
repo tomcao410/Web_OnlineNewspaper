@@ -119,18 +119,25 @@ router.post('/register', (req, res) => {
   var verify = false;
   var verPsw = false;
   var verEmail = false
-  if (entity.password !== entity.confirmPass)
+  if (entity.password == entity.confirmPass)
   {
-    verPsw = false;
+    verPsw = true;
   }
-  if (!entity.email.includes("@"))
+  console.log(entity.password);
+  console.log(entity.confirmPass);
+  console.log(entity.email);
+  if (entity.email.includes("@"))
   {
-    verEmail = false;
+    verEmail = true;
   }
-  if (verEmail == false || verPsw == false)
+  if (verEmail == true && verPsw == true)
   {
-    verify = false;
+    verify = true;
   }
+  console.log("---------");
+  console.log(verify);
+  console.log("---------");
+  
   if (verify == true) {
     var passHashed = bcrypt.hashSync(entity.password, 10);
     console.log(passHashed);
@@ -139,12 +146,10 @@ router.post('/register', (req, res) => {
       if (rows.length > 0) {
         req.session.user = rowFound;
         req.session.op = 0;
-        console.log('Register succeed');
         console.log(rows);
         res.redirect('/');
       }
       else {
-        console.log('Register failed')
         res.redirect('/')
       }
     }).catch(err => {
@@ -408,6 +413,16 @@ router.post("/saved", function(req, res, next){
     premium: req.body.premium
   }
   postModel.editPost(entity, "id").then(id => {
+    console.log(id);
+    res.redirect('/admin/posts-table');
+  }).catch(err => {
+    console.log(err);
+  });
+});
+
+router.post('/admin/disapprove-post', function(req, res, next){
+  console.log(req.body);
+  postModel.disapprovePost("id", req.body.postID).then(id => {
     console.log(id);
     res.redirect('/admin/posts-table');
   }).catch(err => {

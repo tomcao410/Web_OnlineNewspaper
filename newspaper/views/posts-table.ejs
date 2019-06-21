@@ -109,7 +109,7 @@
           </a> -->
             <button class="btn btn-warning btn-icon-split mr-4" style="width: 300px" onclick="sortTable(6)">
                 <span class="icon text-white">
-                  <i class="fa fa-pencil"></i>
+                  <i class="fa fa-sort"></i>
                 </span>
                 <span class="text text-white">Gom nhóm theo tình trạng</span>
             </button>
@@ -147,11 +147,10 @@
                       <th>ID</th>
                       <th>Tiêu đề</th>
                       <th>Chuyên mục</th>
-                      <th>Tag</th>
                       <th >Tác giả</th>
                       <th>Ngày đăng
-                      <th style="max-width: 100px">Tình trạng (filter)</th>
-                      <th style="max-width: 10px">Thao tác </th>
+                      <th style="max-width: 100px">Tình trạng</th>
+                      <th style="max-width: 50px">Thao tác </th>
                     </tr>
                   </thead>
                 <tbody>
@@ -160,7 +159,6 @@
                         <td><%=post.id%></td>
                         <td><%=post.title%></td>
                         <td><%=post.categoryName%>-<%=post.subCategoryName%></td>
-                        <td></td>
                         <td><%=post.fullname%></td>
                         <td><%=post.publishDate%></td>
                         <%if (post.approval == 1) {%>
@@ -181,7 +179,7 @@
                             <button class="btn btn-primary" style="max-height: 30px; max-width: 30px"><i class="fa fa-pencil"></i></button> 
                             <input type="text" name="postID" value="<%=post.id%>" style="visibility: collapse; display: none">
                           </form>
-                                          
+                          <%}%>          
                         </td>
                         <% } %>
                         <!-- Editor -->
@@ -192,9 +190,23 @@
                         <% } %>
                         <!-- Admin -->
                         <% if (userInfo[0].userClass == 4) { %>
-                        <td>
-                          <button class="btn btn-success" style="max-height: 30px; max-width: 30px;"><i class="fa fa-check"></i></button>
-                          <button class="btn btn-danger" style="max-height: 30px; max-width: 30px;"><i class="fa fa-trash"></i></button>
+                        <td style="display: inline-block; width: 100%">
+                          <%if (post.approval != 1) {%>
+                          <form action="/admin/aprrove-post" method="POST" style="display: inline-block">
+                            <button class="btn btn-success" style="max-height: 30px; max-width: 30px;"><i class="fa fa-check"></i></button>
+                            <input type="text" name="postID" value="<%=post.id%>" style="visibility: collapse; display: none">
+                          </form>
+                          <%}%>
+                          <%if (post.approval == 1) {%>
+                          <form action="/admin/disapprove-post" method="POST" style="display: inline-block">
+                            <button class="btn btn-danger" style="max-height: 30px; max-width: 30px;"><i class="fa fa-times"></i></button>
+                            <input type="text" name="postID" value="<%=post.id%>" style="visibility: collapse; display: none">
+                          </form>
+                          <%}%>
+                          <form action="/admin/del-post" method="POST" style="display: inline-block">
+                            <button class="btn btn-danger" style="max-height: 30px; max-width: 30px;"><i class="fa fa-trash"></i></button>
+                            <input type="text" name="postID" value="<%=post.id%>" style="visibility: collapse; display: none">
+                          </form>
                         </td>
                         <% } %>
                     </tr>
