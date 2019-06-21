@@ -311,66 +311,67 @@ router.get('/admin/users-table', function(req, res, next) {
   });
 });
 
-router.get('/admin/update-user', function(req, res, next) {
-  let userInfo = req.session.userInfo;
-  var passHashed = bcrypt.hashSync(req.body.pass, 10);
+//------------------------------------------
+
+
+router.post('/admin/user-updated', function(req, res, next) {
   var entity = {
-    id: req.session.userInfo[0].id,
+    id: req.body.userId,
+    isDelete: 0,
+    username: req.body.username,
     fullname: req.body.fullname,
+    dabirthday: req.body.updateDobUserPicker,
     email: req.body.email,
-    dabirthday: req.body.dobtimepicker,
-    passwordString: passHashed
-  }
-  var p = userModel.update('id', entity);
-  p.then(row => {
-    var find = userModel.findUser(req.session.username);
-    find.then(rowFound => {
-      if (rowFound.length > 0)
-      {
-        req.session.userInfo = rowFound;
-        console.log(rowFound);
-        res.redirect('/');
-      }
-    }).catch(err => {
-      console.log(err);
-    });
+    userClass: req.body.userClass
+  };
+  console.log(entity);
+  userModel.update('id', entity).then(rows => {
+    console.log('User updated!');
+    console.log(rows);
+    res.redirect('/admin/users-table');
   }).catch(err => {
     console.log(err);
   });
-  res.render('update-user', { userInfo: userInfo, title: 'Express' });
-
 });
 
-router.post('/admin/update-user', function(req, res, next) {
-  let userInfo = req.session.userInfo;
-  var passHashed = bcrypt.hashSync(req.body.pass, 10);
-  var entity = {
-    id: req.session.userInfo[0].id,
-    fullname: req.body.fullname,
-    email: req.body.email,
-    dabirthday: req.body.dobtimepicker,
-    passwordString: passHashed
-  }
-  var p = userModel.update('id', entity);
-  p.then(row => {
-    var find = userModel.findUser(req.session.username);
-    find.then(rowFound => {
-      if (rowFound.length > 0)
-      {
-        req.session.userInfo = rowFound;
-        console.log(rowFound);
-        res.redirect('/');
-      }
-    }).catch(err => {
-      console.log(err);
-    });
+router.post('/admin/edit-user', function(req, res, next) {
+  let username = req.body.username;
+  userModel.findUser(username).then(rows => {
+    var userInfo = rows;
+    console.log(rows);
+    res.render('update-user', { userInfo: userInfo, title: 'Express' });
   }).catch(err => {
     console.log(err);
   });
-  res.render('update-user', { userInfo: userInfo, title: 'Express' });
-
 });
 
+router.post('/admin/del-user', function(req, res, next){
+  var entity = {
+    id: req.body.delID,
+    isDelete: 1
+  };
+  userModel.update('id', entity).then(rows => {
+    console.log('User deleted!');
+    res.redirect('/admin/users-table');
+  }).catch(err => {
+    console.log(err);
+  });
+})
+
+
+router.post('/admin/recov-user', function(req, res, next){
+  var entity = {
+    id: req.body.recovID,
+    isDelete: 0
+  };
+  userModel.update('id', entity).then(rows => {
+    console.log('User deleted!');
+    res.redirect('/admin/users-table');
+  }).catch(err => {
+    console.log(err);
+  });
+})
+//-------------------------------
 router.get('/admin/categories-table', function(req, res, next) {
   let userInfo = req.session.userInfo;
   var getTopics = topics.cat();

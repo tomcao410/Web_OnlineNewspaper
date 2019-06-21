@@ -4,7 +4,7 @@ var createConnection = ()=>{
   return mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : '30111998',
+    password : '123456',
     database : 'Newspaper',
     timezone: 'Z',
     dateStrings: true
@@ -114,7 +114,7 @@ module.exports = {
   // User logins
   findUser: username =>{
     return new Promise ((resolve, reject) =>{
-      var sql = `select id, username, passwordString, userClass, fullname, userClass, DATE_FORMAT(dabirthday, "%Y-%m-%d") as dob, email from users where username='${username}'`
+      var sql = `select *, DATE_FORMAT(dabirthday, "%Y-%m-%d") as dob from users where username= '${username}'`
       console.log(sql)
       var connection = createConnection();
       connection.connect();

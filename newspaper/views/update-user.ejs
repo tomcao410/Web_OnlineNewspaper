@@ -51,7 +51,7 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Thông tin người dùng</h1>
-
+                    <h1 class="h3 mb-4 text-gray-800">Username: <%= userInfo[0].username %></h1>
                 </div>
                 <!-- /.container-fluid -->
                 <div class="row">
@@ -59,50 +59,69 @@
 
                         <form class="user" method="POST" action="/admin/user-updated">
 
-                            <div class="form-group">
+                            <div class="form-group" style="display: none;">
+                                    <label for="">ID:</label>
+    
+                                    <input type="text" class="form-control form-control-user" id="userId" name="userId" value="<%= userInfo[0].id %>">
+                                </div>
+
+                            <div class="form-group" style="display: none;">
                                 <label for="">Tên đăng nhập:</label>
 
-                                <input type="email" class="form-control form-control-user" id="username"value="<%= userInfo[0].username %>" disabled>
+                                <input type="text" class="form-control form-control-user" id="username" name="username" value="<%= userInfo[0].username %>">
                             </div>
                             <div class="form-group">
                                 <label for="">Họ tên</label>
 
-                                <input type="email" class="form-control form-control-user" id="fullname" name ="fullname" value="<%= userInfo[0].fullname %>">
+                                <input type="text" class="form-control form-control-user" id="fullname" name ="fullname" value="<%= userInfo[0].fullname %>">
                             </div>
-                            <% if (userInfo[0].userClass == 2) { %>
-                                <div class="form-group">
-                                    <label for="">Phân hệ</label>
-    
-                                    <input type="email" class="form-control form-control-user" id="userclass" name="userclass" value="Writer" >
-                                </div>
-                                <% } %>
-                                <% if (userInfo[0].userClass == 3) { %>
-                                <div class="form-group">
-                                    <label for="">Role</label>
-    
-                                    <input type="email" class="form-control form-control-user" id="userclass" name="userclass" value="Editor">
-                                </div>
-                                <% } %>
-                                <% if (userInfo[0].userClass == 4) { %>
-                                <div class="form-group">
-                                    <label for="">Role</label>
-    
-                                    <input type="email" class="form-control form-control-user" id="userclass" name="userclass" value="Admin">
-                                </div>
-                                <% } %>
+
+                            <div class="form-group">
+                                <label for="">Phân hệ</label>
+                                <select name="userClass" style="max-width:100%" multiple>
+                                    <% if (userInfo[0].userClass == 1) { %>
+                                        <option value="<%= 1 %>" selected="selected">Độc giả</option>
+                                        <option value="<%= 2 %>">Phóng viên</option>
+                                        <option value="<%= 3 %>">Biên tập viên</option>
+                                        <option value="<%= 4 %>">Quản trị viên</option>
+                                    <% } %>
+
+                                    <% if (userInfo[0].userClass == 2) { %>
+                                        <option value="<%= 1 %>">Độc giả</option>
+                                        <option value="<%= 2 %>" selected="selected">Phóng viên</option>
+                                        <option value="<%= 3 %>">Biên tập viên</option>
+                                        <option value="<%= 4 %>">Quản trị viên</option>
+                                    <% } %>
+
+                                    <% if (userInfo[0].userClass == 3) { %>
+                                        <option value="<%= 1 %>">Độc giả</option>
+                                        <option value="<%= 2 %>">Phóng viên</option>
+                                        <option value="<%= 3 %>" selected="selected">Biên tập viên</option>
+                                        <option value="<%= 4 %>">Quản trị viên</option>
+                                    <% } %>
+
+                                    <% if (userInfo[0].userClass == 4) { %>
+                                        <option value="<%= 1 %>">Độc giả</option>
+                                        <option value="<%= 2 %>">Phóng viên</option>
+                                        <option value="<%= 3 %>">Biên tập viên</option>
+                                        <option value="<%= 4 %>" selected="selected">Quản trị viên</option>
+                                    <% } %>
+                                </select>
+                            </div>
+                            
                             <div class="form-group">
                                 <label for="">Email</label>
 
-                                <input type="email" class="form-control form-control-user" id="email" name="email" value="<%= userInfo[0].email %>">
+                                <input type="text" class="form-control form-control-user" id="email" name="email" value="<%= userInfo[0].email %>">
                             </div>
                             <div class="form-group">
                                 <label for="">Ngày sinh</label>
 
-                                <input type="email" class="form-control form-control-user" id="updateDobUserPicker" name="updateDobUserPicker" value="<%= userInfo[0].dob %>">
+                                <input type="text" class="form-control form-control-user" id="updateDobUserPicker" name="updateDobUserPicker" value="<%= userInfo[0].dob %>">
                             </div>
                             
                             <button type="submit" class="btn">
-                                <a href="" class="btn btn-success btn-user btn-block">
+                                <a class="btn btn-success btn-user btn-block">
                                     SAVE
                                 </a>
                             </button>

@@ -121,10 +121,10 @@
                       <td style="max-width: 130px"><%= user.email %></td>
 
                       <% if (user.isDelete == 1) { %>
-                        <td style="max-width: 100px">
-                          <form>
-                            <button class="btn btn-primary" ><i>Recover</i></button> 
-                            <input type="text" name="postID" value="<%=user.id%>" style="visibility: collapse; display: none">
+                        <td style="max-width: 30px">
+                          <form method="POST" action="/admin/recov-user" style="display: inline-block">
+                            <button class="btn btn-primary" style="width: 100px"><i>Recover</i></button> 
+                            <input type="text" name="recovID" value="<%=user.id%>" style="visibility: collapse; display: none">
                           </form>
                         </td>
                       <% } %>
@@ -132,16 +132,17 @@
                         <td>Available</td>
                       <% } %>
 
-                      <td style="width: 150px">
-                          <form method="POST" action="/admin/update-user">
-                            <button class="btn btn-success" style="width: 40px"><i class="fa fa-pencil"></i></button>
-                            <input type="text" name="action" value="<%=user.id%>" style="visibility: collapse; display: none; width: 40px">
-                            <% if (user.isDelete == 0) { %>
-                            <button class="btn btn-danger" style="width: 40px"><i class="fa fa-trash"></i></button>
-                            <input type="text" name="action" value="<%=user.id%>" style="visibility: collapse; display: none">
-                            <% } %>
+                      <td style="width: 100px;">
+                          <form method="POST" action="/admin/edit-user" style="display: inline-block">
+                            <button class="btn btn-success" style="max-height: 30px; max-width: 30px;"><i class="fa fa-pencil"></i></button>
+                            <input type="text" name="username" value="<%=user.username%>" style="visibility: collapse; display: none;">
                           </form>
-
+                          <% if (user.isDelete == 0) { %>
+                          <form method="POST" action="/admin/del-user" style="display: inline-block">
+                            <button class="btn btn-danger" style="max-height: 30px; max-width: 30px;"><i class="fa fa-trash"></i></button>
+                            <input type="text" name="delID" value="<%=user.id%>" style="visibility: collapse; display: none">
+                          </form>
+                          <% } %>
                       </td>
                     </tr>
                     <% }) %>
