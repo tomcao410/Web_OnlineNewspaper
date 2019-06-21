@@ -10,6 +10,8 @@ var postModel = require('../model/uploadPost');
 var bcrypt = require('bcrypt');
 var userModel = require('../model/user');
 var catModel = require('../model/uploadCat');
+var dataTAgs = require('../model/loadtags');
+var datatagtitle = require('../model/loadtags');
 var _ = require('lodash');
 
 // ---------------- Reconfig object -----------------//
@@ -87,7 +89,7 @@ router.post('/login', (req, res) => {
         req.session.op = 1;
 
         console.log('Login succeed');
-        console.log(rowFound)
+        
         res.redirect('/')
       }
       else{
@@ -309,6 +311,16 @@ router.get('/admin/users-table', function(req, res, next) {
   }).catch(err => {
     console.log(err);
   });
+});
+router.get('/admin/admin-tag', function(req, res, next) {
+  var tags = dataTAgs.loadall();
+  var title = datatagtitle.loadtitle();
+  Promise.all([tags, title]).then(result => {
+    var alltags = JSON.parse(JSON.stringify(result[0]));
+    var alltt = JSON.parse(JSON.stringify(result[1]));
+    let userInfo = req.session.userInfo;
+    res.render('manageTag', { alltt:alltt, userInfo: userInfo, alltags: alltags, title: 'Express' });
+  })
 });
 
 //------------------------------------------
@@ -550,6 +562,12 @@ router.post('/admin/del-post', function(req, res, next){
   postModel.delPost(field, fid).then(id => {
     console.log(id);
     res.redirect("/admin/posts-table");
+router.post('/admin/del-tag', function(req, res, next){
+  var fid = req.body.tagname;
+  console.log(fid);
+  var field = "tagName";
+  dataTAgs.delTag(field, fid).then(id => {
+    res.redirect("/admin/admin-tag");
   }).catch(err => {
     console.log(err);
   })
@@ -618,6 +636,24 @@ router.get('/admin/edit-post', function (req, res, next) {
     console.log(err);
   })
 });
+router.post('/admin/update-tag', function(req, res, next){
+  var entity = {
+    txt: req.body.newTag,
+    aa: req.body.oldtag,
+  }
+  var a = entity.txt;
+  var b = entity.aa;
+  NewTagName = a;
+  OldTagName = b;
+  console.log(a);
+  console.log(b);
+  var db1 = require('../utils/db');
+  var sql = "update tags set tags.tagName ='" + NewTagName +"' where tags.tagName like '%"+OldTagName +"%'";
+  console.log(sql);
+  db1.load(sql);
+
+  res.redirect("/admin/admin-tag");
+})
 
 router.get('/admin/write-post', function(req, res, next) {
   var getTopics = topics.all();
@@ -673,6 +709,8 @@ router.post("/add-post", (req, res) => {
   })
 });
 
+
+
 //------------------------------------- Browse by category---------------------------------//
 router.get('/news/:category', function(req, res, next) {
   var getTopics = topics.all();
@@ -723,12 +761,14 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
   var getAllPosts = allPost.all();
   var getComments = users.comments();
   var getNewestCmt = users.newestCmtId();
+  var tags = allPost.loadtags();
 
-  Promise.all([getTopics, getAllPosts, getComments, getNewestCmt]).then(result => {
+  Promise.all([getTopics, getAllPosts, getComments, getNewestCmt, tags]).then(result => {
     var topics = transformTopics(result[0]);
     var allPosts = JSON.parse(JSON.stringify(result[1]));
     var comments = JSON.parse(JSON.stringify(result[2]));
     var newestCmt = JSON.parse(JSON.stringify(result[3]));
+    var tags = JSON.parse(JSON.stringify(result[4]));
     var curUserId;
     var isLogin = false;
     if (req.session.username)
@@ -742,7 +782,7 @@ router.get('/news/:category/:subCategory/:title', function(req, res, next) {
       console.log('There is no user');
       isLogin = false;
     }
-    res.render('image-post',{ curUserId: curUserId, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory});
+    res.render('image-post',{ tagsNews: tags, curUserId: curUserId, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics, allPosts: allPosts, comments: comments, newestCmt: newestCmt,title:req.params.title,category:req.params.category,subCategory:req.params.subCategory}); 
   }
   ).catch(err => {
     console.log(err);
@@ -893,6 +933,32 @@ router.post('/searchResult', (req, res) => {
     console.log(err);
   });
 });
+router.get('/tag/:idP/:tagName', function(req, res, next) {
+  var getTopics = topics.all();
+  var getAllPosts = allPost.all(); 
+  var tags = allPost.loadtags();
+  Promise.all([getTopics,getAllPosts,  tags]).then(result => {
+    var topics = transformTopics(result[0]);
+    var allPosts = JSON.parse(JSON.stringify(result[1]));
+    var tags = JSON.parse(JSON.stringify(result[2]));
+    var isLogin = false;
+    if (req.session.username)
+    {
+      console.log('There is a user');
+      isLogin = true;
+    }
+    else
+    {
+      console.log('There is no user');
+      isLogin = false;
+    }
+    res.render('tagSearch',{ idPo:req.params.idP, title:req.params.tagName, tagsNews: tags, isLogin: isLogin, userInfo: req.session.userInfo, topics: topics,allPosts: allPosts});
+  } 
+  ).catch(err => {
+    console.log(err);
+  });  
+});
+
 
 
 module.exports = router;

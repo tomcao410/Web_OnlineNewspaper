@@ -92,32 +92,87 @@
 							<div class="latest-post-wrap">
 								<h4 class="cat-title">Tin mới nhất</h4>
 								
-								<% postsByPages.forEach(function(post){%>
-								<div class="single-latest-post row align-items-center">
-									<div class="col-lg-5 post-left">
-										<div class="feature-img relative">
-											<div class="overlay overlay-bg"></div>
-											<img class="img-fluid" src="<%=post.imgLink %>" alt="">
-										</div>
-										<ul class="tags">
-											<li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>"><%=post.categoryName %> - <%=post.subCategoryName %></a></li>
-										</ul>
-									</div>
-									<div class="col-lg-7 post-right">
-										<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
-											<h4><%=post.title %></h4>
-										</a>
-										<ul class="meta">
-											<li><a href="#"><i class="fa fa-pencil"></i> <%=post.fullname %></a></li>
-											<li><a href="#"><i class="fa fa-calendar"></i> <%=post.publishDate %></a></li>
-											<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
-										</ul>
-										<p>
-											<%=post.postExcerpt %>
-										</p>
-									</div>
-								</div>
-								<% }) %>
+								<% if (isLogin) {
+									postsByPages.forEach(function(post){
+										if(post.premium == true){%>
+											<div class="single-latest-post row align-items-center">
+													<div class="col-lg-5 post-left">
+														<div class="feature-img relative">
+															<div class="overlay overlay-bg"></div>
+															<img class="img-fluid" src="<%=post.imgLink %>" alt="">
+														</div>
+														<ul class="tags">
+															<li>
+																<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=post.categoryName%> - <%=post.subCategoryName%></a>
+															</li>
+														</ul>
+													</div>
+													<div class="col-lg-7 post-right">
+														<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName%>/<%=post.title %>">
+															<h4> <%=post.title %></h4>
+															<sup style = "color: red">PREMIUM</sup>
+														</a>
+														<ul class="meta">
+															<li>
+																<a href="#">
+																	<i class="fa fa-pencil"></i> <%=post.fullname %></a>
+															</li>
+															<li>
+																<a href="#">
+																	<i class="fa fa-calendar"></i> <%=post.publishDate %></a>
+															</li>
+															<li>
+																<a href="#">
+																	<i class="fa fa-eye"></i> <%=post.views %> Views</a>
+															</li>
+														</ul>
+														<p class="excert">
+															<%=post.postExcerpt %>
+														</p>
+													</div>
+												</div>
+												<%}})%>
+								<%}%>
+								
+									<% 
+									postsByPages.forEach(function(post){
+										if(post.premium == false){%>
+										<div class="single-latest-post row align-items-center">
+												<div class="col-lg-5 post-left">
+													<div class="feature-img relative">
+														<div class="overlay overlay-bg"></div>
+														<img class="img-fluid" src="<%=post.imgLink %>" alt="">
+													</div>
+													<ul class="tags">
+														<li>
+															<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=post.categoryName%> - <%=post.subCategoryName%></a>
+														</li>
+													</ul>
+												</div>
+												<div class="col-lg-7 post-right">
+													<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName%>/<%=post.title %>">
+														<h4><%=post.title %></h4>
+													</a>
+													<ul class="meta">
+														<li>
+															<a href="#">
+																<i class="fa fa-pencil"></i> <%=post.fullname %></a>
+														</li>
+														<li>
+															<a href="#">
+																<i class="fa fa-calendar"></i> <%=post.publishDate %></a>
+														</li>
+														<li>
+															<a href="#">
+																<i class="fa fa-eye"></i> <%=post.views %> Views</a>
+														</li>
+													</ul>
+													<p class="excert">
+														<%=post.postExcerpt %>
+													</p>
+												</div>
+											</div>
+										<<%}})%>
 								<!--Pagination-->
 								<nav aria-label="Page navigation example">
 										<ul class="pagination justify-content-center">
@@ -222,36 +277,81 @@
 									%>
 							<div class="single-sidebar-widget editors-pick-widget" style="overflow-y: scroll; height: 800px;">
 								
-								<% allPosts.forEach(function(post){
-									if(count <= 10){
-										count += 1; %>
-								<div class="editors-pick-post">
-									<div class="feature-img-wrap relative">
-										<div class="feature-img relative">
-											<div class="overlay overlay-bg"></div>
-											<img class="img-fluid" src="<%=post.imgLink%>" alt="">
-										</div>
-										<ul class="tags">
-											<li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=post.categoryName %> - <%=post.subCategoryName%></a></li>
-										</ul>
-									</div>
-									<div class="details">
-										<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
-											<h4 class="mt-20"><%=post.title%></h4>
-										</a>
-										<ul class="meta">
-											<li><a href="#"><i class="fa fa-pencil"></i> <%=post.fullname %></a></li>
-											<li><a href="#"><i class="fa fa-calendar"></i> <%=post.publishDate %></a></li>
-											<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
-										</ul>
-										<p class="excert">
-											<%=post.postExcerpt %>
-										</p>
-									</div>
-									
-								</div>
-								<% }%>
-							<% }) %>
+								<%
+									allPosts.sort(function(a ,b)
+									{
+										var key_A = (a.views);
+										var key_B = (b.views);
+										if (key_A > key_B) return -1;
+										if (key_A < key_B) return 1;
+										return 0;
+									});
+									var count = 0;
+									%>
+									<%console.log(allPosts)%>
+									<% if (isLogin) {
+										allPosts.forEach(function(post){
+												if(count <= 10 && post.premium == true){
+													count += 1; %>
+											<div class="editors-pick-post">
+												<div class="feature-img-wrap relative">
+													<div class="feature-img relative">
+														<div class="overlay overlay-bg"></div>
+														<img class="img-fluid" src="<%=post.imgLink%>" alt="">
+													</div>
+													<ul class="tags">
+														<li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=post.categoryName%> - <%=post.subCategoryName%></a></li>
+													</ul>
+												</div>
+												<div class="details">
+													<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
+														<h4 class="mt-20"><%=post.title%></h4>
+														<sup style = "color: red">PREMIUM</sup>
+													</a>
+													<ul class="meta">
+														<li><a href="#"><i class="fa fa-pencil"></i> <%=post.fullname %></a></li>
+														<li><a href="#"><i class="fa fa-calendar"></i> <%=post.publishDate %></a></li>
+														<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
+													</ul>
+													<p class="excert">
+														<%=post.postExcerpt %>
+													</p>
+												</div>
+												
+											</div>
+											<% }%>
+										<% })} %>
+										
+										<%allPosts.forEach(function(post){
+													if(count <= 10 && post.premium == false){
+														count += 1; %>
+												<div class="editors-pick-post">
+													<div class="feature-img-wrap relative">
+														<div class="feature-img relative">
+															<div class="overlay overlay-bg"></div>
+															<img class="img-fluid" src="<%=post.imgLink%>" alt="">
+														</div>
+														<ul class="tags">
+															<li><a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/"><%=post.categoryName%> - <%=post.subCategoryName%></a></li>
+														</ul>
+													</div>
+													<div class="details">
+														<a href="/news/<%=post.categoryName %>/<%=post.subCategoryName %>/<%=post.title %>">
+															<h4 class="mt-20"><%=post.title%></h4>
+														</a>
+														<ul class="meta">
+															<li><a href="#"><i class="fa fa-pencil"></i> <%=post.fullname %></a></li>
+															<li><a href="#"><i class="fa fa-calendar"></i> <%=post.publishDate %></a></li>
+															<li><a href="#"><i class="fa fa-eye"></i> <%=post.views %></a></li>
+														</ul>
+														<p class="excert">
+															<%=post.postExcerpt %>
+														</p>
+													</div>
+													
+												</div>
+												<% }%>
+											<% }) %>
 							</div>
 							</div>
 						</div>

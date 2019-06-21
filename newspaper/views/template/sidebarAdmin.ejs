@@ -59,6 +59,14 @@
                 <span>Quản lý bài đăng</span>
             </a>
         </li>
+        <% if (userInfo[0].userClass == 4) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/admin-tag">
+                    <i class="fa fa-users"></i>
+                    <span>Quản lý tag</span>
+                </a>
+            </li>
+            <% } %>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 

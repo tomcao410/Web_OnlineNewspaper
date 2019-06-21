@@ -26,5 +26,10 @@ module.exports = {
     },
     newestPostId: () => {
         return db.load("select max(id) as id from Posts");
-    }
+    },
+    
+    loadtags : () =>{
+        return db.load("select * from tags;");
+    },
+
 }
